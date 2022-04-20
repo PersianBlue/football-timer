@@ -8,4 +8,4 @@ The web application has a game clock at the top that keeps track of the current 
 The score board in the middle is use to keep track of each team's points.
 
 
-![](/screenshots/screen1.jpeg)
+![](/screenshots/screen1.jpg)
