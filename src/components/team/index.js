@@ -1,6 +1,6 @@
 import React from 'react'
 import {useState} from 'react'
-import Button from "../button/Button"
+import Button from "../button"
 
 const Team = ({name,ID}) =>{
 const [score,setScore] = useState(0);
