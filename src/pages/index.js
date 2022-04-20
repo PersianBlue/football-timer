@@ -1,6 +1,6 @@
 import React from "react";
-import Button from "../components/Button"
-import GameClock from "../components/GameClock"
+import Button from "../components/button/Button";
+import GameClock from "../components/gameclock/GameClock"
 
 const App = (props) => {
   return (
