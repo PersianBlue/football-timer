@@ -1,7 +1,7 @@
 import React from 'react';
 import Button from "../button"
 import {useState,useEffect} from 'react';
-import whistleSound from "../../WhistleSoundEffect.mp3"
+import whistleSound from "../../assets/audio/WhistleSoundEffect.mp3"
 
 
 const ThrowTimer = ()=>{
@@ -32,7 +32,7 @@ const ThrowTimer = ()=>{
                 var audio = new Audio(whistleSound)
                 audio.play();
             }
-        }
+        },[runCountdown,newCounter,counter] //adding dependencies to avoid infinite updates
     )
     
     const setSeconds = ()=>{

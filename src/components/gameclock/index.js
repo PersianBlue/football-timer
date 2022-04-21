@@ -5,7 +5,7 @@ import Button from "../button";
 
 
 const GameClock = ()=>{
-    console.log("Re-rendering game clock");
+    //console.log("Re-rendering game clock");
     const [hrs, setHours] = useState(0);
     const [mins, setMins] = useState(0);
     const [secs, setSecs] = useState(0);
@@ -73,7 +73,6 @@ const GameClock = ()=>{
     ) 
     return (
         <div>
-            This is the game clock  
             <Button name = "Reset" onClick = {() =>resetTimer()}>Reset </Button>
             <Button name = "Stop" onClick = {() =>stopTimer()}> Stop </Button>
             <Button name = "Start" onClick = {()=> startTimer()}> Start </Button>
