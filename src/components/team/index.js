@@ -1,6 +1,8 @@
 import React from 'react'
 import {useState} from 'react'
 import Button from "../button"
+import * as css from "./css.module.scss";
+
 
 const Team = ({name,ID}) =>{
 const [score,setScore] = useState(0);
@@ -14,11 +16,16 @@ const decrementScore = () =>{
 }
     
     return(
-        <div>
-            <h1>{name}</h1>
+        <div style = {{borderColor: '#black' ,borderStyle: "solid",}} class = {css.inner}>
+            <h1 className = {css.h1}>{name}</h1>
             <p>{score}</p>
-            <Button onClick = {()=> decrementScore()}> - </Button>
-            <Button onClick = {()=> incrementScore()}> + </Button>
+            <div class = {css.inner}>
+                <Button  type = "rounded edges" onClick = {()=> decrementScore()}> - </Button>
+            </div>
+            <div class = {css.inner}>
+                <Button  type = "rounded edges" onClick = {()=> incrementScore()}> + </Button>
+            </div>
+          
         </div>
     )
 }

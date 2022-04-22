@@ -2,7 +2,7 @@ import React from 'react';
 import Button from "../button"
 import {useState,useEffect} from 'react';
 import whistleSound from "../../assets/audio/WhistleSoundEffect.mp3"
-
+import * as css from "./css.module.scss";
 
 const ThrowTimer = ()=>{
     const[counter,setCounter] = useState(4);
@@ -48,8 +48,13 @@ const ThrowTimer = ()=>{
     return (
         <div>
             <br></br>
-            <Button onClick= {()=>setSeconds()}>Change Seconds</Button>
-            <Button onClick ={()=>startCountdown()}> {counter}</Button>
+            <div className = {css.rightAlign}>
+                 <Button type = "circular" onClick= {()=>setSeconds()}>Change Seconds</Button>
+            </div>
+           <div>
+               <Button type = "circular" onClick ={()=>startCountdown()}> {counter}</Button>
+           </div>
+            
             
         </div>
     )

@@ -1,0 +1,38 @@
+#outer{
+    width: 100%;
+    text-align: center;
+}
+
+.inner{
+    display: inline-block;
+    background: rgb(179, 229, 248);
+}
+
+.roundedEdges{
+    margin: 0;
+    padding: 0;
+    height: 40px;
+    width: 40px;
+    background-color: var(--primary-color);
+    border: none;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    display: block;
+    // margin: 0 4px;
+    cursor: pointer;
+    border-radius: 10px;
+    
+  }
+  
+  .h1{
+      display: block;
+      background-color: black;
+      color: white;
+      margin: 5px;
+      margin-left: 15px;
+      margin-right: 15px;
+      padding: 3px;
+      text-align: center;
+  }
+  
