@@ -49,10 +49,10 @@ const ThrowTimer = ()=>{
         <div>
             <br></br>
             <div className = {css.rightAlign}>
-                 <Button type = "circular" onClick= {()=>setSeconds()}>Change Seconds</Button>
+                 <Button name = "changeSeconds" onClick= {()=>setSeconds()}>Change Seconds</Button>
             </div>
-           <div>
-               <Button type = "circular" onClick ={()=>startCountdown()}> {counter}</Button>
+           <div  className ={css.centerAlign}> 
+               <Button name = "countdownTimer" type = "circular" onClick ={()=>startCountdown()}> {counter}</Button>
            </div>
             
             

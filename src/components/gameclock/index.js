@@ -73,18 +73,19 @@ const GameClock = ()=>{
     ) 
     return (
         <div>
-            <div style = {{backgroundColor: "white", borderColor: '#black', borderStyle: "solid", display:"inline-block"}}>
-             <h1>{hrs}:{mins}:{secs}</h1>
+            <div style = {{height: 50, width: 150, textAlign: "center", backgroundColor: "white", borderColor: '#black', borderStyle: "solid", display:"inline-block"}}>
+             <h1>{mins}:{secs}</h1>
 
             </div>
-
-            <div style = {{borderColor: "black", borderStyle: "solid", display: "inline-block" }}>
-                <Button  name = "Reset" onClick = {() =>resetTimer()}>Reset </Button>
-                <Button  name = "Stop" onClick = {() =>stopTimer()}> Stop </Button>
+            <div style = {{backgroundColor: "black", borderColor: "black", borderStyle: "solid", display: "inline-block" }}>
                 <Button name = "Start" onClick = {()=> startTimer()}> Start </Button>
-
+                <Button  name = "Stop" onClick = {() =>stopTimer()}> Stop </Button>
             </div>
-            
+            <Button  style = {{ width: 100, height: 150}} type = "resetTimer" name = "resetTimer" onClick = {() =>resetTimer()}>Reset Timer </Button>
+            <br></br>
+            <br></br>
+
+
             
         </div>
     )

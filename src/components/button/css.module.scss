@@ -15,7 +15,7 @@
 }
 
 .roundedEdges{
-  margin: 0;
+  margin: auto;
   padding: 0;
   height: 40px;
   width: 40px;
@@ -35,16 +35,55 @@
   display: inline-block;
 }
 
-
-
-#changeSeconds{
-  height: 100px;
-  width: 150px;
-  float: right;
-  //display: inline-block;
-  color: red;
-  position: absolute;
-  right: 0px;
-  width: 100%;
+.changeSeconds{
+  margin: 0;
+  padding: 0;
+  height: 70px;
+  width: 70px;
+  background-color: var(--primary-color);
+  border: none;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  display: block;
+  // margin: 0 4px;
+  cursor: pointer;
+  border-radius: 50%;
 }
 
+
+.resetTimer{
+  font-size: 12px;
+  margin: 0;
+  padding: 0;
+  height: 40px;
+  width: 40px;
+  background-color: var(--primary-color);
+  border: none;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  display: block;
+  // margin: 0 4px;
+  cursor: pointer;
+  border-radius: 50%;
+}
+
+
+.countdownTimer{
+  font-size: 72px;
+  margin: 0;
+  padding: 0;
+  height: 200px;
+  width: 200px;
+  background-color: var(--primary-color);
+  border: none;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  display: block;
+  // margin: 0 4px;
+  cursor: pointer;
+  border-radius: 50%;
+  
+}
