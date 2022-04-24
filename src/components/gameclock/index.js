@@ -74,7 +74,7 @@ const GameClock = ()=>{
     return (
         <div>
             <div style = {{height: 50, width: 150, textAlign: "center", backgroundColor: "white", borderColor: '#black', borderStyle: "solid", display:"inline-block"}}>
-             <h1>{mins}:{secs}</h1>
+             <h1 style = {{fontSize: 36}}>{mins}:{secs}</h1>
 
             </div>
             <div style = {{backgroundColor: "black", borderColor: "black", borderStyle: "solid", display: "inline-block" }}>
