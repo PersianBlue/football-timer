@@ -44,7 +44,9 @@ body {
   min-height: 100vh;
   text-rendering: optimizeSpeed;
   line-height: 1.5;
-  background: linear-gradient(white,grey),url("./pages/noise.svg");
+  filter: blur(0.34px);
+  background-blend-mode:overlay;
+  background: linear-gradient(white,white,rgb(131, 129, 129)),url("./pages/noise.svg");
 }
 
 /* A elements that don't have a class get default styles */
@@ -88,6 +90,9 @@ select {
   width:100px;
   margin-right:19px;
   transform:translatex(6px) translatey(4px);
+ 
+
+
  }
 
  .body div div:nth-child(1) .css-module--circular--lCBsb{
