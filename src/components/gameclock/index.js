@@ -5,7 +5,7 @@ import Button from "../button";
 
 
 const GameClock = ()=>{
-    //console.log("Re-rendering game clock");
+    //state variables and functions for controlling the time
     const [hrs, setHours] = useState(0);
     const [mins, setMins] = useState(0);
     const [secs, setSecs] = useState(0);
@@ -22,7 +22,7 @@ const GameClock = ()=>{
             setSecs(secs%60); //remove 60 from secs, and set it to remainder (incase secs = 65 for e.g)
         }
     }
-    const updateHours = ()=>{
+    const updateHours = ()=>{// updates the hours every 60 minutes, however the value is not used
         if(mins>=60){
             const newHrs = Math.floor(60/mins);
             setHours(hrs + newHrs);
@@ -30,14 +30,14 @@ const GameClock = ()=>{
         }
     }
 
-    const resetTimer = ()=>{
+    const resetTimer = ()=>{ //resets all the times to 0 and stops the timer
         setHours(0);
         setMins(0);
         setSecs(0);
         stopTimer();
     }
 
-    const stopTimer = ()=>{
+    const stopTimer = ()=>{ //stops the timer if it hasn't already been stopped
         if(!stopped){
             console.log("Stopped timer");
             setStopped(true);
@@ -45,7 +45,7 @@ const GameClock = ()=>{
         
     }
 
-    const startTimer = ()=>{
+    const startTimer = ()=>{ //starts the timer if it has been stopped
         if(stopped){
             setStopped(false);
             console.log("Starting timer");
@@ -53,7 +53,7 @@ const GameClock = ()=>{
         
     }
     
-    const updateAll = (stopped,isReset) =>{
+    const updateAll = (stopped,isReset) =>{ //updates seconds, mins, hours using previous functions
         if (!stopped){
             //console.log("Updating hh:mm:ss");
             updateSeconds(secs);

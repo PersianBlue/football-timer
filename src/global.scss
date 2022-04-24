@@ -44,9 +44,7 @@ body {
   min-height: 100vh;
   text-rendering: optimizeSpeed;
   line-height: 1.5;
-  filter: blur(0.34px);
-  background-blend-mode:overlay;
-  background: linear-gradient(white,white,rgb(131, 129, 129)),url("./pages/noise.svg");
+  background: linear-gradient(white,grey),url("./pages/noise.svg");
 }
 
 /* A elements that don't have a class get default styles */
@@ -86,11 +84,13 @@ select {
 }
 
 //Visual CSS code exports
+//Used an extension to generate these for specific elements
 .body container div:nth-child(1) > div:nth-child(2){
   width:100px;
   margin-right:19px;
   transform:translatex(6px) translatey(4px);
- 
+  filter: blur(0.34px);
+   background-blend-mode:overlay;
 
 
  }

@@ -5,6 +5,10 @@ import * as css from "./css.module.scss";
 
 
 const Team = ({name,ID}) =>{
+//keeps track of score with state variables
+//increment and decrement score on button click
+//Dsplays team names, score, and + and - buttons
+
 const [score,setScore] = useState(0);
 
 const incrementScore = ()=>{

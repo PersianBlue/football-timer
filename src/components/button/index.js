@@ -3,7 +3,8 @@ import React from "react";
 import * as css from "./css.module.scss";
 
 const Button = (props) => {
-  //const styles = []
+  //creates all the buttons seen on screen
+  //if statements are specific to particular buttons
   if(props.name==="changeSeconds"){
     return (
       <div>

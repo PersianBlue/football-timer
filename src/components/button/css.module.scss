@@ -1,4 +1,4 @@
-.circular {
+.circular { //creates circular buttons
   margin: 0;
   padding: 0;
   height: 40px;
@@ -12,12 +12,11 @@
   // margin: 0 4px;
   cursor: pointer;
   border-radius: 50%;
-  //box-shadow: -1px 1px 5px -2px white inset;
 
   
 }
 
-.roundedEdges{
+.roundedEdges{ //creates buttons with rounded edges
   margin: auto;
   padding: 0;
   height: 40px;
@@ -36,11 +35,11 @@
   box-shadow: -1px 1px 5px -2px white inset;
 }
 
-.inner{
+.inner{ //makes an inline block
   display: inline-block;
 }
 
-.changeSeconds{
+.changeSeconds{ //sets style for the changeSeconds button
   margin: 0;
   padding: 0;
   height: 70px;
@@ -59,7 +58,7 @@
 }
 
 
-.resetTimer{
+.resetTimer{ //sets style for resetTimer button
   font-size: 12px;
   margin: 0px;
   padding: 0;
@@ -81,7 +80,7 @@
 }
 
 
-.countdownTimer{
+.countdownTimer{ //sets style for countdownTimer button
   font-size: 72px;
   margin: 0;
   padding: 0;
@@ -109,7 +108,7 @@
 }
 
 
-.stopTimer {
+.stopTimer { //sets style for stop timer button
   margin: 0;
   padding: 0;
   height: 40px;

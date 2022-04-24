@@ -5,22 +5,21 @@ import whistleSound from "../../assets/audio/WhistleSoundEffect.mp3"
 import * as css from "./css.module.scss";
 
 const ThrowTimer = ()=>{
+    //counter keeps track of the countdown timer
+    //newCounter is used to set the counter to a new variable with
+    //the changeSeconds button
+    //runCountdown acts as a switch to trigger the countdown after button click
+
     const[counter,setCounter] = useState(4);
     const[runCountdown, setRunCountdown] = useState(false);
     const[newCounter, setNewCounter] = useState(4);
 
     const startCountdown = ()=>{
-        console.log("Starting countdown:",runCountdown);
-        console.log(runCountdown);
         setRunCountdown(true);
     }
-    useEffect(
+    useEffect( //useEffect deals with infinite render problems
         ()=>{
-            console.log("Inside useEffect");
-            console.log(runCountdown)
-            console.log(counter);
             if(runCountdown && counter>0){
-                console.log("Inside if statement");
                 const handle = setInterval(()=>setCounter(counter-1),1000)
                 return ()=>clearInterval(handle);
 
@@ -36,6 +35,8 @@ const ThrowTimer = ()=>{
     )
     
     const setSeconds = ()=>{
+        //creates a prompt for changing countdown timer length
+        //if statement checks validity of input
         let seconds = window.prompt("Enter seconds here");
         if(Number.isNaN(seconds) || isNaN(seconds) || seconds===""){
             seconds = counter;
@@ -46,6 +47,7 @@ const ThrowTimer = ()=>{
   
 
     return (
+        //produces the changeSeconds and countdownTimer button
         <div>
             <br></br>
             <div className = {css.rightAlign}>
