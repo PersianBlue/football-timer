@@ -6,6 +6,11 @@
 .inner { //makes the elements appear in one line together
     display: inline-block
 }
+
+.buttonDivStyle{
+    display: flex;
+    justify-content: center;
+}
 .divStyle{ //sets the background colour and box shadow
     display: inline-block;
     background: rgb(179, 229, 248);
@@ -18,7 +23,8 @@
     box-shadow: inset -2px -2px 10px;
 }
 
-  .h1{ //style for Team One/Two text
+  .p{ //style for Team One/Two text
+      font-size: 24px;
       display: block;
       background-color: black;
       color: white;
@@ -27,5 +33,7 @@
       margin-right: 15px;
       padding: 3px;
       text-align: center;
+      display: flex;
+      justify-content: center;
   }
   

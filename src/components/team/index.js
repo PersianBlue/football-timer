@@ -21,13 +21,12 @@ const decrementScore = () =>{
     
     return(
         <div style = {{borderColor: 'black' ,borderStyle: "solid",}} class = {css.divStyle} >
-            <h1 className = {css.h1}>{name}</h1>
+            <p className = {css.p}>{name}</p>
             <h3 style = {{textAlign: "center"}}>{score}</h3>
-            <div class = {css.inner} style={{fontSize: 24, margin: 10, float: "center",width: "auto",}}>
+            <div id = "scoreButtonDiv" class = {css.buttonDivStyle}>
                 <Button  type = "roundedEdges" onClick = {()=> decrementScore()}> - </Button>
-            </div>
-            <div class = {css.inner} style={{fontSize: 24}}>
                 <Button  type = "roundedEdges" onClick = {()=> incrementScore()}> + </Button>
+
             </div>
           
         </div>

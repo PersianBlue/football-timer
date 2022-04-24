@@ -1,6 +1,8 @@
 import React, { useEffect } from 'react';
 import {useState} from 'react';
 import Button from "../button";
+import "./css.module.scss";
+import * as css from "./css.module.scss"
 
 
 
@@ -73,13 +75,12 @@ const GameClock = ()=>{
     ) 
     return (
         <div>
-            <div style = {{height: 50, width: 150, textAlign: "center", backgroundColor: "white", borderColor: '#black', borderStyle: "solid", display:"inline-block"}}>
-             <h1 style = {{fontSize: 36}}>{mins}:{secs}</h1>
-
-            </div>
-            <div style = {{backgroundColor: "black", borderColor: "black", borderStyle: "solid", display: "inline-block" }}>
-                <Button name = "Start" onClick = {()=> startTimer()}> Start </Button>
-                <Button name = "Stop" onClick = {() =>stopTimer()}> Stop </Button>
+            <div id="gameClockDiv" className ={css.gameClockDiv} style = {{height: 50, width: 150, textAlign: "center", backgroundColor: "white", borderColor: '#black', borderStyle: "solid", display:"inline-block"}}>
+             <h1 className = {css.h1}>{mins}:{secs}</h1>
+                <div id ="timersDiv" className = {css.timersDiv} style = {{backgroundColor: "black", borderColor: "black", borderStyle: "solid", display: "inline-block" }}>
+                    <Button name = "Start" onClick = {()=> startTimer()}> Start </Button>
+                    <Button name = "Stop" onClick = {() =>stopTimer()}> Stop </Button>
+                </div>
             </div>
             <Button  style = {{ width: 100, height: 150}} type = "resetTimer" name = "resetTimer" onClick = {() =>resetTimer()}>Reset Timer </Button>
             <br></br>

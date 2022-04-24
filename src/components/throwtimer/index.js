@@ -5,6 +5,7 @@ import whistleSound from "../../assets/audio/WhistleSoundEffect.mp3"
 import * as css from "./css.module.scss";
 
 const ThrowTimer = ()=>{
+    //exports changeSeconds and countdownTimer buttons
     //counter keeps track of the countdown timer
     //newCounter is used to set the counter to a new variable with
     //the changeSeconds button
@@ -48,14 +49,14 @@ const ThrowTimer = ()=>{
 
     return (
         //produces the changeSeconds and countdownTimer button
-        <div>
+        <div id ="throwTimerDiv">
             <br></br>
             <div className = {css.rightAlign}>
                  <Button name = "changeSeconds" onClick= {()=>setSeconds()}>Change Seconds</Button>
             </div>
             
            <div  className ={css.centerAlign}> 
-               <Button name = "countdownTimer" type = "circular" onClick ={()=>startCountdown()}> {counter}</Button>
+               <Button id="countdownTimer" name = "countdownTimer" type = "circular" onClick ={()=>startCountdown()}> {counter}</Button>
            </div>
             
             

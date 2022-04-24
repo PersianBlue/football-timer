@@ -1,9 +1,11 @@
-.circular { //creates circular buttons
+.circular { 
+  //creates circular buttons
+  //used in the start and stop buttons
   margin: 0;
   padding: 0;
   height: 40px;
   width: 40px;
-  background-color: rgba(23,23,23,255);
+  background-color: black;
   border: none;
   color: white;
   text-align: center;
@@ -17,7 +19,8 @@
 }
 
 .roundedEdges{ //creates buttons with rounded edges
-  margin: auto;
+  //only used for - and + buttons in score
+  margin: 10px;
   padding: 0;
   height: 40px;
   width: 40px;
@@ -26,12 +29,9 @@
   color: white;
   text-align: center;
   text-decoration: none;
-  display: block;
-  // margin: 0 4px;
   cursor: pointer;
   border-radius: 10px;
   position: relative;
-  left: 35px;
   box-shadow: -1px 1px 5px -2px white inset;
 }
 
@@ -74,6 +74,7 @@
   cursor: pointer;
   border-radius: 50%;
   position:relative;
+  top: -35px;
   left:22px;
   box-shadow: -1px 1px 5px -2px white inset;
 
@@ -86,6 +87,8 @@
   padding: 0;
   height: 200px;
   width: 200px;
+  margin-top: 50px;
+  position: relative;
   background-color: rgba(23,23,23,255);
   border: black;
   border-style: groove;
@@ -108,12 +111,12 @@
 }
 
 
-.stopTimer { //sets style for stop timer button
+.startTimer{
   margin: 0;
   padding: 0;
   height: 40px;
   width: 40px;
-  background-color: rgba(23,23,23,255);
+  background-color: black;
   border: none;
   color: white;
   text-align: center;
@@ -122,4 +125,22 @@
   // margin: 0 4px;
   cursor: pointer;
   border-radius: 50%;
+  text-decoration: underline;
+  text-underline-offset: 10px;
+}
+.stopTimer { //sets style for stop timer button
+  margin: 0;
+  padding: 0;
+  height: 40px;
+  width: 40px;
+  background-color: black;
+  border: none;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  display: block;
+  // margin: 0 4px;
+  cursor: pointer;
+  border-radius: 50%;
+  
 }
