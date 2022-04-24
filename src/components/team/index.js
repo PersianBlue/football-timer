@@ -16,10 +16,10 @@ const decrementScore = () =>{
 }
     
     return(
-        <div style = {{borderColor: '#black' ,borderStyle: "solid",}} class = {css.inner}>
+        <div style = {{borderColor: 'black' ,borderStyle: "solid",}} class = {css.divStyle} >
             <h1 className = {css.h1}>{name}</h1>
-            <p style = {{textAlign: "center"}}>{score}</p>
-            <div class = {css.inner} style={{fontSize: 24, margin: 10, float: "center",width: "auto"}}>
+            <h3 style = {{textAlign: "center"}}>{score}</h3>
+            <div class = {css.inner} style={{fontSize: 24, margin: 10, float: "center",width: "auto",}}>
                 <Button  type = "roundedEdges" onClick = {()=> decrementScore()}> - </Button>
             </div>
             <div class = {css.inner} style={{fontSize: 24}}>

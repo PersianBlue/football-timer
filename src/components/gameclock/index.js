@@ -79,7 +79,7 @@ const GameClock = ()=>{
             </div>
             <div style = {{backgroundColor: "black", borderColor: "black", borderStyle: "solid", display: "inline-block" }}>
                 <Button name = "Start" onClick = {()=> startTimer()}> Start </Button>
-                <Button  name = "Stop" onClick = {() =>stopTimer()}> Stop </Button>
+                <Button name = "Stop" onClick = {() =>stopTimer()}> Stop </Button>
             </div>
             <Button  style = {{ width: 100, height: 150}} type = "resetTimer" name = "resetTimer" onClick = {() =>resetTimer()}>Reset Timer </Button>
             <br></br>

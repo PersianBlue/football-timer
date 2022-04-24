@@ -34,6 +34,13 @@ const Button = (props) => {
       </div>
     )
   }
+  if (props.name==="Stop"){
+    return(
+      <div>
+        <button  className = {css.circular} id = {props.id} onClick = {props.onClick}>{props.children}</button>
+      </div>
+    )
+  }
     return (
     <div>
       <button className = {css.circular} id = {props.id} onClick = {props.onClick}>{props.children}</button>

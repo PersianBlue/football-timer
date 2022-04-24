@@ -1,4 +1,5 @@
 /* Global style varibles (Can be used in any component style module */
+//I used Visual CSS Editor to make some of these changes, so they are hardcoded in
 :root {
   --primary-color: hsla(0, 0%, 0%);
   --secondary-color: hsla(203, 98%, 84%);
@@ -38,6 +39,7 @@ html:focus-within {
 
 /* Set core body defaults */
 body {
+  border-style: inset;
   font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
   min-height: 100vh;
   text-rendering: optimizeSpeed;
@@ -80,3 +82,43 @@ select {
     scroll-behavior: auto !important;
   }
 }
+
+//Visual CSS code exports
+.body container div:nth-child(1) > div:nth-child(2){
+  width:100px;
+  margin-right:19px;
+  transform:translatex(6px) translatey(4px);
+ }
+
+ .body div div:nth-child(1) .css-module--circular--lCBsb{
+  margin-right:52px;
+ }
+
+ .body container > div{
+  transform:translatex(0px) translatey(0px);
+ }
+ 
+ /* Button */
+ .body div .css-module--circular--lCBsb{
+  margin-right:58px !important;
+  width:100%;
+ }
+
+ container div div div:nth-child(1) .css-module--circular--lCBsb{
+  text-decoration: underline;
+  text-underline-offset: 15px;
+ }
+ 
+ /* Division */
+ .body container div:nth-child(1) > div:nth-child(1){
+  min-height:75px;
+  transform:translatex(9px) translatey(-19px);
+ }
+ 
+ /* Heading */
+ .body div div h1{
+  transform:translatex(0px) translatey(10px);
+ }
+ 
+
+ 

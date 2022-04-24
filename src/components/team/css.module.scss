@@ -3,11 +3,16 @@
     text-align: center;
 }
 
-.inner{
+.inner {
+    display: inline-block
+}
+.divStyle{
     display: inline-block;
     background: rgb(179, 229, 248);
 }
-
+.divBevel{
+    box-shadow: inset -2px -2px 10px;
+}
 .roundedEdges{
     margin: 0;
     padding: 0;
