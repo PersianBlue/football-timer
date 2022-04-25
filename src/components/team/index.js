@@ -4,7 +4,6 @@ import Button from "../button";
 import * as css from "./css.module.scss";
 import minusButton from "../../assets/images/minusButton.png"
 import plusButton from "../../assets/images/plusButton.png"
-
 const Team = ({ name, ID }) => {
   //keeps track of score with state variables
   //increment and decrement score on button click

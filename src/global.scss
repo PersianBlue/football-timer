@@ -1,5 +1,4 @@
 /* Global style varibles (Can be used in any component style module */
-//I used Visual CSS Editor to make some of these changes, so they are hardcoded in
 :root {
   --primary-color: hsla(0, 0%, 0%);
   --secondary-color: hsla(203, 98%, 84%);
@@ -40,7 +39,7 @@ html:focus-within {
 /* Set core body defaults */
 body {
   //The noise.svg file helps add the noisy/grainy filter
-  filter: blur(0.30px);
+  filter: blur(0.34px);
   background-blend-mode:multiply;
   border-style: inset;
   font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
@@ -86,7 +85,6 @@ select {
     scroll-behavior: auto !important;
   }
 }
-
 
 
  

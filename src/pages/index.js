@@ -9,12 +9,12 @@ import "../global.scss"
 const App = (props) => {
   return (
     <main className = 'body'>
-      <container style={{width: 350}}>
+      <div style={{width: 350}}>
         <GameClock/>
         <Team name = "Team One" id ={1}/>
         <Team name = "Team Two" id = {2}/>
         <ThrowTimer/>
-      </container>
+      </div>
     </main>
   );
 };
