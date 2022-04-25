@@ -34,6 +34,13 @@
   position: relative;
   box-shadow: -1px 1px 5px -2px white inset;
 }
+.roundedEdges:focus-within{
+  box-shadow: 0 5px 15px rgba(145, 92, 182, .4);
+}
+
+.roundedEdges:hover{
+  box-shadow: 0 5px 15px 4px rgb(255, 255, 255);
+}
 
 .inner{ //makes an inline block
   display: inline-block;
@@ -57,7 +64,15 @@
 
 }
 
+.changeSeconds:hover{
+    box-shadow: 0 0px 15px 2px  white;
+  
+}
 
+.resetTimer:hover{
+  box-shadow: 0 0px 2px 3px  white;
+
+}
 .resetTimer{ //sets style for resetTimer button
   font-size: 12px;
   margin: 0px;
@@ -105,11 +120,11 @@
   box-shadow: -2px 2px 4px -2px white inset;
 
   //box-shadow: 5px -5px 5px 2px black inset;
- 
-
-  
 }
 
+.countdownTimer:hover{
+  box-shadow: 0 0px 3px 2px  rgb(255, 255, 255);
+}
 
 .startTimer{
   margin: 0;
@@ -124,9 +139,14 @@
   display: block;
   // margin: 0 4px;
   cursor: pointer;
-  border-radius: 50%;
+  border-radius: 10px;
   text-decoration: underline;
   text-underline-offset: 10px;
+}
+
+.startTimer:hover{
+  box-shadow: 0 0px 3px 1px  rgb(123, 128, 109);
+
 }
 .stopTimer { //sets style for stop timer button
   margin: 0;
@@ -141,6 +161,11 @@
   display: block;
   // margin: 0 4px;
   cursor: pointer;
-  border-radius: 50%;
+  border-radius: 10px;
   
+}
+
+.stopTimer:hover{
+  box-shadow: 0 0px 3px 1px  rgb(123, 128, 109);
+
 }
