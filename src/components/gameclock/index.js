@@ -4,8 +4,6 @@ import Button from "../button";
 import "./css.module.scss";
 import * as css from "./css.module.scss"
 
-
-
 const GameClock = ()=>{
     //state variables and functions for controlling the time
     const [hrs, setHours] = useState(0);
