@@ -1,0 +1,29 @@
+.timersDiv{
+    border-color: black; 
+    border-style: solid;
+    background-Color: black;
+    display: inline-block;
+    justify-content: center;
+    padding-left: 33px;
+    width:113px;
+    font-size: 18px;;
+    transform:translatex(122px) translatey(-65px);
+}
+
+.h1{
+    transform:translatex(0px) translatey(10px);
+    font-size: 36px;
+}
+.gameClockDiv{
+    height: 50; 
+    width: 150; 
+    text-align: center;
+    background-color: white;
+    border-color: '#black';
+    border-style: solid;
+    border-width: 5px;
+    display: inline-block;
+    min-height:75px;
+    transform:translatex(8px) translatey(10px);
+}
+

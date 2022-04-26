@@ -38,9 +38,15 @@ html:focus-within {
 
 /* Set core body defaults */
 body {
-  min-height: 100vh;
+  //The noise.svg file helps add the noisy/grainy filter
+  filter: blur(0.34px);
+  background-blend-mode:multiply;
+  border-style: inset;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  min-height: 150vh;
   text-rendering: optimizeSpeed;
   line-height: 1.5;
+  backdrop-filter: contrast(1.23);
   background: linear-gradient(white,grey),url("./pages/noise.svg");
 }
 
@@ -79,3 +85,8 @@ select {
     scroll-behavior: auto !important;
   }
 }
+
+
+ 
+
+

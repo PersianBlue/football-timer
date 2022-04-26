@@ -1,0 +1,23 @@
+.throwTimerDiv{
+  height: auto;
+
+}
+
+.rightAlign{
+    position: relative;
+    display: flexbox;
+    left: 220px;
+    
+  }
+
+  .countdownTimer{
+    font-size: 50px;
+    //color: red;
+  }
+
+  .centerAlign{
+      position:relative;
+      left: 50px;
+      top: 50px;
+      width: 100%;
+  }
