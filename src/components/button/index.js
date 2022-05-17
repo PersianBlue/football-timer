@@ -7,20 +7,15 @@ const Button = (props) => {
   //if statements are specific to particular buttons
   if (props.name) {
     return (
-        <button
-          className={css[props.name]}
-          id={props.id}
-          onClick={props.onClick}
-        >
-          {props.children}
-        </button>
+      <button className={css[props.name]} id={props.id} onClick={props.onClick}>
+        {props.children}
+      </button>
     );
   }
   return (
-
-      <button className={css[props.type]} id={props.id} onClick={props.onClick}>
-        {props.children}
-      </button>
+    <button className={css[props.type]} id={props.id} onClick={props.onClick}>
+      {props.children}
+    </button>
   );
 };
 

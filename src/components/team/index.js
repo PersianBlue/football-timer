@@ -2,8 +2,8 @@ import React from "react";
 import { useState } from "react";
 import Button from "../button";
 import * as css from "./css.module.scss";
-import minusButton from "../../assets/images/minusButton.png"
-import plusButton from "../../assets/images/plusButton.png"
+import minusButton from "../../assets/images/minusButton.png";
+import plusButton from "../../assets/images/plusButton.png";
 const Team = ({ name, ID }) => {
   //keeps track of score with state variables
   //increment and decrement score on button click
@@ -22,16 +22,16 @@ const Team = ({ name, ID }) => {
   return (
     <div
       style={{ borderColor: "black", borderStyle: "solid" }}
-      class={css.divStyle}
+      className={css.divStyle}
     >
       <p className={css.p}>{name}</p>
       <h3 style={{ textAlign: "center" }}>{score}</h3>
       <div id="scoreButtonDiv" class={css.buttonDivStyle}>
         <Button type="roundedEdges" onClick={() => decrementScore()}>
-          <img  className = {css.scoreButtonDivImg} src={minusButton}  />{" "}
+          <img className={css.scoreButtonDivImg} src={minusButton} />{" "}
         </Button>
         <Button type="roundedEdges" onClick={() => incrementScore()}>
-          <img className = {css.scoreButtonDivImg} src ={plusButton} />
+          <img className={css.scoreButtonDivImg} src={plusButton} />
         </Button>
       </div>
     </div>
