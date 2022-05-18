@@ -3,6 +3,8 @@
     justify-content: center;
 }
 .divStyle{ //sets the background colour and box shadow
+    min-height: 100px;
+    min-width: 150px;
     display: inline-block;
     background: rgb(179, 229, 248);
     box-shadow: 3px -2px 7px rgba(0,0,0,.25) inset,
