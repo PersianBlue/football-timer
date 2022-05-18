@@ -1,11 +1,12 @@
 #signOutDiv{
     transform:translatex(300px) translatey(-227px);
-    display: inline-block;
+    display: flex;
     vertical-align: middle;
     padding-left: 42px;
     padding-right: 28px;
     border-radius: 3px;
-    border: thick solid red;
+    border: thick solid;
+    background-color: white;
     height: 120px;
     font-size: 14px;
     font-weight: bold;

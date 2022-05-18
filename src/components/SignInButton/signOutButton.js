@@ -5,7 +5,11 @@ import Button from "../button";
 const SignOutButton = () => {
   return (
     <div>
-      <Button id="signOutButton" onClick={() => auth.signOut()}>
+      <Button
+        id="signOutButton"
+        name="signOutButton"
+        onClick={() => auth.signOut()}
+      >
         Sign Out{" "}
       </Button>
     </div>
