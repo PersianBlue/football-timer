@@ -1,13 +1,11 @@
 import React from "react";
 import signInWithGoogle from "./signInWithGoogle";
-import Button from "../button";
-import { signInButton } from "./signInButton.scss";
-
+import Button from "../button/index";
+import { SignInDiv } from "./signInButton.scss";
 const SignInButton = () => {
   return (
     <div id="SignInDiv">
       <Button
-        className={signInButton}
         id="signInButton"
         type="roundedEdges"
         name="signInButton"
