@@ -6,7 +6,8 @@ import Team from "../components/team";
 import ThrowTimer from "../components/throwtimer";
 import "../global.scss";
 import { useState } from "react";
-
+import MatchSettings from "../components/match/matchSettings";
+import ChangeTeamNames from "../components/match/changeTeamNames";
 const App = (props) => {
   const [teamNames, setTeamNames] = useState([
     {
@@ -15,31 +16,32 @@ const App = (props) => {
     { teamTwo: "Team Two" },
   ]);
 
-  const changeNames = () => {
-    let name1 = null;
-    let name2 = null;
-    name1 = window.prompt("Enter the name for Team 1");
-    name2 = window.prompt("Enter the name for Team 2");
-    let arr = [...teamNames];
-    if (name1 != "") {
-      arr[0] = { teamOne: name1 };
-    }
-    if (name2 != "") {
-      arr[1] = { teamTwo: name2 };
-    }
-    setTeamNames(arr);
-    console.log("Name1 :", name1);
-    console.log("Team one: ", teamNames[0]);
-    console.log("Name2 :", name2);
-    console.log("Team Two: ", teamNames[1]);
+  const handleCallBack = (TeamNames) => {
+    setTeamNames(TeamNames);
+    console.log(teamNames);
   };
 
   return (
     <main className="body">
       <div style={{ width: 350 }}>
         <GameClock />
-        <Button onClick={() => changeNames()}>Change Team Names </Button>
         <SignInPage />
+
+        <div
+          style={{
+            border: "thick solid red",
+            display: "grid",
+            justifyContent: "center",
+          }}
+        >
+          {/* <Button name="changeNames" onClick={() => changeNames()}>
+            Change Team Names{" "}
+          </Button> */}
+          <ChangeTeamNames parentCallBack={handleCallBack} />
+
+          <MatchSettings />
+        </div>
+
         <Team name={teamNames[0].teamOne} id={1} />
         <Team name={teamNames[1].teamTwo} id={2} />
         <ThrowTimer />
