@@ -31,6 +31,7 @@ const App = (props) => {
           style={{
             border: "thick solid red",
             display: "grid",
+            gridTemplateColumns: "1rf 1rf 1rf 1rf",
             justifyContent: "center",
           }}
         >

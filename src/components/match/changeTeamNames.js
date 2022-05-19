@@ -1,6 +1,9 @@
 import React from "react";
 import { useState } from "react";
 import Button from "../button";
+
+/*This controls changing the names of the Teams via window prompts, and is called by index.js */
+
 const ChangeTeamNames = ({ parentCallBack }) => {
   console.log("Rendering ChangeTeamNames");
   const [teamNames, setTeamNames] = useState([

@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
 import Button from "../button";
+import SetHalfTimes from "../match/setHalfTimes";
 import "./css.module.scss";
 import * as css from "./css.module.scss";
 
@@ -10,6 +11,19 @@ const GameClock = () => {
   const [mins, setMins] = useState(0);
   const [secs, setSecs] = useState(0);
   const [stopped, setStopped] = useState(true);
+  const [halfTime, setHalfTime] = useState(1);
+
+  const getHalfTime = () => {
+    let time = window.prompt("Set half-time in minutes here");
+    if (Number.isNaN(time) || isNaN(time) || time === "") {
+      time = halfTime;
+    } else {
+      time = parseInt(time);
+      setHalfTime(time);
+      console.log("Half time set to", time);
+    }
+    return [time];
+  };
 
   const updateSeconds = () => {
     setSecs(secs + 1); //each time the function is called, increment seconds
@@ -63,6 +77,9 @@ const GameClock = () => {
       updateSeconds(secs);
       updateMinutes(secs, mins);
       updateHours(mins, hrs);
+    }
+    if (mins === halfTime - 1) {
+      stopTimer();
     }
   };
   //console.log(hrs,mins,secs);
@@ -121,8 +138,10 @@ const GameClock = () => {
       >
         Reset Timer{" "}
       </Button>
-      <br></br>
-      <br></br>
+      {/* <br></br>
+      <br></br> */}
+      <button onClick={() => getHalfTime()}>Set Half-Time</button>
+      <h2>Half time Set to: {halfTime} minutes</h2>
     </div>
   );
 };
