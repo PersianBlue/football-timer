@@ -26,12 +26,13 @@ const ChangeTeamNames = ({ parentCallBack }) => {
       arr[1] = { teamTwo: name2 };
     }
     setTeamNames(arr);
-    console.log("Team Names:", teamNames);
     parentCallBack(teamNames);
+    // console.log("Team Names in fxn:", teamNames);
   };
 
-  console.log("Team Names:", teamNames);
   parentCallBack(teamNames);
+  // console.log("Team Names outside fxn:", teamNames);
+
   return (
     <div>
       <Button onClick={() => changeNames()}>Change Team Names </Button>

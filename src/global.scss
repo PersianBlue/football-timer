@@ -38,6 +38,7 @@ html:focus-within {
 
 /* Set core body defaults */
 body {
+  border: thick solid red;
   //The noise.svg file helps add the noisy/grainy filter
   filter: blur(0.34px);
   background-blend-mode:multiply;

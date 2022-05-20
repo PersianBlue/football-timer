@@ -50,7 +50,7 @@ const ThrowTimer = () => {
 
   return (
     //produces the changeSeconds and countdownTimer button
-    <div id="throwTimerDiv">
+    <div id="throwTimerDiv" className={css.throwTimerDiv}>
       <br></br>
       <div className={css.rightAlign}>
         <Button name="changeSeconds" onClick={() => setSeconds()}>

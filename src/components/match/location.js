@@ -3,7 +3,7 @@ import { useState } from "react";
 import Button from "../button/index";
 
 const Location = () => {
-  const [location, setLocation] = useState("");
+  const [location, setLocation] = useState("Home");
 
   const changeLocation = () => {
     let loc = window.prompt("Enter location of match:");

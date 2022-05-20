@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
 import Button from "../button";
-import SetHalfTimes from "../match/setHalfTimes";
 import "./css.module.scss";
 import * as css from "./css.module.scss";
 
@@ -12,6 +11,7 @@ const GameClock = () => {
   const [secs, setSecs] = useState(0);
   const [stopped, setStopped] = useState(true);
   const [halfTime, setHalfTime] = useState(1);
+  const [matchEnded, setMatchEnded] = useState(false);
 
   const getHalfTime = () => {
     let time = window.prompt("Set half-time in minutes here");
@@ -52,6 +52,7 @@ const GameClock = () => {
     setMins(0);
     setSecs(0);
     stopTimer();
+    setMatchEnded(false);
   };
 
   const stopTimer = () => {
@@ -71,6 +72,7 @@ const GameClock = () => {
   };
 
   const updateAll = (stopped, isReset) => {
+    console.log("Inside update all");
     //updates seconds, mins, hours using previous functions
     if (!stopped) {
       //console.log("Updating hh:mm:ss");
@@ -78,7 +80,14 @@ const GameClock = () => {
       updateMinutes(secs, mins);
       updateHours(mins, hrs);
     }
-    if (mins === halfTime - 1) {
+    const endTime = 2 * halfTime;
+
+    if (secs === 0 && mins === endTime) {
+      console.log("Game ended");
+      setMatchEnded(true);
+      stopTimer();
+    } else if (mins === halfTime && secs === 0) {
+      console.log("At Half Time");
       stopTimer();
     }
   };
@@ -88,12 +97,16 @@ const GameClock = () => {
   useEffect(
     //useEffect solves the re-rendering too many times issue
     () => {
-      const handle = setInterval(() => updateAll(stopped), 1000);
+      const handle = setInterval(() => {
+        if (!stopped) {
+          updateAll(stopped);
+        }
+      }, 1000);
       return () => clearInterval(handle); //clear interval on unmount
     }
   );
   return (
-    <div>
+    <div style={{ border: "solid thick green" }}>
       <div
         id="gameClockDiv"
         className={css.gameClockDiv}
@@ -140,8 +153,12 @@ const GameClock = () => {
       </Button>
       {/* <br></br>
       <br></br> */}
-      <button onClick={() => getHalfTime()}>Set Half-Time</button>
-      <h2>Half time Set to: {halfTime} minutes</h2>
+      <div className={css.halfTimeDiv}>
+        <button onClick={() => getHalfTime()}>Set Half-Time</button>
+        {mins < halfTime ? <h3>First Half </h3> : <h3>Second Half</h3>}
+        <h3>Half time Set to: {halfTime} minutes</h3>
+        {matchEnded ? <h3>Match Ended!</h3> : ""}
+      </div>
     </div>
   );
 };

@@ -5,7 +5,7 @@ import { SignInDiv } from "./signInDiv.scss";
 const SignInButton = () => {
   return (
     <div id="SignInDiv">
-      <h2 style={{ marginTop: 12 }}>You are not signed in.</h2>
+      <h3 style={{ marginTop: "auto" }}>You are not signed in.</h3>
       <Button
         id="signInButton"
         type="roundedEdges"

@@ -3,9 +3,9 @@ import { auth } from "../../firebase-config";
 import { useState, useEffect } from "react";
 import SignInButton from "./signInButton";
 import SignOutButton from "./signOutButton";
-import "./signInPage.css";
+import "./signOutDiv.css";
 
-const SignInPage = () => {
+const SignInPage = ({ parentCallBack }) => {
   const [loggedIn, setLoggedIn] = useState(false);
   const [thisUser, setThisUser] = useState(null);
 
@@ -25,6 +25,7 @@ const SignInPage = () => {
           console.log("Signed in Successfully");
           setLoggedIn(true);
           setThisUser(user);
+          parentCallBack(user);
         } else {
           console.log("Not logged in");
           setLoggedIn(false);
@@ -35,6 +36,8 @@ const SignInPage = () => {
 
     return unlisten();
   }, []);
+
+  parentCallBack(thisUser);
 
   return <div>{loggedIn ? display() : <SignInButton />}</div>;
 };
