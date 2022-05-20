@@ -8,6 +8,10 @@ import "../global.scss";
 import { useState } from "react";
 import MatchSettings from "../components/match/matchSettings";
 import ChangeTeamNames from "../components/match/changeTeamNames";
+import SaveToDatabase from "../components/database/saveToDatabase";
+import ReadFromDatabase from "../components/database/readFromDatabase";
+
+
 const App = (props) => {
   const [user, setUser] = useState(null);
   const [teamOneScore, setTeamOneScore] = useState(0);
@@ -45,6 +49,20 @@ const App = (props) => {
     console.log(score, id);
   };
 
+  const uploadMatch = () => {
+    console.log("Uploading Match");
+    const teamOneName = teamNames[0].teamOne;
+    const teamTwoName = teamNames[1].teamTwo;
+    console.log("Location: ", location);
+    SaveToDatabase(
+      location,
+      teamOneName,
+      teamTwoName,
+      teamOneScore,
+      teamTwoScore
+    );
+  };
+
   return (
     <main className="body">
       <div style={{ width: 400 }}>
@@ -80,7 +98,8 @@ const App = (props) => {
         <h1>
           Team 1: {teamOneScore} Team 2: {teamTwoScore}
         </h1>
-        <Button>Upload Match</Button>
+        <Button onClick={() => uploadMatch()}>Upload Match</Button>
+        <Button onClick={() => ReadFromDatabase()}>Read Database</Button>
         <ThrowTimer />
       </div>
     </main>

@@ -15,6 +15,7 @@
     "clean": "gatsby clean"
   },
   "dependencies": {
+    "firebase": "^9.8.1",
     "gatsby": "^4.12.1",
     "gatsby-plugin-manifest": "^4.12.1",
     "gatsby-plugin-offline": "^5.12.1",
