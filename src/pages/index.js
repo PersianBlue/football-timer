@@ -11,13 +11,13 @@ import ChangeTeamNames from "../components/match/changeTeamNames";
 import SaveToDatabase from "../components/database/saveToDatabase";
 import ReadFromDatabase from "../components/database/readFromDatabase";
 
-
 const App = (props) => {
   const [user, setUser] = useState(null);
   const [teamOneScore, setTeamOneScore] = useState(0);
   const [teamTwoScore, setTeamTwoScore] = useState(0);
   const [location, setLocation] = useState("");
-
+  const [data, setData] = useState([]);
+  const [dataReady, setDataReady] = useState(false);
   const updateLocation = (location) => {
     setLocation(location);
     console.log("Location:", location);
@@ -25,7 +25,7 @@ const App = (props) => {
 
   const updateUser = (User) => {
     setUser(User);
-    console.log(user);
+    console.log("User:", user);
   };
   const [teamNames, setTeamNames] = useState([
     {
@@ -37,6 +37,24 @@ const App = (props) => {
   const handleCallBack = (TeamNames) => {
     setTeamNames(TeamNames);
     // console.log("In handleCallBack:", teamNames);
+  };
+
+  function updateData() {
+    const promise = ReadFromDatabase().then(
+      (result) => {
+        console.log("Result of promise: ", result);
+        setData(result);
+        setDataReady(true);
+      },
+      (e) => {
+        console.log("Error: ", e);
+      }
+    );
+  }
+
+  const displayData = () => {
+    data.forEach((ele) => console.log(ele.Location));
+    data.map((ele) => <h1>This is my data</h1>);
   };
 
   const setTeamScores = (score, id) => {
@@ -98,8 +116,13 @@ const App = (props) => {
         <h1>
           Team 1: {teamOneScore} Team 2: {teamTwoScore}
         </h1>
+        {data.map((value) => {
+          console.log("This is patrick");
+          return <h1>This is patrick's location: {value.Location}</h1>;
+        })}
         <Button onClick={() => uploadMatch()}>Upload Match</Button>
-        <Button onClick={() => ReadFromDatabase()}>Read Database</Button>
+        <Button onClick={() => updateData()}>Read Database</Button>
+        <Button onClick={() => displayData()}>Display Data </Button>
         <ThrowTimer />
       </div>
     </main>

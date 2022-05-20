@@ -7,7 +7,7 @@ import plusButton from "../../assets/images/plusButton.png";
 const Team = ({ name, id, parentCallBack }) => {
   //keeps track of score with state variables
   //increment and decrement score on button click
-  //Dsplays team names, score, and + and - buttons
+  //Displays team names, score, and + and - buttons
 
   const [score, setScore] = useState(0);
 
@@ -39,17 +39,7 @@ const Team = ({ name, id, parentCallBack }) => {
             <img className={css.scoreButtonDivImg} src={plusButton} />
           </Button>
         </div>
-        <div>
-          {/* {
-            <Button onClick={() => console.log("Score: ", score)}>
-              Upload scores{" "}
-            </Button>
-          } */}
-        </div>
       </div>
-      {/* <Button type="roundedEdges" onClick={() => console.log(score)}>
-        Upload Team Score{" "}
-      </Button> */}
     </>
   );
 };
