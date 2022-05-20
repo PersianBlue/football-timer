@@ -18,6 +18,7 @@ const App = (props) => {
   const [location, setLocation] = useState("");
   const [data, setData] = useState([]);
   const [dataReady, setDataReady] = useState(false);
+
   const updateLocation = (location) => {
     setLocation(location);
     console.log("Location:", location);
@@ -55,6 +56,14 @@ const App = (props) => {
   const displayData = () => {
     data.forEach((ele) => console.log(ele.Location));
     data.map((ele) => <h1>This is my data</h1>);
+  };
+
+  const increment = (score, id) => {
+    setTeamScores(score + 1, id);
+  };
+
+  const decrement = (score, id) => {
+    setTeamScores(score - 1, id);
   };
 
   const setTeamScores = (score, id) => {
@@ -103,19 +112,20 @@ const App = (props) => {
         </div>
         <div style={{ display: "inline-block", border: "thick solid lime" }}>
           <Team
+            score={teamOneScore}
             name={teamNames[0].teamOne}
             id={1}
-            parentCallBack={setTeamScores}
+            incrementScore={increment}
+            decrementScore={decrement}
           />
           <Team
+            score={teamTwoScore}
             name={teamNames[1].teamTwo}
             id={2}
-            parentCallBack={setTeamScores}
+            incrementScore={increment}
+            decrementScore={decrement}
           />
         </div>
-        <h1>
-          Team 1: {teamOneScore} Team 2: {teamTwoScore}
-        </h1>
         {data.map((value) => {
           console.log("This is patrick");
           return <h1>This is patrick's location: {value.Location}</h1>;
