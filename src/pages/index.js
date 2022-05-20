@@ -12,6 +12,12 @@ const App = (props) => {
   const [user, setUser] = useState(null);
   const [teamOneScore, setTeamOneScore] = useState(0);
   const [teamTwoScore, setTeamTwoScore] = useState(0);
+  const [location, setLocation] = useState("");
+
+  const updateLocation = (location) => {
+    setLocation(location);
+    console.log("Location:", location);
+  };
 
   const updateUser = (User) => {
     setUser(User);
@@ -57,7 +63,7 @@ const App = (props) => {
         >
           <SignInPage parentCallBack={updateUser} />
           <ChangeTeamNames parentCallBack={handleCallBack} />
-          <MatchSettings />
+          <MatchSettings updateLocation={updateLocation} />
         </div>
         <div style={{ display: "inline-block", border: "thick solid lime" }}>
           <Team
