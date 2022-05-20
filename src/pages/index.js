@@ -15,14 +15,9 @@ const App = (props) => {
   const [user, setUser] = useState(null);
   const [teamOneScore, setTeamOneScore] = useState(0);
   const [teamTwoScore, setTeamTwoScore] = useState(0);
-  const [location, setLocation] = useState("");
+  const [location, setLocation] = useState("Home");
   const [data, setData] = useState([]);
   const [dataReady, setDataReady] = useState(false);
-
-  const updateLocation = (location) => {
-    setLocation(location);
-    console.log("Location:", location);
-  };
 
   const updateUser = (User) => {
     setUser(User);
@@ -53,9 +48,20 @@ const App = (props) => {
     );
   }
 
-  const displayData = () => {
-    data.forEach((ele) => console.log(ele.Location));
-    data.map((ele) => <h1>This is my data</h1>);
+  const DisplayArrayElement = (element) => {
+    console.log(element.TeamOne);
+    return (
+      <ul>
+        <li>Team One: {element.teamOne} </li>
+        <li>Team Two: {element.teamTwo} </li>
+        <li>Match Location: {element.Location}</li>
+        <li>Match date: {element.Date}</li>
+      </ul>
+    );
+  };
+
+  const displayData = (data) => {
+    return data.map((element) => DisplayArrayElement(element));
   };
 
   const increment = (score, id) => {
@@ -108,7 +114,7 @@ const App = (props) => {
         >
           <SignInPage parentCallBack={updateUser} />
           <ChangeTeamNames parentCallBack={handleCallBack} />
-          <MatchSettings updateLocation={updateLocation} />
+          <MatchSettings location={location} setLocation={setLocation} />
         </div>
         <div style={{ display: "inline-block", border: "thick solid lime" }}>
           <Team
@@ -130,9 +136,10 @@ const App = (props) => {
           console.log("This is patrick");
           return <h1>This is patrick's location: {value.Location}</h1>;
         })}
+        {/* {displayData(data)} */}
         <Button onClick={() => uploadMatch()}>Upload Match</Button>
         <Button onClick={() => updateData()}>Read Database</Button>
-        <Button onClick={() => displayData()}>Display Data </Button>
+        <Button onClick={() => displayData(data)}>Display Data </Button>
         <ThrowTimer />
       </div>
     </main>
