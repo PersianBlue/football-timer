@@ -39,7 +39,9 @@ const App = (props) => {
     const promise = ReadFromDatabase().then(
       (result) => {
         console.log("Result of promise: ", result);
-        setData(result);
+        const arr = [];
+        arr.push(result);
+        setData(arr);
         setDataReady(true);
       },
       (e) => {
@@ -48,20 +50,39 @@ const App = (props) => {
     );
   }
 
-  const DisplayArrayElement = (element) => {
-    console.log(element.TeamOne);
-    return (
+  const DisplayArrayElement = (element) => (
+    <div>
       <ul>
         <li>Team One: {element.teamOne} </li>
         <li>Team Two: {element.teamTwo} </li>
         <li>Match Location: {element.Location}</li>
         <li>Match date: {element.Date}</li>
       </ul>
-    );
+    </div>
+  );
+
+  const showLocation = () => {
+    try {
+      console.log("Data: ", data);
+      console.log(typeof data);
+      console.log(typeof data[0]);
+      return data.map((element) => DisplayArrayElement(element));
+    } catch (err) {
+      console.log("Error: ", err);
+      console.log("Data: ", data);
+      data.forEach((value) => {
+        console.log(value);
+      });
+    } //end catch
   };
 
   const displayData = (data) => {
-    return data.map((element) => DisplayArrayElement(element));
+    // return data.map((element) => DisplayArrayElement(element));
+    if (data) {
+      console.log("My Locations:", data.Location);
+    } else {
+      console.log("Data is undefined");
+    }
   };
 
   const increment = (score, id) => {
@@ -132,14 +153,15 @@ const App = (props) => {
             decrementScore={decrement}
           />
         </div>
-        {data.map((value) => {
-          console.log("This is patrick");
-          return <h1>This is patrick's location: {value.Location}</h1>;
-        })}
-        {/* {displayData(data)} */}
+        {dataReady ? DisplayArrayElement(data) : console.log("Data not ready")}
+        {dataReady ? (
+          <h1>Location: {showLocation()}</h1>
+        ) : (
+          <h1> Data Not Ready </h1>
+        )}
         <Button onClick={() => uploadMatch()}>Upload Match</Button>
         <Button onClick={() => updateData()}>Read Database</Button>
-        <Button onClick={() => displayData(data)}>Display Data </Button>
+        <Button onClick={() => displayData(data[0])}>Display Data </Button>
         <ThrowTimer />
       </div>
     </main>
