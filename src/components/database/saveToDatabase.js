@@ -17,13 +17,17 @@ async function SaveToDatabase(
   console.log("Saving Data to Database");
   console.log(location, TeamOneName, TeamOneScore, TeamTwoName, TeamTwoScore);
   try {
+    let date = new Date();
+    console.log("Date: ", date);
+    // date = new Date(date.seconds).toISOString();
+
     const docRef = await addDoc(collection(db, "matches"), {
       Location: location,
       TeamOne: TeamOneName,
       TeamTwo: TeamTwoName,
       TeamOneScore: TeamOneScore,
       TeamTwoScore: TeamTwoScore,
-      Date: new Date(),
+      Date: date,
     });
     console.log("Document written with ID: ", docRef.id);
   } catch (e) {
