@@ -9,14 +9,43 @@ import { useState } from "react";
 import MatchSettings from "../components/match/matchSettings";
 import ChangeTeamNames from "../components/match/changeTeamNames";
 import SaveToDatabase from "../components/database/saveToDatabase";
-import ReadFromDatabase from "../components/database/readFromDatabase";
+import { auth, db } from "../firebase-config";
+import { collection, query, onSnapshot } from "firebase/firestore";
+import DataTable from "../components/database/dataTable";
+
+async function ReadFromDatabase() {
+  const matches = [];
+  const q = query(collection(db, "matches"));
+  //q is a query of the documents in our database matching the criteria we give
+  //in our onSnapshot function, we get the data from each document in the query,
+  //then store it in an array called matches
+  //the onSnapshot function returns a function we can use to stop listening to the database
+  //this is stored as unsubscribe
+  const unsubscribe = onSnapshot(q, (querySnapshot) => {
+    querySnapshot.forEach((doc) => {
+      matches.push(doc.data());
+    });
+    console.log("Matches: ", matches);
+  });
+  console.log("This is matches:", matches);
+  return matches;
+}
 
 const App = (props) => {
   const [user, setUser] = useState(null);
   const [teamOneScore, setTeamOneScore] = useState(0);
   const [teamTwoScore, setTeamTwoScore] = useState(0);
   const [location, setLocation] = useState("Home");
-  const [data, setData] = useState([]);
+  const array = ["love", "pineapple", "pizza"];
+  const [data, setData] = useState([
+    {
+      teamOne: "Love",
+      teamTwo: "Wins",
+      Location: "Home",
+      teamOneScore: 0,
+      teamTwoScore: 0,
+    },
+  ]);
   const [dataReady, setDataReady] = useState(false);
 
   const updateUser = (User) => {
@@ -30,55 +59,16 @@ const App = (props) => {
     { teamTwo: "Team Two" },
   ]);
 
-  function updateData() {
-    const promise = ReadFromDatabase().then(
-      (result) => {
-        console.log("Result of promise: ", result);
-        const arr = [];
-        arr.push(result);
-        setData(arr);
-        setDataReady(true);
-      },
-      (e) => {
-        console.log("Error: ", e);
-      }
-    );
-  }
-
-  const DisplayArrayElement = (element) => (
-    <div>
-      <ul>
-        <li>Team One: {element.teamOne} </li>
-        <li>Team Two: {element.teamTwo} </li>
-        <li>Match Location: {element.Location}</li>
-        <li>Match date: {element.Date}</li>
-      </ul>
-    </div>
-  );
-
-  const showLocation = () => {
+  async function updateData() {
     try {
-      console.log("Data: ", data);
-      console.log(typeof data);
-      console.log(typeof data[0]);
-      return data.map((element) => DisplayArrayElement(element));
-    } catch (err) {
-      console.log("Error: ", err);
-      console.log("Data: ", data);
-      data.forEach((value) => {
-        console.log(value);
-      });
-    } //end catch
-  };
-
-  const displayData = (data) => {
-    // return data.map((element) => DisplayArrayElement(element));
-    if (data) {
-      console.log("My Locations:", data.Location);
-    } else {
-      console.log("Data is undefined");
+      const promise = await ReadFromDatabase();
+      console.log("Promise returned:", promise);
+      setData(promise);
+      setDataReady(true);
+    } catch (e) {
+      console.log("Error in updateData()", e);
     }
-  };
+  }
 
   const increment = (score, id) => {
     setTeamScores(score + 1, id);
@@ -102,7 +92,6 @@ const App = (props) => {
     console.log("Uploading Match");
     const teamOneName = teamNames[0].teamOne;
     const teamTwoName = teamNames[1].teamTwo;
-    console.log("Location: ", location);
     SaveToDatabase(
       location,
       teamOneName,
@@ -148,15 +137,10 @@ const App = (props) => {
             decrementScore={decrement}
           />
         </div>
-        {dataReady ? DisplayArrayElement(data) : console.log("Data not ready")}
-        {dataReady ? (
-          <h1>Location: {showLocation()}</h1>
-        ) : (
-          <h1> Data Not Ready </h1>
-        )}
+        {dataReady ? <DataTable data={data} /> : <h1>Data is not ready</h1>}
+
         <Button onClick={() => uploadMatch()}>Upload Match</Button>
         <Button onClick={() => updateData()}>Read Database</Button>
-        <Button onClick={() => displayData(data[0])}>Display Data </Button>
         <ThrowTimer />
       </div>
     </main>

@@ -1,6 +1,11 @@
 import React from "react";
 import { auth, db } from "../../firebase-config";
-import { collection, addDoc, serverTimestamp } from "firebase/firestore";
+import {
+  collection,
+  addDoc,
+  serverTimestamp,
+  FieldValue,
+} from "firebase/firestore";
 
 async function SaveToDatabase(
   location,
@@ -18,7 +23,7 @@ async function SaveToDatabase(
       TeamTwo: TeamTwoName,
       TeamOneScore: TeamOneScore,
       TeamTwoScore: TeamTwoScore,
-      Date: serverTimestamp(),
+      Date: new Date(),
     });
     console.log("Document written with ID: ", docRef.id);
   } catch (e) {

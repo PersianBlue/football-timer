@@ -1,16 +1,6 @@
 import React from "react";
 import { auth, db } from "../../firebase-config";
-import {
-  collection,
-  query,
-  where,
-  doc,
-  onSnapshot,
-  addDoc,
-  serverTimestamp,
-  getDoc,
-  getDocs,
-} from "firebase/firestore";
+import { collection, query, onSnapshot } from "firebase/firestore";
 
 async function ReadFromDatabase() {
   const matches = [];
@@ -27,28 +17,6 @@ async function ReadFromDatabase() {
     console.log("Matches: ", matches);
   });
   return matches;
-  //   const unsub = onSnapshot(doc(db, "matches"), (doc) => {
-  //     console.log("Current data: ", doc.data());
-  //   });
-  //   console.log("Reading from Database");
-  //   const data = getDocs(collection(db, "matches"))
-  //     .then((snapshot) => {
-  //       snapshot.docs;
-  //       const arr = [];
-  //       snapshot.forEach((doc) => arr.push(doc.data()));
-  //       console.log(arr);
-  //       return arr;
-  //     })
-  //     .catch((e) => {
-  //       console.log("Error: ", e);
-  //     });
-  //   return data;
 }
-
-//unsubscribe = thingsRef.where("uid", "==", user.uid).onSnapshot(querySnapshot => {
-// const items = querySnapshot.docs.map(doc => {
-//     return `<li> ${doc.data().name} </li>`
-//     // })
-// })
 
 export default ReadFromDatabase;
