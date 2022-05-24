@@ -4,14 +4,9 @@ import Button from "../button";
 
 /*This controls changing the names of the Teams via window prompts, and is called by index.js */
 
-const ChangeTeamNames = ({ parentCallBack }) => {
+const ChangeTeamNames = ({ teamNames, setTeamNames }) => {
   console.log("Rendering ChangeTeamNames");
-  const [teamNames, setTeamNames] = useState([
-    {
-      teamOne: "Team One",
-    },
-    { teamTwo: "Team Two" },
-  ]);
+
 
   const changeNames = () => {
     let name1 = null;
@@ -26,12 +21,8 @@ const ChangeTeamNames = ({ parentCallBack }) => {
       arr[1] = { teamTwo: name2 };
     }
     setTeamNames(arr);
-    parentCallBack(teamNames);
-    // console.log("Team Names in fxn:", teamNames);
   };
 
-  parentCallBack(teamNames);
-  // console.log("Team Names outside fxn:", teamNames);
 
   return (
     <div>

@@ -30,11 +30,6 @@ const App = (props) => {
     { teamTwo: "Team Two" },
   ]);
 
-  const handleCallBack = (TeamNames) => {
-    setTeamNames(TeamNames);
-    // console.log("In handleCallBack:", teamNames);
-  };
-
   function updateData() {
     const promise = ReadFromDatabase().then(
       (result) => {
@@ -134,7 +129,7 @@ const App = (props) => {
           }}
         >
           <SignInPage parentCallBack={updateUser} />
-          <ChangeTeamNames parentCallBack={handleCallBack} />
+          <ChangeTeamNames teamNames={teamNames} setTeamNames={setTeamNames} />
           <MatchSettings location={location} setLocation={setLocation} />
         </div>
         <div style={{ display: "inline-block", border: "thick solid lime" }}>
