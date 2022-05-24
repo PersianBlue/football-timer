@@ -1,0 +1,26 @@
+table{
+    border: solid 1px;
+    overflow: auto;
+    border-collapse:collapse;
+
+
+}
+
+tbody{
+    background-Color: white;
+
+}
+
+
+#td{
+    border: 1px solid;
+
+}
+tr{
+    width: auto;
+    background-Color: white;
+}
+tr:nth-child(even){
+    background-color: rgb(109, 250, 139);
+
+}

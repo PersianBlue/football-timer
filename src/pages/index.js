@@ -103,7 +103,7 @@ const App = (props) => {
 
   return (
     <main className="body">
-      <div style={{ width: 400 }}>
+      <div style={{ width: 700, border: "thick solid" }}>
         <GameClock />
         <div
           style={{

@@ -1,30 +1,34 @@
 import React from "react";
+import * as css from "./dataTable.module.scss";
+import "./dataTable.css";
 
 const DataTable = ({ data }) => {
-  const DisplayArrayElement = (element, id) => {
-    const { TeamOne, TeamTwo } = element;
-    console.log("Observe the team names: ", element);
-    console.log("Team One", TeamOne);
-    console.log("Team Two: ", TeamTwo);
-    // let time = element["Date"].toDate().toGMTString();
+  const DisplayArrayElement = (element) => {
     let date = element["Date"].toDate().toLocaleString();
-    // date += element["Date"].toDate().toLocaleTimeString();
 
     return (
-      <div>
-        <ul>
-          <p>Team One: {TeamOne} </p>
-          <p>Team One Score: {element.TeamOneScore}</p>
-          <p>Team Two: {TeamTwo} </p>
-          <p>Team Two Score: {element.TeamTwoScore}</p>
-          <p>Match Location: {element.Location}</p>
-          <p>Match date: {date}</p>
-        </ul>
-      </div>
+      <tr className={css.tr}>
+        <td>{element.Location}</td>
+        <td>{element.TeamOne}</td>
+        <td>{element.TeamTwo}</td>
+        <td>{element.TeamOneScore + "-" + element.TeamTwoScore}</td>
+        <td>{date}</td>
+      </tr>
     );
   };
-  const arr = data.map((element, index) => DisplayArrayElement(element, index));
-  return <div>{arr}</div>;
+  const arr = data.map((element) => DisplayArrayElement(element));
+  return (
+    <table className={css.Table}>
+      <tr id="Header" className={css.tr}>
+        <th>Location</th>
+        <th>Team One </th>
+        <th>Team Two </th>
+        <th>Score</th>
+        <th>Match Date</th>
+      </tr>
+      {arr}
+    </table>
+  );
 };
 
 export default DataTable;
