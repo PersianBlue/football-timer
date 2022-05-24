@@ -19,14 +19,16 @@ const DataTable = ({ data }) => {
   const arr = data.map((element) => DisplayArrayElement(element));
   return (
     <table className={css.Table}>
-      <tr id="Header" className={css.tr}>
-        <th>Location</th>
-        <th>Team One </th>
-        <th>Team Two </th>
-        <th>Score</th>
-        <th>Match Date</th>
-      </tr>
-      {arr}
+      <thead>
+        <tr id="Header" className={css.tr}>
+          <th>Location</th>
+          <th>Team One </th>
+          <th>Team Two </th>
+          <th>Score</th>
+          <th>Match Date</th>
+        </tr>
+      </thead>
+      <tbody>{arr}</tbody>
     </table>
   );
 };

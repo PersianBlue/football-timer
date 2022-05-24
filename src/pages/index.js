@@ -10,12 +10,12 @@ import MatchSettings from "../components/match/matchSettings";
 import ChangeTeamNames from "../components/match/changeTeamNames";
 import SaveToDatabase from "../components/database/saveToDatabase";
 import { auth, db } from "../firebase-config";
-import { collection, query, onSnapshot } from "firebase/firestore";
+import { collection, query, onSnapshot, where } from "firebase/firestore";
 import DataTable from "../components/database/dataTable";
 
-async function ReadFromDatabase() {
+async function ReadFromDatabase(userID) {
   const matches = [];
-  const q = query(collection(db, "matches"));
+  const q = query(collection(db, "matches"), where("ID", "==", userID));
   //q is a query of the documents in our database matching the criteria we give
   //in our onSnapshot function, we get the data from each document in the query,
   //then store it in an array called matches
@@ -61,10 +61,14 @@ const App = (props) => {
 
   async function updateData() {
     try {
-      const promise = await ReadFromDatabase();
-      console.log("Promise returned:", promise);
-      setData(promise);
-      setDataReady(true);
+      if (user) {
+        const promise = await ReadFromDatabase(user.uid);
+        console.log("Promise returned:", promise);
+        setData(promise);
+        setDataReady(true);
+      } else {
+        alert("You must be signed in to view match scores");
+      }
     } catch (e) {
       console.log("Error in updateData()", e);
     }
@@ -92,13 +96,18 @@ const App = (props) => {
     console.log("Uploading Match");
     const teamOneName = teamNames[0].teamOne;
     const teamTwoName = teamNames[1].teamTwo;
-    SaveToDatabase(
-      location,
-      teamOneName,
-      teamTwoName,
-      teamOneScore,
-      teamTwoScore
-    );
+    if (user) {
+      SaveToDatabase(
+        location,
+        teamOneName,
+        teamTwoName,
+        teamOneScore,
+        teamTwoScore,
+        user.uid
+      );
+    } else {
+      alert("Sign in to upload your match scores");
+    }
   };
 
   return (
@@ -117,7 +126,7 @@ const App = (props) => {
             justifyContent: "center",
           }}
         >
-          <SignInPage parentCallBack={updateUser} />
+          <SignInPage setParentUser={updateUser} />
           <ChangeTeamNames teamNames={teamNames} setTeamNames={setTeamNames} />
           <MatchSettings location={location} setLocation={setLocation} />
         </div>

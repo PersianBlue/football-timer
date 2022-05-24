@@ -5,7 +5,7 @@ import SignInButton from "./signInButton";
 import SignOutButton from "./signOutButton";
 import "./signOutDiv.css";
 
-const SignInPage = ({ parentCallBack }) => {
+const SignInPage = ({ setParentUser }) => {
   const [loggedIn, setLoggedIn] = useState(false);
   const [thisUser, setThisUser] = useState(null);
 
@@ -13,7 +13,7 @@ const SignInPage = ({ parentCallBack }) => {
     return (
       <div id="signOutDiv">
         <h2>Logged in as {thisUser ? thisUser.displayName : "Not defined"}</h2>
-        <SignOutButton />
+        <SignOutButton setParentUser={setParentUser}  />
       </div>
     );
   };
@@ -25,7 +25,7 @@ const SignInPage = ({ parentCallBack }) => {
           console.log("Signed in Successfully");
           setLoggedIn(true);
           setThisUser(user);
-          parentCallBack(user);
+          setParentUser(user);
         } else {
           console.log("Not logged in");
           setLoggedIn(false);
@@ -36,8 +36,6 @@ const SignInPage = ({ parentCallBack }) => {
 
     return unlisten();
   }, []);
-
-  parentCallBack(thisUser);
 
   return <div>{loggedIn ? display() : <SignInButton />}</div>;
 };

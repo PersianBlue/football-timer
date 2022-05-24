@@ -12,7 +12,8 @@ async function SaveToDatabase(
   TeamOneName,
   TeamTwoName,
   TeamOneScore,
-  TeamTwoScore
+  TeamTwoScore,
+  userID
 ) {
   console.log("Saving Data to Database");
   console.log(location, TeamOneName, TeamOneScore, TeamTwoName, TeamTwoScore);
@@ -22,6 +23,7 @@ async function SaveToDatabase(
     // date = new Date(date.seconds).toISOString();
 
     const docRef = await addDoc(collection(db, "matches"), {
+      ID: userID,
       Location: location,
       TeamOne: TeamOneName,
       TeamTwo: TeamTwoName,
