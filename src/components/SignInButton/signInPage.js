@@ -5,7 +5,7 @@ import SignInButton from "./signInButton";
 import SignOutButton from "./signOutButton";
 import "./signOutDiv.css";
 
-const SignInPage = ({ setParentUser }) => {
+const SignInPage = ({ setParentUser, unsubscribe, setDataReady }) => {
   const [loggedIn, setLoggedIn] = useState(false);
   const [thisUser, setThisUser] = useState(null);
 
@@ -13,7 +13,11 @@ const SignInPage = ({ setParentUser }) => {
     return (
       <div id="signOutDiv">
         <h2>Logged in as {thisUser ? thisUser.displayName : "Not defined"}</h2>
-        <SignOutButton setParentUser={setParentUser}  />
+        <SignOutButton
+          setParentUser={setParentUser}
+          unsubscribe={unsubscribe}
+          setDataReady={setDataReady}
+        />
       </div>
     );
   };

@@ -13,19 +13,22 @@ import { auth, db } from "../firebase-config";
 import { collection, query, onSnapshot, where } from "firebase/firestore";
 import DataTable from "../components/database/dataTable";
 
+let unsubscribe;
+
 async function ReadFromDatabase(userID) {
   const matches = [];
   const q = query(collection(db, "matches"), where("ID", "==", userID));
   //q is a query of the documents in our database matching the criteria we give
+  //Here the criteria is that the ID of the document must match the userID we specify
   //in our onSnapshot function, we get the data from each document in the query,
   //then store it in an array called matches
   //the onSnapshot function returns a function we can use to stop listening to the database
   //this is stored as unsubscribe
-  const unsubscribe = onSnapshot(q, (querySnapshot) => {
+  unsubscribe = onSnapshot(q, (querySnapshot) => {
     querySnapshot.forEach((doc) => {
       matches.push(doc.data());
     });
-    console.log("Matches: ", matches);
+    // console.log("Matches: ", matches);
   });
   console.log("This is matches:", matches);
   return matches;
@@ -36,7 +39,6 @@ const App = (props) => {
   const [teamOneScore, setTeamOneScore] = useState(0);
   const [teamTwoScore, setTeamTwoScore] = useState(0);
   const [location, setLocation] = useState("Home");
-  const array = ["love", "pineapple", "pizza"];
   const [data, setData] = useState([
     {
       teamOne: "Love",
@@ -126,7 +128,11 @@ const App = (props) => {
             justifyContent: "center",
           }}
         >
-          <SignInPage setParentUser={updateUser} />
+          <SignInPage
+            setParentUser={updateUser}
+            unsubscribe={unsubscribe}
+            setDataReady={setDataReady}
+          />
           <ChangeTeamNames teamNames={teamNames} setTeamNames={setTeamNames} />
           <MatchSettings location={location} setLocation={setLocation} />
         </div>

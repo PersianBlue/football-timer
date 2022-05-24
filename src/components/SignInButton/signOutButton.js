@@ -2,10 +2,12 @@ import React from "react";
 import { auth } from "../../firebase-config";
 import Button from "../button";
 
-const SignOutButton = ({ setParentUser }) => {
+const SignOutButton = ({ setParentUser, unsubscribe, setDataReady }) => {
   const signOut = () => {
     auth.signOut();
     setParentUser(null);
+    unsubscribe();
+    setDataReady(false);
   };
   return (
     <div>
