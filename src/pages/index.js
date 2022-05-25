@@ -12,7 +12,7 @@ import SaveToDatabase from "../components/database/saveToDatabase";
 import { auth, db } from "../firebase-config";
 import { collection, query, onSnapshot, where } from "firebase/firestore";
 import DataTable from "../components/database/dataTable";
-
+import { useEffect, Suspense } from "react";
 let unsubscribe;
 
 async function ReadFromDatabase(userID) {
@@ -35,6 +35,7 @@ async function ReadFromDatabase(userID) {
 }
 
 const App = (props) => {
+  console.log("Rendering app.js");
   const [user, setUser] = useState(null);
   const [teamOneScore, setTeamOneScore] = useState(0);
   const [teamTwoScore, setTeamTwoScore] = useState(0);
@@ -61,13 +62,16 @@ const App = (props) => {
     { teamTwo: "Team Two" },
   ]);
 
-  async function updateData() {
+  function updateData() {
     try {
       if (user) {
-        const promise = await ReadFromDatabase(user.uid);
-        console.log("Promise returned:", promise);
-        setData(promise);
-        setDataReady(true);
+        setDataReady(false);
+        const promise = ReadFromDatabase(user.uid).then((result) => {
+          console.log("Promise returned:", result);
+          setData(result);
+          setTimeout(() => setDataReady(true), 3000);
+          console.log("Finished updating data");
+        });
       } else {
         alert("You must be signed in to view match scores");
       }
@@ -75,6 +79,10 @@ const App = (props) => {
       console.log("Error in updateData()", e);
     }
   }
+
+  const displayData = () => {
+    return <DataTable data={data} />;
+  };
 
   const increment = (score, id) => {
     setTeamScores(score + 1, id);
@@ -91,7 +99,7 @@ const App = (props) => {
     if (id === 2) {
       setTeamTwoScore(score);
     }
-    console.log(score, id);
+    console.log("Team:", id, "Score:", score);
   };
 
   const uploadMatch = () => {
@@ -136,7 +144,10 @@ const App = (props) => {
           <ChangeTeamNames teamNames={teamNames} setTeamNames={setTeamNames} />
           <MatchSettings location={location} setLocation={setLocation} />
         </div>
-        <div style={{ display: "inline-block", border: "thick solid lime" }}>
+        <div
+          id="Team"
+          style={{ display: "inline-block", border: "thick solid lime" }}
+        >
           <Team
             score={teamOneScore}
             name={teamNames[0].teamOne}
@@ -152,10 +163,15 @@ const App = (props) => {
             decrementScore={decrement}
           />
         </div>
-        {dataReady ? <DataTable data={data} /> : <h1>Data is not ready</h1>}
-
+        <div id="DataTable">
+          {dataReady ? (
+            <DataTable data={data} />
+          ) : (
+            <p>Click to show match scores. It may take a few seconds</p>
+          )}
+        </div>
         <Button onClick={() => uploadMatch()}>Upload Match</Button>
-        <Button onClick={() => updateData()}>Read Database</Button>
+        <Button onClick={() => updateData()}>Display Match Scores</Button>
         <ThrowTimer />
       </div>
     </main>
