@@ -69,7 +69,7 @@ const App = (props) => {
         const promise = ReadFromDatabase(user.uid).then((result) => {
           console.log("Promise returned:", result);
           setData(result);
-          setTimeout(() => setDataReady(true), 3000);
+          // setTimeout(() => setDataReady(true), 3000);
           console.log("Finished updating data");
         });
       } else {
@@ -79,10 +79,6 @@ const App = (props) => {
       console.log("Error in updateData()", e);
     }
   }
-
-  const displayData = () => {
-    return <DataTable data={data} />;
-  };
 
   const increment = (score, id) => {
     setTeamScores(score + 1, id);
@@ -167,11 +163,16 @@ const App = (props) => {
           {dataReady ? (
             <DataTable data={data} />
           ) : (
-            <p>Click to show match scores. It may take a few seconds</p>
+            <p>
+              Click Load Data to fetch the data from the database, then display
+              data to show it.
+            </p>
           )}
         </div>
         <Button onClick={() => uploadMatch()}>Upload Match</Button>
-        <Button onClick={() => updateData()}>Display Match Scores</Button>
+        <Button onClick={() => updateData()}>Load Data</Button>
+        <Button onClick={() => setDataReady(!dataReady)}>Display Data</Button>
+
         <ThrowTimer />
       </div>
     </main>
