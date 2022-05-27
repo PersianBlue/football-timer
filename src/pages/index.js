@@ -13,6 +13,8 @@ import { auth, db } from "../firebase-config";
 import { collection, query, onSnapshot, where } from "firebase/firestore";
 import DataTable from "../components/database/dataTable";
 import { useEffect, Suspense } from "react";
+import * as css from "./index.module.scss";
+
 let unsubscribe;
 
 async function ReadFromDatabase(userID) {
@@ -118,7 +120,7 @@ const App = (props) => {
 
   return (
     <main className="body">
-      <div style={{ width: 700, border: "thick solid" }}>
+      <div id="mainDiv" className={css.mainDiv}>
         <GameClock />
         <div
           style={{

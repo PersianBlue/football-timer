@@ -106,33 +106,12 @@ const GameClock = () => {
     }
   );
   return (
-    <div style={{ border: "solid thick green" }}>
-      <div
-        id="gameClockDiv"
-        className={css.gameClockDiv}
-        style={{
-          height: 50,
-          width: 150,
-          textAlign: "center",
-          backgroundColor: "white",
-          borderColor: "#black",
-          borderStyle: "solid",
-          display: "inline-block",
-        }}
-      >
+    <div id="gameClockDiv" className={css.gameClockDiv}>
+      <div id="clockDiv" className={css.clockDiv}>
         <h1 className={css.h1}>
           {mins}:{secs}
         </h1>
-        <div
-          id="timersDiv"
-          className={css.timersDiv}
-          style={{
-            backgroundColor: "black",
-            borderColor: "black",
-            borderStyle: "solid",
-            display: "inline-block",
-          }}
-        >
+        <div id="timersDiv" className={css.timersDiv}>
           <Button name="startTimer" onClick={() => startTimer()}>
             {" "}
             Start{" "}
@@ -143,21 +122,24 @@ const GameClock = () => {
           </Button>
         </div>
       </div>
-      <Button
-        style={{ width: 100, height: 150 }}
-        type="resetTimer"
-        name="resetTimer"
-        onClick={() => resetTimer()}
-      >
-        Reset Timer{" "}
-      </Button>
-      {/* <br></br>
-      <br></br> */}
+      <div id="resetTimerDiv" className={css.resetTimerDiv}>
+        <Button
+          style={{ width: 100, height: 150 }}
+          type="resetTimer"
+          name="resetTimer"
+          onClick={() => resetTimer()}
+        >
+          Reset Timer{" "}
+        </Button>
+      </div>
       <div className={css.halfTimeDiv}>
-        <button onClick={() => getHalfTime()}>Set Half-Time</button>
         {mins < halfTime ? <h3>First Half </h3> : <h3>Second Half</h3>}
+
         <h3>Half time Set to: {halfTime} minutes</h3>
+
         {matchEnded ? <h3>Match Ended!</h3> : ""}
+
+        <Button onClick={() => getHalfTime()}>Set Half-Time</Button>
       </div>
     </div>
   );
