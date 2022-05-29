@@ -3,20 +3,28 @@ import { auth } from "../../firebase-config";
 import { useState, useEffect } from "react";
 import SignInButton from "./signInButton";
 import SignOutButton from "./signOutButton";
-import "./signOutDiv.css";
+import "./signInPage.scss";
 
-const SignInPage = ({ setParentUser, unsubscribe, setDataReady }) => {
+const SignInPage = ({
+  setParentUser,
+  unsubscribe,
+  setDataReady,
+  loadDatabase,
+  dataReady,
+}) => {
   const [loggedIn, setLoggedIn] = useState(false);
   const [thisUser, setThisUser] = useState(null);
 
   const display = () => {
     return (
       <div id="signOutDiv">
-        <h2>Logged in as {thisUser ? thisUser.displayName : "Not defined"}</h2>
+        <h3>Logged in as </h3>
+        <h3> {thisUser ? thisUser.displayName : "Not defined"}</h3>
         <SignOutButton
           setParentUser={setParentUser}
           unsubscribe={unsubscribe}
           setDataReady={setDataReady}
+          dataReady={dataReady}
         />
       </div>
     );
@@ -30,6 +38,7 @@ const SignInPage = ({ setParentUser, unsubscribe, setDataReady }) => {
           setLoggedIn(true);
           setThisUser(user);
           setParentUser(user);
+          loadDatabase(user.uid);
         } else {
           console.log("Not logged in");
           setLoggedIn(false);

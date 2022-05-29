@@ -6,32 +6,68 @@
     justify-content: center;
     padding-left: 33px;
     width:113px;
-    font-size: 18px;;
-    transform:translatex(122px) translatey(-65px);
+    transform:translatex(100px) translatey(-65px);
+   
 }
 
 .h1{
-    transform:translatex(0px) translatey(10px);
+
     font-size: 36px;
+    
 }
-.gameClockDiv{
-    height: 50; 
-    width: 150; 
+.clockDiv{
+    display: inline-block;
+    height: 75px;
+    width: 150px;
     text-align: center;
     background-color: white;
-    border-color: '#black';
+    border-color: black;
     border-style: solid;
     border-width: 5px;
-    display: inline-block;
-    min-height:75px;
+    
+   
     transform:translatex(8px) translatey(10px);
 }
 
 .halfTimeDiv{
-    border: thick solid red;
-    border-bottom: 0px;
+    display: inline-block;
+    border:  solid rgb(0, 0, 0);
     background-color: white;
-    margin-left: 50px;
-    margin-right: 50px;
+    font-size: 0.8em;
     
+    
+}
+
+.resetTimerDiv{
+    border: thick red solid;
+    max-width: 55px;
+    position: relative;
+    top: -35px;
+    left: 10px;
+}
+@media (min-width: 420px){
+    .halfTimeDiv{
+        display: block;
+        max-width: 280px;
+        //
+    }
+
+    .timersDiv{
+        font-size: 18px;
+    }
+    .h1{
+        font-size: 36px;
+    }
+
+
+}
+@media (min-width: 600px){
+    .halfTimeDiv{
+        transform: translatey(-185px) translatex(280px);
+
+        }
+        .gameClockDiv{
+            max-height: 180px;
+            border: thick solid green;
+        }
 }

@@ -1,0 +1,44 @@
+#SignInDiv{
+  min-width: 173px;
+  display: inline-block;
+  justify-content: center;
+      vertical-align: middle;
+      border-radius: 3px;
+      border: thick solid;
+      border-bottom: 0px;
+      background-color: rgb(255, 255, 255);
+      font-size: 0.8em;
+      font-weight: bold;
+      /* Use the Roboto font that is loaded in the <head> */
+      font-family: 'Roboto', sans-serif;
+       transform:translatex(0px) translatey(0px);
+
+       
+}
+
+@media (width > 420px){
+  #SignInDiv{
+    padding-left: 42px;
+    padding-right: 28px;
+  }
+
+  #signOutDiv{
+    padding-right: 28px;
+    padding-top: 10px;
+  }
+}
+
+
+#signOutDiv{
+  display: inline-block;
+  min-width: 173px;
+  transform:translatex(0px) translatey(0px);
+  vertical-align: middle;
+  margin-right: 50px;
+  border-radius: 3px;
+  border: thick solid;
+  background-color: white;
+  font-size: 0.8em;
+  font-weight: bold;
+  font-family: 'Roboto', sans-serif;
+}

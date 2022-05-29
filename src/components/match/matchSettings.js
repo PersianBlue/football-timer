@@ -1,15 +1,30 @@
 import React from "react";
 import Location from "./location";
 import * as css from "./matchSettings.module.scss";
+import Button from "../button";
 
-const MatchSettings = ({ location, setLocation }) => {
-  
+const MatchSettings = ({ location, setLocation, teamNames, setTeamNames }) => {
   const updateLocation = (location) => {
     let loc = window.prompt("Enter location of match:");
     if (loc != "") {
       setLocation(loc);
     }
   };
+  const changeNames = () => {
+    let name1 = null;
+    let name2 = null;
+    name1 = window.prompt("Enter the name for Team 1");
+    name2 = window.prompt("Enter the name for Team 2");
+    let arr = [...teamNames];
+    if (name1) {
+      arr[0] = { teamOne: name1 };
+    }
+    if (name2) {
+      arr[1] = { teamTwo: name2 };
+    }
+    setTeamNames(arr);
+  };
+
   return (
     <div id="Settings" className={css.Settings}>
       <Location
@@ -17,6 +32,7 @@ const MatchSettings = ({ location, setLocation }) => {
         updateLocation={updateLocation}
         setLocation={setLocation}
       />
+      <Button onClick={() => changeNames()}>Change Team Names </Button>
     </div>
   );
 };

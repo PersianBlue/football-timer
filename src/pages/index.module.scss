@@ -1,0 +1,24 @@
+.mainDiv{
+    min-width: 280px;
+    border: thick solid cyan;
+}
+
+.settingsDiv{
+  display: inline-block;
+  border: thick solid orange;
+  min-width: 280px;
+    
+
+}
+
+/*
+ style={{
+            marginLeft: 25,
+            marginRight: 25,
+            minWidth: "100",
+            backgroundColor: "white",
+            border: "thick solid ",
+            display: "grid",
+            gridTemplateColumns: "1rf 1rf 1rf 1rf",
+            justifyContent: "center",
+          }} */
