@@ -7,7 +7,6 @@ import ThrowTimer from "../components/throwtimer";
 import "../global.scss";
 import { useState } from "react";
 import MatchSettings from "../components/match/matchSettings";
-import ChangeTeamNames from "../components/match/changeTeamNames";
 import SaveToDatabase from "../components/database/saveToDatabase";
 import { auth, db } from "../firebase-config";
 import { collection, query, onSnapshot, where } from "firebase/firestore";
@@ -122,25 +121,20 @@ const App = (props) => {
     <main className="body">
       <div id="mainDiv" className={css.mainDiv}>
         <GameClock />
-        <div
-          style={{
-            marginLeft: 25,
-            marginRight: 25,
-            minWidth: "100",
-            backgroundColor: "white",
-            border: "thick solid ",
-            display: "grid",
-            gridTemplateColumns: "1rf 1rf 1rf 1rf",
-            justifyContent: "center",
-          }}
-        >
+        <div id="settingsDiv" className={css.settingsDiv}>
           <SignInPage
             setParentUser={updateUser}
             unsubscribe={unsubscribe}
             setDataReady={setDataReady}
+            loadDatabase={ReadFromDatabase}
+            dataReady={dataReady}
           />
-          <ChangeTeamNames teamNames={teamNames} setTeamNames={setTeamNames} />
-          <MatchSettings location={location} setLocation={setLocation} />
+          <MatchSettings
+            location={location}
+            setLocation={setLocation}
+            teamNames={teamNames}
+            setTeamNames={setTeamNames}
+          />
         </div>
         <div
           id="Team"

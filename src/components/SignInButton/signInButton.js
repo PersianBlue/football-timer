@@ -1,7 +1,8 @@
 import React from "react";
 import signInWithGoogle from "./signInWithGoogle";
 import Button from "../button/index";
-import { SignInDiv } from "./signInDiv.scss";
+import "./signInPage.scss";
+
 const SignInButton = () => {
   return (
     <div id="SignInDiv">

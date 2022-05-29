@@ -1,9 +1,17 @@
 .Settings{
-    display: flex;
+    display: inline-block;
     justify-content: center;
     border: solid thick black;
+    border-top: 0px;
     min-height: 100px;
     background-color: white;
     
-    
+}
+
+.changeNameDiv{
+    transform: translatey(50px);
+}
+
+.locationDiv{
+    font-size: 0.8em;
 }
