@@ -15,14 +15,21 @@ const GameClock = () => {
 
   const getHalfTime = () => {
     let time = window.prompt("Set half-time in minutes here");
-    if (Number.isNaN(time) || isNaN(time) || time === "") {
-      time = halfTime;
+    console.log("Is nan", Number.isNaN(time));
+    console.log("Is nan 2", isNaN(time));
+    console.log("empty string", time === "");
+    console.log("Type: ", typeof time);
+
+    if (time == null || Number.isNaN(time) || isNaN(time) || time === "") {
+      console.log("Inside the if block");
+      return;
     } else {
+      console.log("inside the else");
       time = parseInt(time);
       setHalfTime(time);
       console.log("Half time set to", time);
     }
-    return [time];
+    return time;
   };
 
   const updateSeconds = () => {
@@ -139,7 +146,9 @@ const GameClock = () => {
 
         {matchEnded ? <h3>Match Ended!</h3> : ""}
 
-        <Button onClick={() => getHalfTime()}>Set Half-Time</Button>
+        <Button type="roundedEdges" onClick={() => getHalfTime()}>
+          Set Half-Time
+        </Button>
       </div>
     </div>
   );
