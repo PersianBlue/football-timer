@@ -25,8 +25,15 @@
   text-decoration: none;
   cursor: pointer;
   border-radius: 5px;
+  margin: 5px;
   &:hover{
-    box-shadow: 0 5px 15px 4px rgb(255, 255, 255);
+    filter: brightness(115%);
+    box-shadow: 0 5px 15px 2px rgb(255, 255, 255);
+  }
+
+  &:active{
+    filter: brightness(115%);
+    transition: color 1s;
   }
 
 
@@ -216,11 +223,10 @@
 }
 
 .signInButton{
-  display: flexbox;
-  margin-top: 8px;
+  margin: 8px;
+  border: none;
   transition: background-color .3s, box-shadow .3s;
   padding: 12px 16px 12px 42px;
-  border: none;
   border-radius: 3px;
   box-shadow: 0 -1px 0 rgba(0, 0, 0, .04), 0 1px 1px rgba(0, 0, 0, .25);
   vertical-align: middle;
@@ -234,7 +240,7 @@
   background-position: 12px 11px;
   
   &:hover {
-    box-shadow: 0 -1px 0 rgba(0, 0, 0, .04), 0 2px 4px rgba(0, 0, 0, .25);
+    filter: brightness(90%);
   }
   
   &:active {
@@ -265,6 +271,10 @@
   border-radius: 10px;
   position: relative;
   box-shadow: -1px 1px 5px -2px white inset;
+
+  &:hover{
+    filter: brightness(120%);
+  }
 }
 
 .changeNames{

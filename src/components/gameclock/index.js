@@ -142,13 +142,16 @@ const GameClock = () => {
       <div className={css.halfTimeDiv}>
         {mins < halfTime ? <h3>First Half </h3> : <h3>Second Half</h3>}
 
-        <h3>Half time Set to: {halfTime} minutes</h3>
+        <h3>
+          Half time Set to: {halfTime} {halfTime === 1 ? "minute" : "minutes"}
+        </h3>
 
         {matchEnded ? <h3>Match Ended!</h3> : ""}
-
-        <Button type="roundedEdges" onClick={() => getHalfTime()}>
-          Set Half-Time
-        </Button>
+        <div style={{ textAlign: "center" }}>
+          <Button type="roundedEdges" onClick={() => getHalfTime()}>
+            Set Half-Time
+          </Button>
+        </div>
       </div>
     </div>
   );

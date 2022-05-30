@@ -30,16 +30,19 @@
 }
 
 .halfTimeDiv{
+    text-align: center;
     border: solid;
     display: inline-block;
-    background-color: white;
+    background-color: var(--secondary-color);
     font-size: 0.8em;
+    box-shadow: 3px -2px 7px rgba(0,0,0,.25) inset,
+    -3px 5px 8px white inset;
+    min-width: 209px;
     
     
 }
 
 .resetTimerDiv{
-    border: thick red solid;
     max-width: 55px;
     position: relative;
     top: -35px;
@@ -63,11 +66,11 @@
 }
 @media (min-width: 600px){
     .halfTimeDiv{
-        transform: translatey(-185px) translatex(280px);
+        transform: translatey(-175px) translatex(280px);
 
         }
         .gameClockDiv{
             max-height: 180px;
-            border: thick solid green;
+            border: thick solid black ;
         }
 }

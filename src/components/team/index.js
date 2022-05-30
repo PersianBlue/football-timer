@@ -18,7 +18,7 @@ const Team = ({ name, id, score, incrementScore, decrementScore }) => {
         <p className={css.p}>{name}</p>
         <h3 style={{ textAlign: "center" }}>{score}</h3>
         <div id="scoreButtonDiv" class={css.buttonDivStyle}>
-          <Button type="scoreButton"  onClick={() => decrementScore(score, id)}>
+          <Button type="scoreButton" onClick={() => decrementScore(score, id)}>
             <img
               alt="Minus button"
               className={css.scoreButtonDivImg}

@@ -21,6 +21,6 @@ tr{
     background-Color: white;
 }
 tr:nth-child(even){
-    background-color: rgb(109, 250, 139);
+    background-color: var(--secondary-color);
 
 }
