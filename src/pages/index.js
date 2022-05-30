@@ -136,10 +136,7 @@ const App = (props) => {
             setTeamNames={setTeamNames}
           />
         </div>
-        <div
-          id="Team"
-          style={{ display: "inline-block", border: "thick solid lime" }}
-        >
+        <div id="TeamDiv" className={css.teamDiv}>
           <Team
             score={teamOneScore}
             name={teamNames[0].teamOne}
@@ -155,6 +152,11 @@ const App = (props) => {
             decrementScore={decrement}
           />
         </div>
+
+        <ThrowTimer />
+        <Button onClick={() => uploadMatch()}>Upload Match</Button>
+        <Button onClick={() => updateData()}>Load Data</Button>
+        <Button onClick={() => setDataReady(!dataReady)}>Display Data</Button>
         <div id="DataTable">
           {dataReady ? (
             <DataTable data={data} />
@@ -165,11 +167,6 @@ const App = (props) => {
             </p>
           )}
         </div>
-        <Button onClick={() => uploadMatch()}>Upload Match</Button>
-        <Button onClick={() => updateData()}>Load Data</Button>
-        <Button onClick={() => setDataReady(!dataReady)}>Display Data</Button>
-
-        <ThrowTimer />
       </div>
     </main>
   );

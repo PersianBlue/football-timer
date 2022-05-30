@@ -58,7 +58,7 @@ const ThrowTimer = () => {
         </Button>
       </div>
 
-      <div className={css.centerAlign}>
+      <div id="countdownTimerDiv" className={css.centerAlign}>
         <Button
           id="countdownTimer"
           name="countdownTimer"

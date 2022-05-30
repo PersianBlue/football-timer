@@ -18,8 +18,7 @@
   
 }
 
-.roundedEdges{ //creates buttons with rounded edges
-  //only used for - and + buttons in score
+.scoreButton{
   margin: 10px;
   padding: 0;
   height: 40px;
@@ -34,13 +33,15 @@
   position: relative;
   box-shadow: -1px 1px 5px -2px white inset;
 }
-.roundedEdges:focus-within{
+
+.scoreButton:focus-within{
   box-shadow: 0 5px 15px rgba(145, 92, 182, .4);
 }
 
-.roundedEdges:hover{
+.scoreButton:hover{
   box-shadow: 0 5px 15px 4px rgb(255, 255, 255);
 }
+
 
 .inner{ //makes an inline block
   display: inline-block;
@@ -100,7 +101,7 @@
   padding: 0;
   height: 200px;
   width: 200px;
-  margin-top: 50px;
+
   position: relative;
   background-color: rgba(23,23,23,255);
   border: black;
