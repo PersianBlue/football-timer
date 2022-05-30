@@ -1,15 +1,24 @@
 .mainDiv{
     min-width: 280px;
-    border: thick solid cyan;
 }
 
 .settingsDiv{
   display: inline-block;
-  border: thick solid orange;
   min-width: 280px;
+  justify-content: center;
     
 
 }
+
+
+.teamDiv{
+  display: inline-block;
+  width: auto;
+  height: auto;
+
+
+}
+
 
 /*
  style={{

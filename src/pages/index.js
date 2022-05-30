@@ -51,6 +51,7 @@ const App = (props) => {
     },
   ]);
   const [dataReady, setDataReady] = useState(false);
+  const [showData, setShowData] = useState(false);
 
   const updateUser = (User) => {
     setUser(User);
@@ -72,6 +73,7 @@ const App = (props) => {
           setData(result);
           // setTimeout(() => setDataReady(true), 3000);
           console.log("Finished updating data");
+          setDataReady(true);
         });
       } else {
         alert("You must be signed in to view match scores");
@@ -80,6 +82,17 @@ const App = (props) => {
       console.log("Error in updateData()", e);
     }
   }
+
+  const displayData = () => {
+    console.log("Inside display data");
+    if (dataReady && !showData) {
+      setShowData(true);
+    } else if (dataReady && showData) {
+      setShowData(false);
+    } else if (!dataReady && !showData) {
+      alert("Make sure to sign in and load the data first");
+    }
+  };
 
   const increment = (score, id) => {
     setTeamScores(score + 1, id);
@@ -136,10 +149,7 @@ const App = (props) => {
             setTeamNames={setTeamNames}
           />
         </div>
-        <div
-          id="Team"
-          style={{ display: "inline-block", border: "thick solid lime" }}
-        >
+        <div id="TeamDiv" className={css.teamDiv}>
           <Team
             score={teamOneScore}
             name={teamNames[0].teamOne}
@@ -155,8 +165,13 @@ const App = (props) => {
             decrementScore={decrement}
           />
         </div>
+
+        <ThrowTimer />
+        <Button onClick={() => uploadMatch()}>Upload Match</Button>
+        <Button onClick={() => updateData()}>Load Data</Button>
+        <Button onClick={() => displayData()}>Display Data</Button>
         <div id="DataTable">
-          {dataReady ? (
+          {showData ? (
             <DataTable data={data} />
           ) : (
             <p>
@@ -165,11 +180,6 @@ const App = (props) => {
             </p>
           )}
         </div>
-        <Button onClick={() => uploadMatch()}>Upload Match</Button>
-        <Button onClick={() => updateData()}>Load Data</Button>
-        <Button onClick={() => setDataReady(!dataReady)}>Display Data</Button>
-
-        <ThrowTimer />
       </div>
     </main>
   );

@@ -41,7 +41,12 @@ const ThrowTimer = () => {
     //creates a prompt for changing countdown timer length
     //if statement checks validity of input
     let seconds = window.prompt("Enter seconds here");
-    if (Number.isNaN(seconds) || isNaN(seconds) || seconds === "") {
+    if (
+      seconds == null ||
+      Number.isNaN(seconds) ||
+      isNaN(seconds) ||
+      seconds === ""
+    ) {
       seconds = counter;
     }
     seconds = parseInt(seconds);
@@ -58,7 +63,7 @@ const ThrowTimer = () => {
         </Button>
       </div>
 
-      <div className={css.centerAlign}>
+      <div id="countdownTimerDiv" className={css.centerAlign}>
         <Button
           id="countdownTimer"
           name="countdownTimer"

@@ -6,7 +6,7 @@ import Button from "../button";
 const MatchSettings = ({ location, setLocation, teamNames, setTeamNames }) => {
   const updateLocation = (location) => {
     let loc = window.prompt("Enter location of match:");
-    if (loc != "") {
+    if (loc != "" && loc != null) {
       setLocation(loc);
     }
   };
@@ -32,7 +32,9 @@ const MatchSettings = ({ location, setLocation, teamNames, setTeamNames }) => {
         updateLocation={updateLocation}
         setLocation={setLocation}
       />
-      <Button onClick={() => changeNames()}>Change Team Names </Button>
+      <Button name="changeTeamNames" onClick={() => changeNames()}>
+        Change Team Names{" "}
+      </Button>
     </div>
   );
 };

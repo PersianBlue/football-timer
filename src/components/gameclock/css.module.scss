@@ -11,8 +11,8 @@
 }
 
 .h1{
-
     font-size: 36px;
+    transform: translatey(7px);
     
 }
 .clockDiv{
@@ -30,8 +30,8 @@
 }
 
 .halfTimeDiv{
+    border: solid;
     display: inline-block;
-    border:  solid rgb(0, 0, 0);
     background-color: white;
     font-size: 0.8em;
     

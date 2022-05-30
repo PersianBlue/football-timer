@@ -1,6 +1,5 @@
 .throwTimerDiv{
   height: auto;
-  border: thick solid red;
 
 }
 
@@ -11,14 +10,12 @@
     
   }
 
-  .countdownTimer{
+  .countdownTimerDiv{
     font-size: 50px;
     //color: red;
   }
 
   .centerAlign{
       position:relative;
-      left: 50px;
-      top: 50px;
       width: 100%;
   }
