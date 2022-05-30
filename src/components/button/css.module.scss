@@ -35,7 +35,34 @@
 
 }
 
+.changeTeamNames{
+  margin: 5px;
+  background-color: rgba(23,23,23,255);
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  border-radius: 5px;
+  &:hover{
+    box-shadow: 0 5px 15px 4px rgb(255, 255, 255);
+  }
 
+}
+
+.locationButton{
+  font-size: 15px;
+  margin: 5px;
+  background-color: rgba(23,23,23,255);
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  border-radius: 5px;
+  &:hover{
+    box-shadow: 0 5px 15px 4px rgb(255, 255, 255);
+  }
+
+}
 
 .scoreButton{
   margin: 10px;

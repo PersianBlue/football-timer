@@ -7,7 +7,7 @@ const Location = ({ location, updateLocation }) => {
   return (
     <div id="locationDiv" className={css.locationDiv}>
       <h1>{location}</h1>
-      <Button onClick={() => updateLocation()}>
+      <Button name="locationButton" onClick={() => updateLocation()}>
         Set location / Tournament
       </Button>
     </div>
