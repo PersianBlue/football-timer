@@ -1,6 +1,9 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
 import Button from "../button";
+import whistleSoundLong from "../../assets/audio/WhistleSoundEffect-long.mp3";
+import whistleSoundLonger from "../../assets/audio/WhistleSoundEffect-longer.mp3";
+
 import "./css.module.scss";
 import * as css from "./css.module.scss";
 
@@ -93,9 +96,13 @@ const GameClock = () => {
       console.log("Game ended");
       setMatchEnded(true);
       stopTimer();
+      var audio = new Audio(whistleSoundLonger);
+      audio.play();
     } else if (mins === halfTime && secs === 0) {
       console.log("At Half Time");
       stopTimer();
+      var audio = new Audio(whistleSoundLong);
+      audio.play();
     }
   };
   //console.log(hrs,mins,secs);

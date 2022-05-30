@@ -1,7 +1,7 @@
 import React from "react";
 import Button from "../button";
 import { useState, useEffect } from "react";
-import whistleSound from "../../assets/audio/WhistleSoundEffect.mp3";
+import whistleSound from "../../assets/audio/WhistleSoundEffect-short2.mp3";
 import * as css from "./css.module.scss";
 
 const ThrowTimer = () => {
