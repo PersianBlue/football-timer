@@ -11,6 +11,7 @@ const SignInPage = ({
   setDataReady,
   loadDatabase,
   dataReady,
+  setShowData,
 }) => {
   const [loggedIn, setLoggedIn] = useState(false);
   const [thisUser, setThisUser] = useState(null);
@@ -25,6 +26,7 @@ const SignInPage = ({
           unsubscribe={unsubscribe}
           setDataReady={setDataReady}
           dataReady={dataReady}
+          setShowData={setShowData}
         />
       </div>
     );

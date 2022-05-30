@@ -7,6 +7,7 @@ const SignOutButton = ({
   unsubscribe,
   setDataReady,
   dataReady,
+  setShowData,
 }) => {
   const signOut = () => {
     auth.signOut();
@@ -15,6 +16,7 @@ const SignOutButton = ({
       unsubscribe();
     }
     setDataReady(false);
+    setShowData(false);
   };
   return (
     <div>

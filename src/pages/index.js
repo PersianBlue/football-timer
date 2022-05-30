@@ -87,7 +87,7 @@ const App = (props) => {
     console.log("Inside display data");
     if (dataReady && !showData) {
       setShowData(true);
-    } else if (dataReady && showData) {
+    } else if (showData) {
       setShowData(false);
     } else if (!dataReady && !showData) {
       alert("Make sure to sign in and load the data first");
@@ -141,6 +141,7 @@ const App = (props) => {
             setDataReady={setDataReady}
             loadDatabase={ReadFromDatabase}
             dataReady={dataReady}
+            setShowData={setShowData}
           />
           <MatchSettings
             location={location}
