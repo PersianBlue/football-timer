@@ -1,6 +1,13 @@
 import React from "react";
 import * as css from "./dataTable.module.scss";
 import "./dataTable.css";
+import { doc, deleteDoc } from "firebase/firestore";
+import { db } from "../../firebase-config";
+
+const deleteScore = async (ID) => {
+  await deleteDoc(doc(db, "matches", ID));
+  console.log("Document deleted");
+};
 
 const DisplayArrayElement = (element) => {
   console.log("Inside DisplayArrayElement");
@@ -16,6 +23,9 @@ const DisplayArrayElement = (element) => {
       <td>{element.TeamTwo}</td>
       <td>{element.TeamOneScore + "-" + element.TeamTwoScore}</td>
       <td>{date}</td>
+      <td onClick={() => deleteScore(ID)}>
+        <p className={css.redText}> X </p>
+      </td>
     </tr>
   );
 };
