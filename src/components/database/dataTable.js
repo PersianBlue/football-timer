@@ -5,8 +5,12 @@ import { doc, deleteDoc } from "firebase/firestore";
 import { db } from "../../firebase-config";
 
 const deleteScore = async (ID) => {
-  await deleteDoc(doc(db, "matches", ID));
-  console.log("Document deleted");
+  if (window.confirm("Are you sure you want to delete this match?")) {
+    await deleteDoc(doc(db, "matches", ID));
+    console.log("Document deleted");
+  } else {
+    console.log("Delete operation canceled");
+  }
 };
 
 const DisplayArrayElement = (element) => {
@@ -23,7 +27,7 @@ const DisplayArrayElement = (element) => {
       <td>{element.TeamTwo}</td>
       <td>{element.TeamOneScore + "-" + element.TeamTwoScore}</td>
       <td>{date}</td>
-      <td onClick={() => deleteScore(ID)}>
+      <td onClick={() => deleteScore(ID)} className={css.redTextCell}>
         <p className={css.redText}> X </p>
       </td>
     </tr>
@@ -42,6 +46,7 @@ const DataTable = ({ data }) => {
           <th>Team Two </th>
           <th>Score</th>
           <th>Match Date</th>
+          <th></th>
         </tr>
       </thead>
       <tbody>{data.map((element) => DisplayArrayElement(element))}</tbody>
