@@ -5,9 +5,12 @@ import "./dataTable.css";
 const DisplayArrayElement = (element) => {
   console.log("Inside DisplayArrayElement");
   let date = element["Date"].toDate().toLocaleString();
+  console.log(element);
+  let ID = element.docID;
+  console.log("ID: ", ID);
 
   return (
-    <tr className={css.tr}>
+    <tr className={css.tr} key={ID}>
       <td>{element.Location}</td>
       <td>{element.TeamOne}</td>
       <td>{element.TeamTwo}</td>

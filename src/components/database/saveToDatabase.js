@@ -23,7 +23,7 @@ async function SaveToDatabase(
     // date = new Date(date.seconds).toISOString();
 
     const docRef = await addDoc(collection(db, "matches"), {
-      ID: userID,
+      UID: userID,
       Location: location,
       TeamOne: TeamOneName,
       TeamTwo: TeamTwoName,

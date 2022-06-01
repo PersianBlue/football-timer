@@ -27,7 +27,7 @@ async function ReadFromDatabase(userID) {
   //this is stored as unsubscribe
   unsubscribe = onSnapshot(q, (querySnapshot) => {
     querySnapshot.forEach((doc) => {
-      matches.push(doc.data());
+      matches.push({ ...doc.data(), docID: doc.id });
     });
     // console.log("Matches: ", matches);
   });
