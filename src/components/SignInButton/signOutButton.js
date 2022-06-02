@@ -10,11 +10,11 @@ const SignOutButton = ({
   setShowData,
 }) => {
   const signOut = () => {
-    auth.signOut();
-    setParentUser(null);
     if (dataReady) {
       unsubscribe();
     }
+    auth.signOut();
+    setParentUser(null);
     setDataReady(false);
     setShowData(false);
   };

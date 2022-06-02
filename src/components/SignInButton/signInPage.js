@@ -40,7 +40,6 @@ const SignInPage = ({
           setLoggedIn(true);
           setThisUser(user);
           setParentUser(user);
-          loadDatabase(user.uid);
         } else {
           console.log("Not logged in");
           setLoggedIn(false);

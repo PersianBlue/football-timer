@@ -16,25 +16,6 @@ import * as css from "./index.module.scss";
 
 let unsubscribe;
 
-async function ReadFromDatabase(userID) {
-  const matches = [];
-  const q = query(collection(db, "matches"), where("ID", "==", userID));
-  //q is a query of the documents in our database matching the criteria we give
-  //Here the criteria is that the ID of the document must match the userID we specify
-  //in our onSnapshot function, we get the data from each document in the query,
-  //then store it in an array called matches
-  //the onSnapshot function returns a function we can use to stop listening to the database
-  //this is stored as unsubscribe
-  unsubscribe = onSnapshot(q, (querySnapshot) => {
-    querySnapshot.forEach((doc) => {
-      matches.push({ ...doc.data(), docID: doc.id });
-    });
-    // console.log("Matches: ", matches);
-  });
-  console.log("This is matches:", matches);
-  return matches;
-}
-
 const App = (props) => {
   console.log("Rendering app.js");
   const [user, setUser] = useState(null);
@@ -52,6 +33,38 @@ const App = (props) => {
   ]);
   const [dataReady, setDataReady] = useState(false);
   const [showData, setShowData] = useState(false);
+
+  async function ReadFromDatabase(userID) {
+    console.log("Reading from database");
+    const matches = [];
+    if (user) {
+      if (user.email === "kristoff1331@gmail.com") {
+        console.log("Email:", user.email);
+        const q = query(collection(db, "matches"));
+        unsubscribe = onSnapshot(q, (querySnapshot) => {
+          querySnapshot.forEach((doc) => {
+            matches.push({ ...doc.data(), docID: doc.id });
+          });
+        });
+      } else {
+        const q = query(collection(db, "matches"), where("UID", "==", userID));
+        unsubscribe = onSnapshot(q, (querySnapshot) => {
+          querySnapshot.forEach((doc) => {
+            matches.push({ ...doc.data(), docID: doc.id });
+          });
+        });
+      }
+      //q is a query of the documents in our database matching the criteria we give
+      //Here the criteria is that the ID of the document must match the userID we specify
+      //in our onSnapshot function, we get the data from each document in the query,
+      //then store it in an array called matches
+      //the onSnapshot function returns a function we can use to stop listening to the database
+      //this is stored as unsubscribe
+
+      console.log("This is matches:", matches);
+      return matches;
+    }
+  }
 
   const updateUser = (User) => {
     setUser(User);
