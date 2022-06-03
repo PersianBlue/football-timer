@@ -19,6 +19,23 @@ const addUserToDatabase = (user) => {
   }
 };
 
+const checkIfUserExists = async (user) => {
+  getDocs(collection(db, "users"))
+    .then((querySnapshot) => {
+      querySnapshot.forEach((doc) => {
+        if (doc.data().UserID === user.uid) {
+          console.log("This user exists");
+          console.log(doc.data());
+          return true;
+        }
+      });
+      return false;
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
+
 const signInWithGoogle = () => {
   console.log("Signing in with Google ");
   const provider = new GoogleAuthProvider();
@@ -26,20 +43,7 @@ const signInWithGoogle = () => {
   signInWithPopup(auth, provider)
     .then((userCred) => {
       console.log("We signed in with the popup");
-      console.log("User:", userCred);
-      getDocs(collection(db, "users"))
-        .then((querySnapshot) => {
-          querySnapshot.forEach((doc) => {
-            if (doc.data().UserID === userCred.user.uid) {
-              console.log("This user exists");
-              console.log(doc.data());
-              userExists = true;
-            }
-          });
-        })
-        .catch((err) => {
-          console.log(err);
-        });
+      userExists = checkIfUserExists(userCred.user);
       if (!userExists) {
         addUserToDatabase(userCred.user);
       }

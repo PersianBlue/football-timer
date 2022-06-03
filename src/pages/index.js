@@ -44,11 +44,32 @@ const App = (props) => {
   const [dataReady, setDataReady] = useState(false);
   const [showData, setShowData] = useState(false);
 
-  const makeAdmin = () => {
+  const getEmail = () => {
     let email = window.prompt(
       "Enter the email of the user to promote to an admin."
     );
-    if (email != null && email != "") {
+    if (email != null && email != "" && validateEmail(email)) {
+      console.log("The email passed.", email);
+      return email;
+    } else {
+      alert("Data entered was not a valid email");
+      return false;
+    }
+  };
+
+  const validateEmail = (email) => {
+    let regexEmail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+    if (email.match(regexEmail)) {
+      return true;
+    } else {
+      return false;
+    }
+  };
+
+  const makeAdmin = () => {
+    let email = getEmail();
+    console.log("Email:", email);
+    if (email) {
       const q = query(collection(db, "users"), where("Email", "==", email));
       getDocs(q).then((querySnapshot) => {
         querySnapshot.forEach((document) => {
@@ -69,7 +90,7 @@ const App = (props) => {
         console.log("User details", user);
       });
     } else {
-      alert("Email entered was invalid");
+      console.log("Email validation failed");
     }
   };
 
@@ -77,6 +98,10 @@ const App = (props) => {
     console.log("Reading from database");
     const matches = [];
     if (user) {
+      /*Query the users collection for the user whose ID matches the currently logged in user
+       If the user is an admin, then query the matches collection for all the matches and push them to the matches array
+       Otherwise, only query and push the matches created by the current user
+       */
       const q = query(collection(db, "users"), where("UserID", "==", user.uid));
       getDocs(q).then((querySnapshot) => {
         querySnapshot.forEach((document) => {
@@ -89,11 +114,11 @@ const App = (props) => {
               });
             });
           } else {
-            const q = query(
+            const matchQuery = query(
               collection(db, "matches"),
               where("UID", "==", userID)
             );
-            unsubscribe = onSnapshot(q, (querySnapshot) => {
+            unsubscribe = onSnapshot(matchQuery, (querySnapshot) => {
               querySnapshot.forEach((doc) => {
                 matches.push({ ...doc.data(), docID: doc.id });
               });
