@@ -28,6 +28,7 @@ let unsubscribe;
 const App = (props) => {
   console.log("Rendering app.js");
   const [user, setUser] = useState(null);
+  const [isAdmin, setIsAdmin] = useState(false);
   const [teamOneScore, setTeamOneScore] = useState(0);
   const [teamTwoScore, setTeamTwoScore] = useState(0);
   const [location, setLocation] = useState("Home");
@@ -76,22 +77,30 @@ const App = (props) => {
     console.log("Reading from database");
     const matches = [];
     if (user) {
-      if (user.email === "kristoff1331@gmail.com") {
-        console.log("Email:", user.email);
-        const q = query(collection(db, "matches"));
-        unsubscribe = onSnapshot(q, (querySnapshot) => {
-          querySnapshot.forEach((doc) => {
-            matches.push({ ...doc.data(), docID: doc.id });
-          });
+      const q = query(collection(db, "users"), where("UserID", "==", user.uid));
+      getDocs(q).then((querySnapshot) => {
+        querySnapshot.forEach((document) => {
+          if (document.data().Admin) {
+            setIsAdmin(true);
+            const q = query(collection(db, "matches"));
+            unsubscribe = onSnapshot(q, (querySnapshot) => {
+              querySnapshot.forEach((doc) => {
+                matches.push({ ...doc.data(), docID: doc.id });
+              });
+            });
+          } else {
+            const q = query(
+              collection(db, "matches"),
+              where("UID", "==", userID)
+            );
+            unsubscribe = onSnapshot(q, (querySnapshot) => {
+              querySnapshot.forEach((doc) => {
+                matches.push({ ...doc.data(), docID: doc.id });
+              });
+            });
+          }
         });
-      } else {
-        const q = query(collection(db, "matches"), where("UID", "==", userID));
-        unsubscribe = onSnapshot(q, (querySnapshot) => {
-          querySnapshot.forEach((doc) => {
-            matches.push({ ...doc.data(), docID: doc.id });
-          });
-        });
-      }
+      });
       console.log("This is matches:", matches);
       return matches;
     }
@@ -212,7 +221,7 @@ const App = (props) => {
         </div>
 
         <ThrowTimer />
-        <Button onClick={() => makeAdmin()}>Make Admin</Button>
+        {isAdmin ? <Button onClick={() => makeAdmin()}>Make Admin</Button> : ""}
         <Button onClick={() => uploadMatch()}>Upload Match</Button>
         <Button onClick={() => updateData()}>Load Data</Button>
         <Button onClick={() => displayData()}>Display Data</Button>
