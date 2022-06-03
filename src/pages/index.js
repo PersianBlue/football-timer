@@ -39,6 +39,8 @@ const App = (props) => {
       Location: "Home",
       teamOneScore: 0,
       teamTwoScore: 0,
+      UID: 0,
+      docID: 0,
     },
   ]);
   const [dataReady, setDataReady] = useState(false);
@@ -141,12 +143,14 @@ const App = (props) => {
     try {
       if (user) {
         setDataReady(false);
+        setShowData(false);
         const promise = ReadFromDatabase(user.uid).then((result) => {
           console.log("Promise returned:", result);
           setData(result);
-          // setTimeout(() => setDataReady(true), 3000);
           console.log("Finished updating data");
           setDataReady(true);
+          setTimeout(() => setShowData(true), 2000);
+          //setShowData(true);
         });
       } else {
         alert("You must be signed in to view match scores");
@@ -200,7 +204,9 @@ const App = (props) => {
         teamOneScore,
         teamTwoScore,
         user.uid
-      );
+      ).then(() => {
+        updateData();
+      });
     } else {
       alert("Sign in to upload your match scores");
     }
@@ -248,10 +254,12 @@ const App = (props) => {
         {isAdmin ? <Button onClick={() => makeAdmin()}>Make Admin</Button> : ""}
         <Button onClick={() => uploadMatch()}>Upload Match</Button>
         <Button onClick={() => updateData()}>Load Data</Button>
-        <Button onClick={() => displayData()}>Display Data</Button>
+        <Button onClick={() => displayData()}>
+          {showData ? "Hide Data" : " Display Data"}
+        </Button>
         <div id="DataTable">
           {showData ? (
-            <DataTable data={data} />
+            <DataTable data={data} updateData={updateData} />
           ) : (
             <p>
               Click Load Data to fetch the data from the database, then display

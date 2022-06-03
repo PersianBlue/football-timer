@@ -8,6 +8,7 @@ const SignOutButton = ({
   setDataReady,
   dataReady,
   setShowData,
+  setIsAdmin,
 }) => {
   const signOut = () => {
     if (dataReady) {
@@ -17,6 +18,7 @@ const SignOutButton = ({
     setParentUser(null);
     setDataReady(false);
     setShowData(false);
+    setIsAdmin(false);
   };
   return (
     <div>

@@ -37,6 +37,7 @@ const SignInPage = ({
           setDataReady={setDataReady}
           dataReady={dataReady}
           setShowData={setShowData}
+          setIsAdmin={setIsAdmin}
         />
       </div>
     );
