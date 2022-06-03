@@ -16,18 +16,12 @@ const GameClock = () => {
   const [halfTime, setHalfTime] = useState(1);
   const [matchEnded, setMatchEnded] = useState(false);
 
+  //sets halfTime variable to given input
   const getHalfTime = () => {
     let time = window.prompt("Set half-time in minutes here");
-    console.log("Is nan", Number.isNaN(time));
-    console.log("Is nan 2", isNaN(time));
-    console.log("empty string", time === "");
-    console.log("Type: ", typeof time);
-
     if (time == null || Number.isNaN(time) || isNaN(time) || time === "") {
-      console.log("Inside the if block");
       return;
     } else {
-      console.log("inside the else");
       time = parseInt(time);
       setHalfTime(time);
       console.log("Half time set to", time);
@@ -36,12 +30,11 @@ const GameClock = () => {
   };
 
   const updateSeconds = () => {
-    setSecs(secs + 1); //each time the function is called, increment seconds
+    setSecs(secs + 1);
   };
 
   const updateMinutes = () => {
     if (secs >= 60) {
-      //every 60 secondss
       const newMins = Math.floor(60 / secs); //converts & stores all accumulated secs in newMins
       setMins(mins + newMins); //updates mins with newMins
       setSecs(secs % 60); //remove 60 from secs, and set it to remainder (incase secs = 65 for e.g)
@@ -90,9 +83,9 @@ const GameClock = () => {
       updateMinutes(secs, mins);
       updateHours(mins, hrs);
     }
-    const endTime = 2 * halfTime;
-
-    if (secs === 0 && mins === endTime) {
+    //stop timer and play whistle when halfTime or fullTime are reached
+    const fullTime = 2 * halfTime;
+    if (secs === 0 && mins === fullTime) {
       console.log("Game ended");
       setMatchEnded(true);
       stopTimer();
@@ -105,8 +98,6 @@ const GameClock = () => {
       audio.play();
     }
   };
-  //console.log(hrs,mins,secs);
-  //setInterval(updateAll,1000)
 
   useEffect(
     //useEffect solves the re-rendering too many times issue

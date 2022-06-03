@@ -5,9 +5,8 @@ import * as css from "./css.module.scss";
 import minusButton from "../../assets/images/minusButton.png";
 import plusButton from "../../assets/images/plusButton.png";
 const Team = ({ name, id, score, incrementScore, decrementScore }) => {
-  //keeps track of score with state variables
-  //increment and decrement score on button click
   //Displays team names, score, and + and - buttons
+  //state has been migrated to parent component
 
   return (
     <>

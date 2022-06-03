@@ -7,6 +7,7 @@ import {
   FieldValue,
 } from "firebase/firestore";
 
+//creates a new document in the Firestore "matches" collection with the given data
 async function SaveToDatabase(
   location,
   TeamOneName,
@@ -16,12 +17,9 @@ async function SaveToDatabase(
   userID
 ) {
   console.log("Saving Data to Database");
-  console.log(location, TeamOneName, TeamOneScore, TeamTwoName, TeamTwoScore);
   try {
     let date = new Date();
     console.log("Date: ", date);
-    // date = new Date(date.seconds).toISOString();
-
     const docRef = await addDoc(collection(db, "matches"), {
       UID: userID,
       Location: location,

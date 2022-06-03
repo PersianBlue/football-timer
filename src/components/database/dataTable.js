@@ -6,7 +6,8 @@ import { db } from "../../firebase-config";
 
 const DataTable = ({ data, updateData }) => {
   console.log("Rendering Data Table");
-
+  //deletes match with given document ID from "matches" collection in Firestore
+  //bug fix: also runs updateData from parent component to fix sync issues
   const deleteScore = async (docID) => {
     if (window.confirm("Are you sure you want to delete this match?")) {
       deleteDoc(doc(db, "matches", docID)).then(() => {
@@ -18,12 +19,11 @@ const DataTable = ({ data, updateData }) => {
     }
   };
 
+  //renders each individual table row
   const DisplayArrayElement = (element) => {
     console.log("Inside DisplayArrayElement");
     let date = element["Date"].toDate().toLocaleString();
-    console.log("Displaying elmement:", element);
     let docID = element.docID;
-    console.log("Element ID & Key: ", docID);
     return (
       <tr className={css.tr} key={docID}>
         <td>{element.Location}</td>

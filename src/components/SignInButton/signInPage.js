@@ -43,6 +43,8 @@ const SignInPage = ({
     );
   };
 
+  //checks "users" collection in Firestore to see if given user is an Admin
+  //current implementation has Admin as a boolean value
   const checkAdmin = (user) => {
     const q = query(collection(db, "users"), where("UserID", "==", user.uid));
     getDocs(q).then((querySnapshot) => {
@@ -56,6 +58,9 @@ const SignInPage = ({
   };
 
   useEffect(() => {
+    // creates a listener object to listen for auth state changes
+    // if a user is signed in, it initializes user variables locally and in parent component
+    //it also runs checkAdmin to set the Admin property in the parent component
     const unlisten = () => {
       auth.onAuthStateChanged((user) => {
         if (user) {

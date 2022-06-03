@@ -4,6 +4,7 @@ import Button from "../button/index";
 import { signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 import { addDoc, collection, getDocs } from "firebase/firestore";
 
+//adds given user to the "users" collection in Firestore
 const addUserToDatabase = (user) => {
   try {
     const docRef = addDoc(collection(db, "users"), {
@@ -11,14 +12,13 @@ const addUserToDatabase = (user) => {
       Email: user.email,
       Name: user.displayName,
     });
-    console.log("Added user to database");
-    console.log("Document written with ID: ", docRef.id);
     return docRef;
   } catch (e) {
     console.error("Error adding document: ", e);
   }
 };
 
+//checks "users" collecction in Firestore to see if the current user already exists there
 const checkIfUserExists = async (user) => {
   getDocs(collection(db, "users"))
     .then((querySnapshot) => {

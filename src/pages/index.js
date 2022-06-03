@@ -23,15 +23,29 @@ import DataTable from "../components/database/dataTable";
 import { useEffect } from "react";
 import * as css from "./index.module.scss";
 
+//this variable is used to cancel the listener object that listens for
+//changes to the firestore database
 let unsubscribe;
 
 const App = (props) => {
+  /*
+  This component renders the entire visible page
+  The app here is a football timer with additional features such as half time and throwout timers
+  It allows users to keep time for a live game, and store data about a match such as
+  Team names, scores, the tournament/location
+  Users can also save this data to the cloud with Firebase
+  Saving data requires logging in with Google then uploading the current match
+  Users can also see and delete the matches that they have already uploaded with their account
+  Admin users are able to see and delete all matches as well as create other admins
+  */
   console.log("Rendering app.js");
   const [user, setUser] = useState(null);
   const [isAdmin, setIsAdmin] = useState(false);
   const [teamOneScore, setTeamOneScore] = useState(0);
   const [teamTwoScore, setTeamTwoScore] = useState(0);
   const [location, setLocation] = useState("Home");
+  const [dataReady, setDataReady] = useState(false);
+  const [showData, setShowData] = useState(false);
   const [data, setData] = useState([
     {
       teamOne: "Love",
@@ -43,8 +57,12 @@ const App = (props) => {
       docID: 0,
     },
   ]);
-  const [dataReady, setDataReady] = useState(false);
-  const [showData, setShowData] = useState(false);
+  const [teamNames, setTeamNames] = useState([
+    {
+      teamOne: "Team One",
+    },
+    { teamTwo: "Team Two" },
+  ]);
 
   //gets an email via window prompt
   const getEmail = () => {
@@ -60,6 +78,7 @@ const App = (props) => {
     }
   };
 
+  //checks if email is a valid email with regex expression
   const validateEmail = (email) => {
     let regexEmail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
     if (email.match(regexEmail)) {
@@ -68,12 +87,11 @@ const App = (props) => {
       return false;
     }
   };
-
+  //What: Makes a given user an admin
+  //How: Query the users collection for the user document whose email matches the given email
+  //Sets that document's Admin property to true
   const makeAdmin = () => {
-    //Query the users collection for the user document whose email matches the given email
-    //set that document's Admin property to true
     let email = getEmail();
-    console.log("Email:", email);
     if (email) {
       const q = query(collection(db, "users"), where("Email", "==", email));
       getDocs(q).then((querySnapshot) => {
@@ -98,14 +116,13 @@ const App = (props) => {
     }
   };
 
+  //returns an array with matches loaded from the Firestore database
+  //if the user is an Admin, it adds all matches
+  //if not, only matches containing the given userID are returned
   async function ReadFromDatabase(userID) {
     console.log("Reading from database");
     const matches = [];
     if (user) {
-      /*
-       If the user is an admin, then query the matches collection for all the matches and push them to the matches array
-       Otherwise, only query and push the matches created by the current user
-       */
       if (isAdmin) {
         const q = query(collection(db, "matches"));
         unsubscribe = onSnapshot(q, (querySnapshot) => {
@@ -121,8 +138,6 @@ const App = (props) => {
           });
         });
       }
-
-      console.log("This is matches:", matches);
       return matches;
     }
   }
@@ -131,15 +146,11 @@ const App = (props) => {
     setUser(User);
     console.log("Updated User:", user);
   };
-  const [teamNames, setTeamNames] = useState([
-    {
-      teamOne: "Team One",
-    },
-    { teamTwo: "Team Two" },
-  ]);
 
+  //updates data with the array returned from ReadFromDatabase
+  //bug fix: to prevent datatable being displayed before data is ready
+  //set display variables to false until after async operation finishes
   function updateData() {
-    //Sets the value of data to the matches array returned from ReadFromDatabase
     try {
       if (user) {
         setDataReady(false);
@@ -159,10 +170,9 @@ const App = (props) => {
       console.log("Error in updateData()", e);
     }
   }
-
+  //Controls displaying the data table
+  //dataReady checks if the data has been loaded, showData toggles visibility of the data table
   const displayData = () => {
-    //Controls displaying the data table
-    //dataReady checks if the data has been loaded, showData toggles visibility of the data table
     console.log("Inside display data");
     if (dataReady && !showData) {
       setShowData(true);
@@ -191,8 +201,9 @@ const App = (props) => {
     console.log("Team:", id, "Score:", score);
   };
 
+  //uploads match scores & data to Firebase/Firestore with SaveToDatabase
+  //bug fix: also runs updateData to fix synchronization issues
   const uploadMatch = () => {
-    //uploads match scores & data to Firebase/Firestore with SaveToDatabase
     console.log("Uploading Match");
     const teamOneName = teamNames[0].teamOne;
     const teamTwoName = teamNames[1].teamTwo;
@@ -212,6 +223,8 @@ const App = (props) => {
     }
   };
 
+  //Renders all other components:
+  //GameClock, SignInPage, MatchSettings, Team, ThrowTimer, DataTable
   return (
     <main className="body">
       <div id="mainDiv" className={css.mainDiv}>
