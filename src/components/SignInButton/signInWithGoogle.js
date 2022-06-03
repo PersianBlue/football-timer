@@ -39,16 +39,16 @@ const checkIfUserExists = async (user) => {
 const signInWithGoogle = () => {
   console.log("Signing in with Google ");
   const provider = new GoogleAuthProvider();
-  let userExists = false;
   signInWithPopup(auth, provider)
     .then((userCred) => {
       console.log("We signed in with the popup");
-      userExists = checkIfUserExists(userCred.user);
-      if (!userExists) {
-        addUserToDatabase(userCred.user);
-      }
-
-      return userCred;
+      checkIfUserExists(userCred.user).then((userExists) => {
+        if (userExists) {
+          return userCred;
+        } else {
+          addUserToDatabase(userCred.user);
+        }
+      });
     })
     .catch((err) => {
       console.log(err);
