@@ -5,7 +5,14 @@ import SignInButton from "./signInButton";
 import SignOutButton from "./signOutButton";
 import "./signInPage.scss";
 import { db } from "../../firebase-config";
-import { addDoc, collection, doc } from "firebase/firestore";
+import {
+  addDoc,
+  collection,
+  doc,
+  getDocs,
+  query,
+  where,
+} from "firebase/firestore";
 
 const SignInPage = ({
   setParentUser,
@@ -14,6 +21,7 @@ const SignInPage = ({
   loadDatabase,
   dataReady,
   setShowData,
+  setIsAdmin,
 }) => {
   const [loggedIn, setLoggedIn] = useState(false);
   const [thisUser, setThisUser] = useState(null);
@@ -34,6 +42,18 @@ const SignInPage = ({
     );
   };
 
+  const checkAdmin = (user) => {
+    const q = query(collection(db, "users"), where("UserID", "==", user.uid));
+    getDocs(q).then((querySnapshot) => {
+      querySnapshot.forEach((doc) => {
+        if (doc.data().Admin) {
+          setIsAdmin(true);
+          console.log("User is an admin");
+        }
+      });
+    });
+  };
+
   useEffect(() => {
     const unlisten = () => {
       auth.onAuthStateChanged((user) => {
@@ -42,7 +62,7 @@ const SignInPage = ({
           setLoggedIn(true);
           setThisUser(user);
           setParentUser(user);
-          
+          checkAdmin(user);
         } else {
           console.log("Not logged in");
           setLoggedIn(false);

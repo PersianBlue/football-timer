@@ -20,7 +20,7 @@ import {
   doc,
 } from "firebase/firestore";
 import DataTable from "../components/database/dataTable";
-import { useEffect, Suspense } from "react";
+import { useEffect } from "react";
 import * as css from "./index.module.scss";
 
 let unsubscribe;
@@ -44,6 +44,7 @@ const App = (props) => {
   const [dataReady, setDataReady] = useState(false);
   const [showData, setShowData] = useState(false);
 
+  //gets an email via window prompt
   const getEmail = () => {
     let email = window.prompt(
       "Enter the email of the user to promote to an admin."
@@ -67,6 +68,8 @@ const App = (props) => {
   };
 
   const makeAdmin = () => {
+    //Query the users collection for the user document whose email matches the given email
+    //set that document's Admin property to true
     let email = getEmail();
     console.log("Email:", email);
     if (email) {
@@ -87,7 +90,6 @@ const App = (props) => {
           }
         });
         console.log("We set the user as an admin");
-        console.log("User details", user);
       });
     } else {
       console.log("Email validation failed");
@@ -98,34 +100,26 @@ const App = (props) => {
     console.log("Reading from database");
     const matches = [];
     if (user) {
-      /*Query the users collection for the user whose ID matches the currently logged in user
+      /*
        If the user is an admin, then query the matches collection for all the matches and push them to the matches array
        Otherwise, only query and push the matches created by the current user
        */
-      const q = query(collection(db, "users"), where("UserID", "==", user.uid));
-      getDocs(q).then((querySnapshot) => {
-        querySnapshot.forEach((document) => {
-          if (document.data().Admin) {
-            setIsAdmin(true);
-            const q = query(collection(db, "matches"));
-            unsubscribe = onSnapshot(q, (querySnapshot) => {
-              querySnapshot.forEach((doc) => {
-                matches.push({ ...doc.data(), docID: doc.id });
-              });
-            });
-          } else {
-            const matchQuery = query(
-              collection(db, "matches"),
-              where("UID", "==", userID)
-            );
-            unsubscribe = onSnapshot(matchQuery, (querySnapshot) => {
-              querySnapshot.forEach((doc) => {
-                matches.push({ ...doc.data(), docID: doc.id });
-              });
-            });
-          }
+      if (isAdmin) {
+        const q = query(collection(db, "matches"));
+        unsubscribe = onSnapshot(q, (querySnapshot) => {
+          querySnapshot.forEach((doc) => {
+            matches.push({ ...doc.data(), docID: doc.id });
+          });
         });
-      });
+      } else {
+        const q2 = query(collection(db, "matches"), where("UID", "==", userID));
+        unsubscribe = onSnapshot(q2, (querySnapshot) => {
+          querySnapshot.forEach((doc) => {
+            matches.push({ ...doc.data(), docID: doc.id });
+          });
+        });
+      }
+
       console.log("This is matches:", matches);
       return matches;
     }
@@ -143,6 +137,7 @@ const App = (props) => {
   ]);
 
   function updateData() {
+    //Sets the value of data to the matches array returned from ReadFromDatabase
     try {
       if (user) {
         setDataReady(false);
@@ -162,6 +157,8 @@ const App = (props) => {
   }
 
   const displayData = () => {
+    //Controls displaying the data table
+    //dataReady checks if the data has been loaded, showData toggles visibility of the data table
     console.log("Inside display data");
     if (dataReady && !showData) {
       setShowData(true);
@@ -191,6 +188,7 @@ const App = (props) => {
   };
 
   const uploadMatch = () => {
+    //uploads match scores & data to Firebase/Firestore with SaveToDatabase
     console.log("Uploading Match");
     const teamOneName = teamNames[0].teamOne;
     const teamTwoName = teamNames[1].teamTwo;
@@ -220,6 +218,7 @@ const App = (props) => {
             loadDatabase={ReadFromDatabase}
             dataReady={dataReady}
             setShowData={setShowData}
+            setIsAdmin={setIsAdmin}
           />
           <MatchSettings
             location={location}
