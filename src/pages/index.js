@@ -9,7 +9,16 @@ import { useState } from "react";
 import MatchSettings from "../components/match/matchSettings";
 import SaveToDatabase from "../components/database/saveToDatabase";
 import { auth, db } from "../firebase-config";
-import { collection, query, onSnapshot, where } from "firebase/firestore";
+import {
+  collection,
+  query,
+  onSnapshot,
+  where,
+  getDoc,
+  getDocs,
+  setDoc,
+  doc,
+} from "firebase/firestore";
 import DataTable from "../components/database/dataTable";
 import { useEffect, Suspense } from "react";
 import * as css from "./index.module.scss";
@@ -34,6 +43,35 @@ const App = (props) => {
   const [dataReady, setDataReady] = useState(false);
   const [showData, setShowData] = useState(false);
 
+  const makeAdmin = () => {
+    let email = window.prompt(
+      "Enter the email of the user to promote to an admin."
+    );
+    if (email != null && email != "") {
+      const q = query(collection(db, "users"), where("Email", "==", email));
+      getDocs(q).then((querySnapshot) => {
+        querySnapshot.forEach((document) => {
+          console.log("Document found:", document.data());
+          try {
+            setDoc(
+              doc(db, "users", document.id),
+              {
+                Admin: true,
+              },
+              { merge: true }
+            );
+          } catch (error) {
+            console.log(error);
+          }
+        });
+        console.log("We set the user as an admin");
+        console.log("User details", user);
+      });
+    } else {
+      alert("Email entered was invalid");
+    }
+  };
+
   async function ReadFromDatabase(userID) {
     console.log("Reading from database");
     const matches = [];
@@ -54,13 +92,6 @@ const App = (props) => {
           });
         });
       }
-      //q is a query of the documents in our database matching the criteria we give
-      //Here the criteria is that the ID of the document must match the userID we specify
-      //in our onSnapshot function, we get the data from each document in the query,
-      //then store it in an array called matches
-      //the onSnapshot function returns a function we can use to stop listening to the database
-      //this is stored as unsubscribe
-
       console.log("This is matches:", matches);
       return matches;
     }
@@ -68,7 +99,7 @@ const App = (props) => {
 
   const updateUser = (User) => {
     setUser(User);
-    console.log("User:", user);
+    console.log("Updated User:", user);
   };
   const [teamNames, setTeamNames] = useState([
     {
@@ -181,6 +212,7 @@ const App = (props) => {
         </div>
 
         <ThrowTimer />
+        <Button onClick={() => makeAdmin()}>Make Admin</Button>
         <Button onClick={() => uploadMatch()}>Upload Match</Button>
         <Button onClick={() => updateData()}>Load Data</Button>
         <Button onClick={() => displayData()}>Display Data</Button>

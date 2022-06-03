@@ -4,6 +4,8 @@ import { useState, useEffect } from "react";
 import SignInButton from "./signInButton";
 import SignOutButton from "./signOutButton";
 import "./signInPage.scss";
+import { db } from "../../firebase-config";
+import { addDoc, collection, doc } from "firebase/firestore";
 
 const SignInPage = ({
   setParentUser,
@@ -40,6 +42,7 @@ const SignInPage = ({
           setLoggedIn(true);
           setThisUser(user);
           setParentUser(user);
+          
         } else {
           console.log("Not logged in");
           setLoggedIn(false);
