@@ -9,38 +9,43 @@ import { useState } from "react";
 import MatchSettings from "../components/match/matchSettings";
 import SaveToDatabase from "../components/database/saveToDatabase";
 import { auth, db } from "../firebase-config";
-import { collection, query, onSnapshot, where } from "firebase/firestore";
+import {
+  collection,
+  query,
+  onSnapshot,
+  where,
+  getDoc,
+  getDocs,
+  setDoc,
+  doc,
+} from "firebase/firestore";
 import DataTable from "../components/database/dataTable";
-import { useEffect, Suspense } from "react";
+import { useEffect } from "react";
 import * as css from "./index.module.scss";
 
+//this variable is used to cancel the listener object that listens for
+//changes to the firestore database
 let unsubscribe;
 
-async function ReadFromDatabase(userID) {
-  const matches = [];
-  const q = query(collection(db, "matches"), where("ID", "==", userID));
-  //q is a query of the documents in our database matching the criteria we give
-  //Here the criteria is that the ID of the document must match the userID we specify
-  //in our onSnapshot function, we get the data from each document in the query,
-  //then store it in an array called matches
-  //the onSnapshot function returns a function we can use to stop listening to the database
-  //this is stored as unsubscribe
-  unsubscribe = onSnapshot(q, (querySnapshot) => {
-    querySnapshot.forEach((doc) => {
-      matches.push(doc.data());
-    });
-    // console.log("Matches: ", matches);
-  });
-  console.log("This is matches:", matches);
-  return matches;
-}
-
 const App = (props) => {
+  /*
+  This component renders the entire visible page
+  The app here is a football timer with additional features such as half time and throwout timers
+  It allows users to keep time for a live game, and store data about a match such as
+  Team names, scores, the tournament/location
+  Users can also save this data to the cloud with Firebase
+  Saving data requires logging in with Google then uploading the current match
+  Users can also see and delete the matches that they have already uploaded with their account
+  Admin users are able to see and delete all matches as well as create other admins
+  */
   console.log("Rendering app.js");
   const [user, setUser] = useState(null);
+  const [isAdmin, setIsAdmin] = useState(false);
   const [teamOneScore, setTeamOneScore] = useState(0);
   const [teamTwoScore, setTeamTwoScore] = useState(0);
   const [location, setLocation] = useState("Home");
+  const [dataReady, setDataReady] = useState(false);
+  const [showData, setShowData] = useState(false);
   const [data, setData] = useState([
     {
       teamOne: "Love",
@@ -48,15 +53,10 @@ const App = (props) => {
       Location: "Home",
       teamOneScore: 0,
       teamTwoScore: 0,
+      UID: 0,
+      docID: 0,
     },
   ]);
-  const [dataReady, setDataReady] = useState(false);
-  const [showData, setShowData] = useState(false);
-
-  const updateUser = (User) => {
-    setUser(User);
-    console.log("User:", user);
-  };
   const [teamNames, setTeamNames] = useState([
     {
       teamOne: "Team One",
@@ -64,16 +64,104 @@ const App = (props) => {
     { teamTwo: "Team Two" },
   ]);
 
+  //gets an email via window prompt
+  const getEmail = () => {
+    let email = window.prompt(
+      "Enter the email of the user to promote to an admin."
+    );
+    if (email != null && email != "" && validateEmail(email)) {
+      console.log("The email passed.", email);
+      return email;
+    } else {
+      alert("Data entered was not a valid email");
+      return false;
+    }
+  };
+
+  //checks if email is a valid email with regex expression
+  const validateEmail = (email) => {
+    let regexEmail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+    if (email.match(regexEmail)) {
+      return true;
+    } else {
+      return false;
+    }
+  };
+  //What: Makes a given user an admin
+  //How: Query the users collection for the user document whose email matches the given email
+  //Sets that document's Admin property to true
+  const makeAdmin = () => {
+    let email = getEmail();
+    if (email) {
+      const q = query(collection(db, "users"), where("Email", "==", email));
+      getDocs(q).then((querySnapshot) => {
+        querySnapshot.forEach((document) => {
+          console.log("Document found:", document.data());
+          try {
+            setDoc(
+              doc(db, "users", document.id),
+              {
+                Admin: true,
+              },
+              { merge: true }
+            );
+          } catch (error) {
+            console.log(error);
+          }
+        });
+        console.log("We set the user as an admin");
+      });
+    } else {
+      console.log("Email validation failed");
+    }
+  };
+
+  //returns an array with matches loaded from the Firestore database
+  //if the user is an Admin, it adds all matches
+  //if not, only matches containing the given userID are returned
+  async function ReadFromDatabase(userID) {
+    console.log("Reading from database");
+    const matches = [];
+    if (user) {
+      if (isAdmin) {
+        const q = query(collection(db, "matches"));
+        unsubscribe = onSnapshot(q, (querySnapshot) => {
+          querySnapshot.forEach((doc) => {
+            matches.push({ ...doc.data(), docID: doc.id });
+          });
+        });
+      } else {
+        const q2 = query(collection(db, "matches"), where("UID", "==", userID));
+        unsubscribe = onSnapshot(q2, (querySnapshot) => {
+          querySnapshot.forEach((doc) => {
+            matches.push({ ...doc.data(), docID: doc.id });
+          });
+        });
+      }
+      return matches;
+    }
+  }
+
+  const updateUser = (User) => {
+    setUser(User);
+    console.log("Updated User:", user);
+  };
+
+  //updates data with the array returned from ReadFromDatabase
+  //bug fix: to prevent datatable being displayed before data is ready
+  //set display variables to false until after async operation finishes
   function updateData() {
     try {
       if (user) {
         setDataReady(false);
+        setShowData(false);
         const promise = ReadFromDatabase(user.uid).then((result) => {
           console.log("Promise returned:", result);
           setData(result);
-          // setTimeout(() => setDataReady(true), 3000);
           console.log("Finished updating data");
           setDataReady(true);
+          setTimeout(() => setShowData(true), 2000);
+          //setShowData(true);
         });
       } else {
         alert("You must be signed in to view match scores");
@@ -82,12 +170,13 @@ const App = (props) => {
       console.log("Error in updateData()", e);
     }
   }
-
+  //Controls displaying the data table
+  //dataReady checks if the data has been loaded, showData toggles visibility of the data table
   const displayData = () => {
     console.log("Inside display data");
     if (dataReady && !showData) {
       setShowData(true);
-    } else if (dataReady && showData) {
+    } else if (showData) {
       setShowData(false);
     } else if (!dataReady && !showData) {
       alert("Make sure to sign in and load the data first");
@@ -112,6 +201,8 @@ const App = (props) => {
     console.log("Team:", id, "Score:", score);
   };
 
+  //uploads match scores & data to Firebase/Firestore with SaveToDatabase
+  //bug fix: also runs updateData to fix synchronization issues
   const uploadMatch = () => {
     console.log("Uploading Match");
     const teamOneName = teamNames[0].teamOne;
@@ -124,12 +215,16 @@ const App = (props) => {
         teamOneScore,
         teamTwoScore,
         user.uid
-      );
+      ).then(() => {
+        updateData();
+      });
     } else {
       alert("Sign in to upload your match scores");
     }
   };
 
+  //Renders all other components:
+  //GameClock, SignInPage, MatchSettings, Team, ThrowTimer, DataTable
   return (
     <main className="body">
       <div id="mainDiv" className={css.mainDiv}>
@@ -141,6 +236,8 @@ const App = (props) => {
             setDataReady={setDataReady}
             loadDatabase={ReadFromDatabase}
             dataReady={dataReady}
+            setShowData={setShowData}
+            setIsAdmin={setIsAdmin}
           />
           <MatchSettings
             location={location}
@@ -167,12 +264,15 @@ const App = (props) => {
         </div>
 
         <ThrowTimer />
+        {isAdmin ? <Button onClick={() => makeAdmin()}>Make Admin</Button> : ""}
         <Button onClick={() => uploadMatch()}>Upload Match</Button>
         <Button onClick={() => updateData()}>Load Data</Button>
-        <Button onClick={() => displayData()}>Display Data</Button>
+        <Button onClick={() => displayData()}>
+          {showData ? "Hide Data" : " Display Data"}
+        </Button>
         <div id="DataTable">
           {showData ? (
-            <DataTable data={data} />
+            <DataTable data={data} updateData={updateData} />
           ) : (
             <p>
               Click Load Data to fetch the data from the database, then display

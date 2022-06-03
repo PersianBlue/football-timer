@@ -4,12 +4,16 @@ import * as css from "./matchSettings.module.scss";
 import Button from "../button";
 
 const MatchSettings = ({ location, setLocation, teamNames, setTeamNames }) => {
+
+  //updates location variable in the parent component with a window prompt
   const updateLocation = (location) => {
     let loc = window.prompt("Enter location of match:");
     if (loc != "" && loc != null) {
       setLocation(loc);
     }
   };
+
+  //updates team names in parent component
   const changeNames = () => {
     let name1 = null;
     let name2 = null;

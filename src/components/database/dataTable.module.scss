@@ -24,3 +24,15 @@ tr:nth-child(even){
     background-color: var(--secondary-color);
 
 }
+
+.redText{
+    color: red;
+    cursor: pointer; 
+
+}
+
+.redTextCell{
+    &:hover{
+        backdrop-filter: brightness(55%);
+    }
+}

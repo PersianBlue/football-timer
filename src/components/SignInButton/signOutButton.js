@@ -7,14 +7,20 @@ const SignOutButton = ({
   unsubscribe,
   setDataReady,
   dataReady,
+  setShowData,
+  setIsAdmin,
 }) => {
+  //signs out using Firebase auth and cancels listener object
+  //resets parent data values to null/false
   const signOut = () => {
-    auth.signOut();
-    setParentUser(null);
     if (dataReady) {
       unsubscribe();
     }
+    auth.signOut();
+    setParentUser(null);
     setDataReady(false);
+    setShowData(false);
+    setIsAdmin(false);
   };
   return (
     <div>
