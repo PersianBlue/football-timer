@@ -1,4 +1,56 @@
-.circular { 
+@media (min-width: 600px) {
+  .roundedEdges {
+    &:hover {
+      filter: brightness(115%);
+      box-shadow: 0 5px 15px 2px rgb(255, 255, 255);
+    }
+  }
+
+  .stopTimer:hover {
+    background-color: white;
+    color: black;
+    box-shadow: 0 0px 3px 1px rgb(123, 128, 109);
+  }
+
+  .signOutButton:hover {
+    filter: brightness(120%);
+  }
+
+  .signInButton:hover {
+    filter: brightness(90%);
+  }
+
+  .changeTeamNames {
+    &:hover {
+      box-shadow: 0 5px 15px 4px rgb(255, 255, 255);
+    }
+  }
+  .locationButton {
+    &:hover {
+      box-shadow: 0 5px 15px 4px rgb(255, 255, 255);
+    }
+  }
+  .changeSeconds:hover {
+    box-shadow: 0 0px 15px 2px white;
+  }
+
+  .resetTimer:hover {
+    box-shadow: 0 0px 2px 3px white;
+  }
+  .scoreButton:hover {
+    box-shadow: 0 5px 15px 4px rgb(255, 255, 255);
+  }
+  .countdownTimer:hover {
+    box-shadow: 0 0px 3px 2px rgb(255, 255, 255);
+  }
+  .startTimer:hover {
+    background-color: white;
+    color: black;
+    box-shadow: 0 0px 3px 1px rgb(123, 128, 109);
+  }
+}
+
+.circular {
   //creates circular buttons
   //used in the start and stop buttons
   margin: 0;
@@ -14,69 +66,60 @@
   // margin: 0 4px;
   cursor: pointer;
   border-radius: 50%;
-
-  
+}
+@keyframes lighten {
+  from {
+    background-color: white;
+    color: black;
+  }
+  to {
+    position: relative;
+  }
 }
 
-.roundedEdges{
-  background-color: rgba(23,23,23,255);
+.roundedEdges {
+  background-color: rgba(23, 23, 23, 255);
   color: white;
   text-align: center;
   text-decoration: none;
   cursor: pointer;
   border-radius: 5px;
   margin: 5px;
-  &:hover{
+
+  &:focus {
     filter: brightness(115%);
-    box-shadow: 0 5px 15px 2px rgb(255, 255, 255);
+    animation: lighten;
+    animation-duration: 3s;
   }
-
-  &:active{
-    filter: brightness(115%);
-    transition: color 1s;
-  }
-
-
-    //
-  
-
 }
 
-.changeTeamNames{
+.changeTeamNames {
   margin: 5px;
-  background-color: rgba(23,23,23,255);
+  background-color: rgba(23, 23, 23, 255);
   color: white;
   text-align: center;
   text-decoration: none;
   cursor: pointer;
   border-radius: 5px;
-  &:hover{
-    box-shadow: 0 5px 15px 4px rgb(255, 255, 255);
-  }
-
 }
 
-.locationButton{
+.locationButton {
   font-size: 15px;
   margin: 5px;
-  background-color: rgba(23,23,23,255);
+  background-color: rgba(23, 23, 23, 255);
   color: white;
   text-align: center;
   text-decoration: none;
   cursor: pointer;
   border-radius: 5px;
-  &:hover{
-    box-shadow: 0 5px 15px 4px rgb(255, 255, 255);
-  }
-
 }
 
-.scoreButton{
+.scoreButton {
   margin: 10px;
   padding: 0;
   height: 40px;
   width: 40px;
-  background-color: rgba(23,23,23,255);
+  background-color: rgba(23, 23, 23, 255);
   border: none;
   color: white;
   text-align: center;
@@ -87,25 +130,22 @@
   box-shadow: -1px 1px 5px -2px white inset;
 }
 
-.scoreButton:focus-within{
-  box-shadow: 0 5px 15px rgba(145, 92, 182, .4);
+.scoreButton:focus-within {
+  box-shadow: 0 5px 15px rgba(145, 92, 182, 0.4);
 }
 
-.scoreButton:hover{
-  box-shadow: 0 5px 15px 4px rgb(255, 255, 255);
-}
-
-
-.inner{ //makes an inline block
+.inner {
+  //makes an inline block
   display: inline-block;
 }
 
-.changeSeconds{ //sets style for the changeSeconds button
+.changeSeconds {
+  //sets style for the changeSeconds button
   margin: 0;
   padding: 0;
   height: 70px;
   width: 70px;
-  background-color: rgba(23,23,23,255);
+  background-color: rgba(23, 23, 23, 255);
   border: none;
   color: white;
   text-align: center;
@@ -115,25 +155,16 @@
   cursor: pointer;
   border-radius: 50%;
   box-shadow: -1px 1px 3px -1px white inset;
-
 }
 
-.changeSeconds:hover{
-    box-shadow: 0 0px 15px 2px  white;
-  
-}
-
-.resetTimer:hover{
-  box-shadow: 0 0px 2px 3px  white;
-
-}
-.resetTimer{ //sets style for resetTimer button
+.resetTimer {
+  //sets style for resetTimer button
   font-size: 12px;
   margin: 0px;
   padding: 0;
   height: 45px;
   width: 45px;
-  background-color: rgba(23,23,23,255);
+  background-color: rgba(23, 23, 23, 255);
   border: none;
   color: white;
   text-align: center;
@@ -142,13 +173,12 @@
   // margin: 0 4px;
   cursor: pointer;
   border-radius: 50%;
-  position:relative;
+  position: relative;
   box-shadow: -1px 1px 5px -2px white inset;
-
 }
 
-
-.countdownTimer{ //sets style for countdownTimer button
+.countdownTimer {
+  //sets style for countdownTimer button
   font-size: 72px;
   margin: 0;
   padding: 0;
@@ -156,7 +186,7 @@
   width: 200px;
 
   position: relative;
-  background-color: rgba(23,23,23,255);
+  background-color: rgba(23, 23, 23, 255);
   border: black;
   border-style: groove;
   border-width: 3px;
@@ -174,11 +204,7 @@
   //box-shadow: 5px -5px 5px 2px black inset;
 }
 
-.countdownTimer:hover{
-  box-shadow: 0 0px 3px 2px  rgb(255, 255, 255);
-}
-
-.startTimer{
+.startTimer {
   margin: 0;
   padding: 0;
   height: 40px;
@@ -196,11 +222,8 @@
   text-underline-offset: 10px;
 }
 
-.startTimer:hover{
-  box-shadow: 0 0px 3px 1px  rgb(123, 128, 109);
-
-}
-.stopTimer { //sets style for stop timer button
+.stopTimer {
+  //sets style for stop timer button
   margin: 0;
   padding: 0;
   height: 40px;
@@ -214,55 +237,43 @@
   // margin: 0 4px;
   cursor: pointer;
   border-radius: 10px;
-  
 }
 
-.stopTimer:hover{
-  box-shadow: 0 0px 3px 1px  rgb(123, 128, 109);
-
-}
-
-.signInButton{
+.signInButton {
   margin: 8px;
   border: none;
-  transition: background-color .3s, box-shadow .3s;
+  transition: background-color 0.3s, box-shadow 0.3s;
   padding: 12px 16px 12px 42px;
   border-radius: 3px;
-  box-shadow: 0 -1px 0 rgba(0, 0, 0, .04), 0 1px 1px rgba(0, 0, 0, .25);
+  box-shadow: 0 -1px 0 rgba(0, 0, 0, 0.04), 0 1px 1px rgba(0, 0, 0, 0.25);
   vertical-align: middle;
   font-size: 0.8em;
   font-weight: 500;
-  font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen,Ubuntu,Cantarell,"Fira Sans","Droid Sans","Helvetica Neue",sans-serif;
-  
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+
   background-image: url(https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg);
   background-color: rgba(255, 255, 255, 0.775);
   background-repeat: no-repeat;
   background-position: 12px 11px;
-  
-  &:hover {
-    filter: brightness(90%);
-  }
-  
+
   &:active {
     background-color: #eeeeee;
   }
-  
+
   &:focus {
     outline: none;
-    box-shadow: 
-      0 -1px 0 rgba(0, 0, 0, .04),
-      0 2px 4px rgba(0, 0, 0, .25),
+    box-shadow: 0 -1px 0 rgba(0, 0, 0, 0.04), 0 2px 4px rgba(0, 0, 0, 0.25),
       0 0 0 3px #c8dafc;
   }
-
 }
 
-.signOutButton{
+.signOutButton {
   margin: 5px;
   padding: 0;
   height: 40px;
   width: 100px;
-  background-color: rgba(23,23,23,255);
+  background-color: rgba(23, 23, 23, 255);
   border: none;
   color: white;
   text-align: center;
@@ -271,14 +282,9 @@
   border-radius: 10px;
   position: relative;
   box-shadow: -1px 1px 5px -2px white inset;
-
-  &:hover{
-    filter: brightness(120%);
-  }
 }
 
-.changeNames{
+.changeNames {
   padding: 3px 0px 0 5px;
   border: thick solid green;
-
 }

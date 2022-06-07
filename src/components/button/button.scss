@@ -1,0 +1,17 @@
+@keyframes lighten {
+  from {
+    background-color: white;
+    color: black;
+  }
+  to {
+    position: relative;
+  }
+}
+
+button {
+  &:focus {
+    filter: brightness(115%);
+    animation: lighten;
+    animation-duration: 3s;
+  }
+}

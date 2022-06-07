@@ -226,7 +226,7 @@ const App = (props) => {
   //Renders all other components:
   //GameClock, SignInPage, MatchSettings, Team, ThrowTimer, DataTable
   return (
-    <main className="body">
+    <main className={css.main}>
       <div id="mainDiv" className={css.mainDiv}>
         <GameClock />
         <div id="settingsDiv" className={css.settingsDiv}>

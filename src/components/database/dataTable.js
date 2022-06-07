@@ -1,6 +1,7 @@
 import React from "react";
 import * as css from "./dataTable.module.scss";
 import "./dataTable.css";
+import "./dataTable.module.scss";
 import { doc, deleteDoc } from "firebase/firestore";
 import { db } from "../../firebase-config";
 

@@ -1,38 +1,55 @@
-table{
-    border: solid 1px;
-    overflow: auto;
-    border-collapse:collapse;
-
-
+table {
+  border: solid 1px;
+  overflow: auto;
+  border-collapse: collapse;
+  margin-right: 10px;
+}
+@media (min-width: 600px) {
+  table {
+    font-size: 1.5em;
+  }
 }
 
-tbody{
-    background-Color: white;
-
+tbody {
+  background-color: red;
 }
 
-
-#td{
-    border: 1px solid;
-
+#td {
+  border: 1px solid;
 }
-tr{
-    width: auto;
-    background-Color: white;
+tr {
+  width: auto;
+  background-color: white;
 }
-tr:nth-child(even){
-    background-color: var(--secondary-color);
-
+tr:nth-child(even) {
+  background-color: var(--secondary-color);
 }
 
-.redText{
-    color: red;
-    cursor: pointer; 
-
+.redText {
+  color: red;
+  cursor: pointer;
+  text-align: center;
 }
 
-.redTextCell{
-    &:hover{
-        backdrop-filter: brightness(55%);
+.redTextCell {
+  &:active {
+    animation-duration: 2s;
+    animation-name: darken;
+  }
+}
+
+@keyframes darken {
+  from {
+    backdrop-filter: brightness(55%);
+  }
+  to {
+    backdrop-filter: brightness(100%);
+  }
+}
+@media (min-width: 600px) {
+  .redTextCell {
+    &:hover {
+      backdrop-filter: brightness(55%);
     }
+  }
 }
