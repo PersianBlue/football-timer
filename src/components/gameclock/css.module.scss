@@ -1,76 +1,72 @@
-.timersDiv{
-    border-color: black; 
-    border-style: solid;
-    background-Color: black;
-    display: inline-block;
-    justify-content: center;
-    padding-left: 33px;
-    width:113px;
-    transform:translatex(100px) translatey(-65px);
-   
+.gameClockDiv {
+  max-width: 600px;
 }
 
-.h1{
+.timersDiv {
+  border-color: black;
+  border-style: solid;
+  background-color: black;
+  display: inline-block;
+  justify-content: center;
+  padding-left: 33px;
+  width: 113px;
+  transform: translatex(100px) translatey(-65px);
+}
+
+.h1 {
+  font-size: 36px;
+  transform: translatey(7px);
+}
+.clockDiv {
+  display: inline-block;
+  height: 75px;
+  width: 150px;
+  text-align: center;
+  background-color: white;
+  border-color: black;
+  border-style: solid;
+  border-width: 5px;
+
+  transform: translatex(8px) translatey(10px);
+}
+
+.halfTimeDiv {
+  text-align: center;
+  border: solid;
+  display: inline-block;
+  background-color: var(--secondary-color);
+  font-size: 0.8em;
+  box-shadow: 3px -2px 7px rgba(0, 0, 0, 0.25) inset, -3px 5px 8px white inset;
+  min-width: 209px;
+}
+
+.resetTimerDiv {
+  max-width: 55px;
+  position: relative;
+  top: -35px;
+  left: 10px;
+}
+
+@media (min-width: 420px) {
+  .halfTimeDiv {
+    display: block;
+    max-width: 209px;
+
+    //
+  }
+
+  .timersDiv {
+    font-size: 18px;
+  }
+  .h1 {
     font-size: 36px;
-    transform: translatey(7px);
-    
+  }
 }
-.clockDiv{
-    display: inline-block;
-    height: 75px;
-    width: 150px;
-    text-align: center;
-    background-color: white;
-    border-color: black;
-    border-style: solid;
-    border-width: 5px;
-    
-   
-    transform:translatex(8px) translatey(10px);
-}
-
-.halfTimeDiv{
-    text-align: center;
-    border: solid;
-    display: inline-block;
-    background-color: var(--secondary-color);
-    font-size: 0.8em;
-    box-shadow: 3px -2px 7px rgba(0,0,0,.25) inset,
-    -3px 5px 8px white inset;
-    min-width: 209px;
-    
-    
-}
-
-.resetTimerDiv{
-    max-width: 55px;
-    position: relative;
-    top: -35px;
-    left: 10px;
-}
-@media (min-width: 420px){
-    .halfTimeDiv{
-        display: block;
-        max-width: 280px;
-        //
-    }
-
-    .timersDiv{
-        font-size: 18px;
-    }
-    .h1{
-        font-size: 36px;
-    }
-
-
-}
-@media (min-width: 600px){
-    .halfTimeDiv{
-        transform: translatey(-175px) translatex(280px);
-
-        }
-        .gameClockDiv{
-            max-height: 180px;
-            border: thick solid black ;
-        }
+@media (min-width: 600px) {
+  .halfTimeDiv {
+    transform: translatey(-175px) translatex(280px);
+  }
+  .gameClockDiv {
+    max-height: 180px;
+  }
 }

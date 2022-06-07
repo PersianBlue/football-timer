@@ -1,33 +1,29 @@
-.mainDiv{
-    min-width: 280px;
-}
-
-.settingsDiv{
+.settingsDiv {
   display: inline-block;
   min-width: 280px;
   justify-content: center;
-    
-
 }
 
-
-.teamDiv{
+.teamDiv {
   display: inline-block;
   width: auto;
   height: auto;
-
-
 }
 
+.main {
+  display: flex;
+  justify-content: center;
+  max-width: 850px;
+  min-width: 280px;
+}
 
-/*
- style={{
-            marginLeft: 25,
-            marginRight: 25,
-            minWidth: "100",
-            backgroundColor: "white",
-            border: "thick solid ",
-            display: "grid",
-            gridTemplateColumns: "1rf 1rf 1rf 1rf",
-            justifyContent: "center",
-          }} */
+@media (min-width: 600px) {
+  .main {
+    font-size: 1.2em;
+  }
+}
+@media (min-width: 1150px) {
+  .main {
+    font-size: initial;
+  }
+}

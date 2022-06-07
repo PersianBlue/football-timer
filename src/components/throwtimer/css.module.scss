@@ -1,13 +1,14 @@
 .throwTimerDiv{
   height: auto;
+  max-width: 600px;
 
 }
 
 .rightAlign{
     position: relative;
-    display: flexbox;
-    left: 220px;
-    
+    display: flex;
+    max-width: 300px;
+    justify-content: right;    
   }
 
   .countdownTimerDiv{

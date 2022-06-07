@@ -2,10 +2,8 @@
 :root {
   --primary-color: hsla(0, 0%, 0%);
   --secondary-color: hsla(203, 98%, 84%);
-  --tertiary-color:   #f67373;
-  --boxShadow: 3px -2px 7px rgba(0,0,0,.25) inset,
-  -3px 5px 7px white inset,
-
+  --tertiary-color: #f67373;
+  --boxShadow: 3px -2px 7px rgba(0, 0, 0, 0.25) inset, -3px 5px 7px white inset;
 }
 
 /* Box sizing rules */
@@ -42,18 +40,18 @@ html:focus-within {
 
 /* Set core body defaults */
 body {
-  border: thick solid red;
   //The noise.svg file helps add the noisy/grainy filter
   filter: blur(0.34px);
   padding-left: 7px;
-  background-blend-mode:multiply;
+  background-blend-mode: multiply;
   border-style: inset;
-  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
   min-height: 150vh;
   text-rendering: optimizeSpeed;
   line-height: 1.5;
   backdrop-filter: contrast(1.23);
-  background: linear-gradient(white,grey),url("./pages/noise.svg");
+  background: linear-gradient(white, grey), url("./pages/noise.svg");
 }
 
 /* A elements that don't have a class get default styles */
@@ -91,8 +89,3 @@ select {
     scroll-behavior: auto !important;
   }
 }
-
-
- 
-
-

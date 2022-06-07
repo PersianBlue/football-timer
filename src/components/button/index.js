@@ -1,6 +1,7 @@
 import React from "react";
 //import "./css.module.scss";
 import * as css from "./css.module.scss";
+import "./button.scss";
 
 const Button = (props) => {
   //creates all the buttons seen on screen
