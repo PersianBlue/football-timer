@@ -226,62 +226,86 @@ const App = (props) => {
   //Renders all other components:
   //GameClock, SignInPage, MatchSettings, Team, ThrowTimer, DataTable
   return (
-    <main className={css.main}>
-      <div id="mainDiv" className={css.mainDiv}>
-        <GameClock />
-        <div id="settingsDiv" className={css.settingsDiv}>
-          <SignInPage
-            setParentUser={updateUser}
-            unsubscribe={unsubscribe}
-            setDataReady={setDataReady}
-            loadDatabase={ReadFromDatabase}
-            dataReady={dataReady}
-            setShowData={setShowData}
-            setIsAdmin={setIsAdmin}
-          />
-          <MatchSettings
-            location={location}
-            setLocation={setLocation}
-            teamNames={teamNames}
-            setTeamNames={setTeamNames}
-          />
-        </div>
-        <div id="TeamDiv" className={css.teamDiv}>
-          <Team
-            score={teamOneScore}
-            name={teamNames[0].teamOne}
-            id={1}
-            incrementScore={increment}
-            decrementScore={decrement}
-          />
-          <Team
-            score={teamTwoScore}
-            name={teamNames[1].teamTwo}
-            id={2}
-            incrementScore={increment}
-            decrementScore={decrement}
-          />
-        </div>
+    <div>
+      <main className={css.main}>
+        <div id="mainDiv" className={css.mainDiv}>
+          <GameClock />
+          <div id="settingsDiv" className={css.settingsDiv}>
+            <SignInPage
+              setParentUser={updateUser}
+              unsubscribe={unsubscribe}
+              setDataReady={setDataReady}
+              loadDatabase={ReadFromDatabase}
+              dataReady={dataReady}
+              setShowData={setShowData}
+              setIsAdmin={setIsAdmin}
+            />
+            <MatchSettings
+              location={location}
+              setLocation={setLocation}
+              teamNames={teamNames}
+              setTeamNames={setTeamNames}
+            />
+          </div>
+          <div id="TeamDiv" className={css.teamDiv}>
+            <Team
+              score={teamOneScore}
+              name={teamNames[0].teamOne}
+              id={1}
+              incrementScore={increment}
+              decrementScore={decrement}
+            />
+            <Team
+              score={teamTwoScore}
+              name={teamNames[1].teamTwo}
+              id={2}
+              incrementScore={increment}
+              decrementScore={decrement}
+            />
+          </div>
 
-        <ThrowTimer />
-        {isAdmin ? <Button onClick={() => makeAdmin()}>Make Admin</Button> : ""}
-        <Button onClick={() => uploadMatch()}>Upload Match</Button>
-        <Button onClick={() => updateData()}>Load Data</Button>
-        <Button onClick={() => displayData()}>
-          {showData ? "Hide Data" : " Display Data"}
-        </Button>
-        <div id="DataTable">
-          {showData ? (
-            <DataTable data={data} updateData={updateData} />
+          <ThrowTimer />
+          {isAdmin ? (
+            <Button onClick={() => makeAdmin()}>Make Admin</Button>
           ) : (
-            <p>
-              Click Load Data to fetch the data from the database, then display
-              data to show it.
-            </p>
+            ""
           )}
+          <Button onClick={() => uploadMatch()}>Upload Match</Button>
+          <Button onClick={() => updateData()}>Load Data</Button>
+          <Button onClick={() => displayData()}>
+            {showData ? "Hide Data" : " Display Data"}
+          </Button>
+          <div id="DataTable">
+            {showData ? (
+              <DataTable data={data} updateData={updateData} />
+            ) : (
+              <p>
+                Click Load Data to fetch the data from the database, then
+                display data to show it.
+              </p>
+            )}
+          </div>
+          <footer
+            style={{
+              textAlign: "center",
+              marginTop: 250,
+              fontFamily: "Verdana",
+            }}
+          >
+            <p>
+              Made by{" "}
+              <a
+                href="https://www.github.com/PersianBlue"
+                style={{ color: "black" }}
+                target="_blank"
+              >
+                PersianBlue
+              </a>
+            </p>
+          </footer>
         </div>
-      </div>
-    </main>
+      </main>
+    </div>
   );
 };
 export default App;
