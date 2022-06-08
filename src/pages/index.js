@@ -69,7 +69,7 @@ const App = (props) => {
     let email = window.prompt(
       "Enter the email of the user to promote to an admin."
     );
-    if (email != null && email != "" && validateEmail(email)) {
+    if (email != null && email !== "" && validateEmail(email)) {
       console.log("The email passed.", email);
       return email;
     } else {
