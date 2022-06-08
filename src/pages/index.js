@@ -298,6 +298,7 @@ const App = (props) => {
                 href="https://www.github.com/PersianBlue"
                 style={{ color: "black" }}
                 target="_blank"
+                rel="noreferrer"
               >
                 PersianBlue
               </a>
