@@ -128,9 +128,6 @@
   border-radius: 10px;
   position: relative;
   box-shadow: -1px 1px 5px -2px white inset;
-  &:focus {
-    animation: none;
-  }
 }
 
 .scoreButton:focus-within {
