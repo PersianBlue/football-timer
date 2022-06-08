@@ -9,6 +9,7 @@
   display: inline-block;
   justify-content: center;
   padding-left: 33px;
+  margin-right: auto;
   width: 113px;
   transform: translatex(100px) translatey(-65px);
 }
@@ -49,7 +50,7 @@
 
 @media (min-width: 420px) {
   .halfTimeDiv {
-    display: block;
+    // display: block;
     max-width: 209px;
 
     //
@@ -66,6 +67,7 @@
   .halfTimeDiv {
     transform: translatey(-175px) translatex(280px);
   }
+
   .gameClockDiv {
     max-height: 180px;
   }

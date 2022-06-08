@@ -17,9 +17,14 @@
   min-width: 280px;
 }
 
-@media (min-width: 600px) {
+@media (max-width: 600px) {
   .main {
-    font-size: 1.2em;
+    text-align: center;
+  }
+}
+@media (min-width: 650px) {
+  .main {
+    font-size: 1.05em;
   }
 }
 @media (min-width: 1150px) {

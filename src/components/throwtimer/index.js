@@ -41,6 +41,7 @@ const ThrowTimer = () => {
     //creates a prompt for changing countdown timer length
     //if statement checks validity of input
     let seconds = window.prompt("Enter seconds here");
+    seconds = parseInt(seconds);
     if (
       seconds == null ||
       Number.isNaN(seconds) ||
@@ -49,7 +50,6 @@ const ThrowTimer = () => {
     ) {
       seconds = counter;
     }
-    seconds = parseInt(seconds);
     return setNewCounter(seconds);
   };
 

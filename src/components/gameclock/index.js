@@ -19,10 +19,12 @@ const GameClock = () => {
   //sets halfTime variable to given input
   const getHalfTime = () => {
     let time = window.prompt("Set half-time in minutes here");
+    time = parseInt(time);
     if (time == null || Number.isNaN(time) || isNaN(time) || time === "") {
-      return;
+      if (Number.isNaN(halfTime)) {
+        setHalfTime(1);
+      }
     } else {
-      time = parseInt(time);
       setHalfTime(time);
       console.log("Half time set to", time);
     }

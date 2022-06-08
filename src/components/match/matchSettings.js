@@ -2,9 +2,10 @@ import React from "react";
 import Location from "./location";
 import * as css from "./matchSettings.module.scss";
 import Button from "../button";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faKeyboard } from "@fortawesome/free-solid-svg-icons";
 
 const MatchSettings = ({ location, setLocation, teamNames, setTeamNames }) => {
-
   //updates location variable in the parent component with a window prompt
   const updateLocation = (location) => {
     let loc = window.prompt("Enter location of match:");
@@ -37,7 +38,9 @@ const MatchSettings = ({ location, setLocation, teamNames, setTeamNames }) => {
         setLocation={setLocation}
       />
       <Button name="changeTeamNames" onClick={() => changeNames()}>
-        Change Team Names{" "}
+        <span>
+          <FontAwesomeIcon icon={faKeyboard} /> Change Team Names{" "}
+        </span>
       </Button>
     </div>
   );
