@@ -6,6 +6,14 @@ import Team from "../components/team";
 import ThrowTimer from "../components/throwtimer";
 import "../global.scss";
 import { useState } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faDisplay,
+  faEye,
+  faEyeSlash,
+  faHome,
+} from "@fortawesome/free-solid-svg-icons";
+
 import MatchSettings from "../components/match/matchSettings";
 import SaveToDatabase from "../components/database/saveToDatabase";
 import { auth, db } from "../firebase-config";
@@ -227,6 +235,15 @@ const App = (props) => {
   //GameClock, SignInPage, MatchSettings, Team, ThrowTimer, DataTable
   return (
     <div>
+      <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+      ></link>
+      <script
+        src="https://kit.fontawesome.com/5f53d7f4ac.js"
+        crossorigin="anonymous"
+      ></script>
+
       <main className={css.main}>
         <div id="mainDiv" className={css.mainDiv}>
           <GameClock />
@@ -266,14 +283,32 @@ const App = (props) => {
 
           <ThrowTimer />
           {isAdmin ? (
-            <Button onClick={() => makeAdmin()}>Make Admin</Button>
+            <Button onClick={() => makeAdmin()}>
+              <span>
+                <i class="fa fa-user-circle"></i> Make Admin
+              </span>
+            </Button>
           ) : (
             ""
           )}
-          <Button onClick={() => uploadMatch()}>Upload Match</Button>
-          <Button onClick={() => updateData()}>Load Data</Button>
+          <Button onClick={() => uploadMatch()}>
+            <i class="fa fa-upload"></i> Upload Match
+          </Button>
+          <Button onClick={() => updateData()}>
+            <i class="fa fa-download"></i> Load Data
+          </Button>
           <Button onClick={() => displayData()}>
-            {showData ? "Hide Data" : " Display Data"}
+            {showData ? (
+              <span>
+                <FontAwesomeIcon icon={faEyeSlash} />
+                Hide Data
+              </span>
+            ) : (
+              <span>
+                <FontAwesomeIcon icon={faDisplay} />
+                {"  "}Display Data
+              </span>
+            )}
           </Button>
           <div id="DataTable">
             {showData ? (
