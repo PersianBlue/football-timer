@@ -25,7 +25,6 @@ const GameClock = () => {
         setHalfTime(1);
       }
     } else {
-      console.log("Time is nan", Number.isNaN(time));
       setHalfTime(time);
       console.log("Half time set to", time);
     }
