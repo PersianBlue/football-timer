@@ -26,6 +26,10 @@
   .main {
     font-size: 1.05em;
   }
+  .buttonsDiv {
+    display: flex;
+    justify-content: space-evenly;
+  }
 }
 @media (min-width: 1150px) {
   .main {

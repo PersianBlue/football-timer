@@ -14,6 +14,11 @@
   transform: translatex(100px) translatey(-65px);
 }
 
+.timersClockDiv {
+  text-align: center;
+  display: flex;
+  justify-content: center;
+}
 .h1 {
   font-size: 36px;
   transform: translatey(7px);
@@ -28,7 +33,7 @@
   border-style: solid;
   border-width: 5px;
 
-  transform: translatex(8px) translatey(10px);
+  transform: translatex(-40px) translatey(10px);
 }
 
 .halfTimeDiv {
@@ -44,18 +49,11 @@
 .resetTimerDiv {
   max-width: 55px;
   position: relative;
-  top: -35px;
+  top: 0px;
   left: 10px;
 }
 
 @media (min-width: 420px) {
-  .halfTimeDiv {
-    // display: block;
-    max-width: 209px;
-
-    //
-  }
-
   .timersDiv {
     font-size: 18px;
   }
@@ -65,10 +63,12 @@
 }
 @media (min-width: 600px) {
   .halfTimeDiv {
-    transform: translatey(-175px) translatex(280px);
+    transform: translatey(82px) translatex(330px);
   }
-
   .gameClockDiv {
     max-height: 180px;
+  }
+  .resetTimerDiv {
+    left: 55px;
   }
 }

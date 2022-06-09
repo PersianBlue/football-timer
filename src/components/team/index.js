@@ -2,8 +2,6 @@ import React from "react";
 import { useState } from "react";
 import Button from "../button";
 import * as css from "./css.module.scss";
-import minusButton from "../../assets/images/minusButton.png";
-import plusButton from "../../assets/images/plusButton.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus, faMinus } from "@fortawesome/free-solid-svg-icons";
 
@@ -22,14 +20,14 @@ const Team = ({ name, id, score, incrementScore, decrementScore }) => {
         <div id="scoreButtonDiv" class={css.buttonDivStyle}>
           <Button type="scoreButton" onClick={() => decrementScore(score, id)}>
             <FontAwesomeIcon
-              icon={faPlus}
+              icon={faMinus}
               alt="Minus button"
               className={css.scoreButtonDivImg}
             />
           </Button>
           <Button type="scoreButton" onClick={() => incrementScore(score, id)}>
             <FontAwesomeIcon
-              icon={faMinus}
+              icon={faPlus}
               alt="Plus Button"
               className={css.scoreButtonDivImg}
             />
