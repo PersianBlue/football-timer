@@ -282,34 +282,36 @@ const App = (props) => {
           </div>
 
           <ThrowTimer />
-          {isAdmin ? (
-            <Button onClick={() => makeAdmin()}>
-              <span>
-                <i class="fa fa-user-circle"></i> Make Admin
-              </span>
-            </Button>
-          ) : (
-            ""
-          )}
-          <Button onClick={() => uploadMatch()}>
-            <i class="fa fa-upload"></i> Upload Match
-          </Button>
-          <Button onClick={() => updateData()}>
-            <i class="fa fa-download"></i> Load Data
-          </Button>
-          <Button onClick={() => displayData()}>
-            {showData ? (
-              <span>
-                <FontAwesomeIcon icon={faEyeSlash} />
-                Hide Data
-              </span>
+          <div id="buttonsDiv" className={css.buttonsDiv}>
+            {isAdmin ? (
+              <Button onClick={() => makeAdmin()}>
+                <span>
+                  <i class="fa fa-user-circle"></i> Make Admin
+                </span>
+              </Button>
             ) : (
-              <span>
-                <FontAwesomeIcon icon={faDisplay} />
-                {"  "}Display Data
-              </span>
+              ""
             )}
-          </Button>
+            <Button onClick={() => uploadMatch()}>
+              <i class="fa fa-upload"></i> Upload Match
+            </Button>
+            <Button onClick={() => updateData()}>
+              <i class="fa fa-download"></i> Load Data
+            </Button>
+            <Button onClick={() => displayData()}>
+              {showData ? (
+                <span>
+                  <FontAwesomeIcon icon={faEyeSlash} />
+                  Hide Data
+                </span>
+              ) : (
+                <span>
+                  <FontAwesomeIcon icon={faDisplay} />
+                  {"  "}Display Data
+                </span>
+              )}
+            </Button>
+          </div>
           <div id="DataTable">
             {showData ? (
               <DataTable data={data} updateData={updateData} />

@@ -114,6 +114,7 @@ const GameClock = () => {
   );
   return (
     <div id="gameClockDiv" className={css.gameClockDiv}>
+      <div id="timersClockDiv" className={css.timersClockDiv}>
       <div id="clockDiv" className={css.clockDiv}>
         <h1 className={css.h1}>
           {mins}:{secs}
@@ -128,7 +129,10 @@ const GameClock = () => {
             Stop{" "}
           </Button>
         </div>
-      </div>
+        {/*End timers Div*/}
+      </div>{" "}
+      {/*End clock Div*/}
+      </div> 
       <div id="resetTimerDiv" className={css.resetTimerDiv}>
         <Button
           style={{ width: 100, height: 150 }}
