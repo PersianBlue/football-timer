@@ -1,11 +1,5 @@
-import React from "react";
-import { auth, db } from "../../firebase-config";
-import {
-  collection,
-  addDoc,
-  serverTimestamp,
-  FieldValue,
-} from "firebase/firestore";
+import { db } from "../../firebase-config";
+import { collection, addDoc } from "firebase/firestore";
 
 //creates a new document in the Firestore "matches" collection with the given data
 async function SaveToDatabase(
@@ -14,7 +8,8 @@ async function SaveToDatabase(
   TeamTwoName,
   TeamOneScore,
   TeamTwoScore,
-  userID
+  userID,
+  userName
 ) {
   console.log("Saving Data to Database");
   try {
@@ -28,6 +23,7 @@ async function SaveToDatabase(
       TeamOneScore: TeamOneScore,
       TeamTwoScore: TeamTwoScore,
       Date: date,
+      Creator: userName,
     });
     console.log("Document written with ID: ", docRef.id);
   } catch (e) {

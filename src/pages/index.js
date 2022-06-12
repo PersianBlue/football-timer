@@ -7,28 +7,21 @@ import ThrowTimer from "../components/throwtimer";
 import "../global.scss";
 import { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faDisplay,
-  faEye,
-  faEyeSlash,
-  faHome,
-} from "@fortawesome/free-solid-svg-icons";
+import { faDisplay, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 
 import MatchSettings from "../components/match/matchSettings";
 import SaveToDatabase from "../components/database/saveToDatabase";
-import { auth, db } from "../firebase-config";
+import { db } from "../firebase-config";
 import {
   collection,
   query,
   onSnapshot,
   where,
-  getDoc,
   getDocs,
   setDoc,
   doc,
 } from "firebase/firestore";
 import DataTable from "../components/database/dataTable";
-import { useEffect } from "react";
 import * as css from "./index.module.scss";
 
 //this variable is used to cancel the listener object that listens for
@@ -152,7 +145,7 @@ const App = (props) => {
 
   const updateUser = (User) => {
     setUser(User);
-    console.log("Updated User:", user);
+    console.log("Updated User. This will show on next render");
   };
 
   //updates data with the array returned from ReadFromDatabase
@@ -222,7 +215,8 @@ const App = (props) => {
         teamTwoName,
         teamOneScore,
         teamTwoScore,
-        user.uid
+        user.uid,
+        user.displayName
       ).then(() => {
         updateData();
       });
@@ -314,7 +308,11 @@ const App = (props) => {
           </div>
           <div id="DataTable">
             {showData ? (
-              <DataTable data={data} updateData={updateData} />
+              <DataTable
+                data={data}
+                updateData={updateData}
+                isAdmin={isAdmin}
+              />
             ) : (
               <p>
                 Click Load Data to fetch the data from the database, then

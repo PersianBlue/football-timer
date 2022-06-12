@@ -1,35 +1,37 @@
-import React from "react";
 import { auth, db } from "../../firebase-config";
-import Button from "../button/index";
 import { signInWithPopup, GoogleAuthProvider } from "firebase/auth";
-import { addDoc, collection, getDocs } from "firebase/firestore";
+import { collection, getDocs, setDoc, doc } from "firebase/firestore";
 
 //adds given user to the "users" collection in Firestore
-const addUserToDatabase = (user) => {
+const addUserToDatabase = async (user) => {
   try {
-    const docRef = addDoc(collection(db, "users"), {
+    console.log("Adding user to database");
+    const docRef = await setDoc(doc(db, "users", user.uid), {
       UserID: user.uid,
       Email: user.email,
       Name: user.displayName,
     });
+    console.log("User has been added to database");
     return docRef;
   } catch (e) {
     console.error("Error adding document: ", e);
   }
 };
 
-//checks "users" collecction in Firestore to see if the current user already exists there
+//checks "users" collection in Firestore to see if the current user already exists there
 const checkIfUserExists = async (user) => {
-  getDocs(collection(db, "users"))
+  console.log("Checking if user exists");
+  return getDocs(collection(db, "users"))
     .then((querySnapshot) => {
+      var exists = false;
       querySnapshot.forEach((doc) => {
         if (doc.data().UserID === user.uid) {
           console.log("This user exists");
-          console.log(doc.data());
-          return true;
+          // console.log(doc.data());
+          exists = true;
         }
       });
-      return false;
+      return exists;
     })
     .catch((err) => {
       console.log(err);
@@ -43,9 +45,11 @@ const signInWithGoogle = () => {
     .then((userCred) => {
       console.log("We signed in with the popup");
       checkIfUserExists(userCred.user).then((userExists) => {
+        console.log("User exists: ", userExists);
         if (userExists) {
           return userCred;
-        } else {
+        } else if (!userExists) {
+          console.log("Calling add user to database");
           addUserToDatabase(userCred.user);
         }
       });

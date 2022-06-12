@@ -5,20 +5,12 @@ import SignInButton from "./signInButton";
 import SignOutButton from "./signOutButton";
 import "./signInPage.scss";
 import { db } from "../../firebase-config";
-import {
-  addDoc,
-  collection,
-  doc,
-  getDocs,
-  query,
-  where,
-} from "firebase/firestore";
+import { collection, getDocs, query, where } from "firebase/firestore";
 
 const SignInPage = ({
   setParentUser,
   unsubscribe,
   setDataReady,
-  loadDatabase,
   dataReady,
   setShowData,
   setIsAdmin,
