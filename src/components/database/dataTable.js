@@ -32,6 +32,7 @@ const DataTable = ({ data, updateData }) => {
         <td>{element.TeamTwo}</td>
         <td>{element.TeamOneScore + "-" + element.TeamTwoScore}</td>
         <td>{date}</td>
+        <td>{element.Creator}</td>
         <td onClick={() => deleteScore(docID)} className={css.redTextCell}>
           <p className={css.redText}> X </p>
         </td>
@@ -48,6 +49,7 @@ const DataTable = ({ data, updateData }) => {
           <th>Team Two </th>
           <th>Score</th>
           <th>Match Date</th>
+          <th>Creator</th>
           <th></th>
         </tr>
       </thead>
