@@ -6,15 +6,15 @@ import "./signInPage.scss";
 const SignInButton = () => {
   return (
     <div id="SignInDiv">
-      <h3 style={{ marginTop: "auto" }}>You are not signed in.</h3>
+      <p>You are not signed in.</p>
       <Button
         id="signInButton"
         type="roundedEdges"
         name="signInButton"
         onClick={() => signInWithGoogle()}
-        text="Sign In With Google"
+        text="Sign In "
       >
-        Sign In With Google{" "}
+        Sign In
       </Button>
     </div>
   );

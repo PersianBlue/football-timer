@@ -8,7 +8,6 @@ import { faLocationDot } from "@fortawesome/free-solid-svg-icons";
 const Location = ({ location, updateLocation }) => {
   return (
     <div id="locationDiv" className={css.locationDiv}>
-      <h1>{location}</h1>
       <Button name="locationButton" onClick={() => updateLocation()}>
         <span>
           <FontAwesomeIcon icon={faLocationDot} /> Set Tournament/Location
