@@ -21,7 +21,6 @@ const SignInPage = ({
   const display = () => {
     return (
       <div id="signOutDiv">
-        <h3>Logged in as </h3>
         <h3> {thisUser ? thisUser.displayName : "Not defined"}</h3>
         <SignOutButton
           setParentUser={setParentUser}

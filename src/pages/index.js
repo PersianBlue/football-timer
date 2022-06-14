@@ -240,17 +240,23 @@ const App = (props) => {
 
       <main className={css.main}>
         <div id="mainDiv" className={css.mainDiv}>
+          <nav class={css.navBar}>
+            <ul>
+              <li>
+                <SignInPage
+                  setParentUser={updateUser}
+                  unsubscribe={unsubscribe}
+                  setDataReady={setDataReady}
+                  loadDatabase={ReadFromDatabase}
+                  dataReady={dataReady}
+                  setShowData={setShowData}
+                  setIsAdmin={setIsAdmin}
+                />
+              </li>
+            </ul>
+          </nav>
           <GameClock />
           <div id="settingsDiv" className={css.settingsDiv}>
-            <SignInPage
-              setParentUser={updateUser}
-              unsubscribe={unsubscribe}
-              setDataReady={setDataReady}
-              loadDatabase={ReadFromDatabase}
-              dataReady={dataReady}
-              setShowData={setShowData}
-              setIsAdmin={setIsAdmin}
-            />
             <MatchSettings
               location={location}
               setLocation={setLocation}
