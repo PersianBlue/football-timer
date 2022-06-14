@@ -7,7 +7,11 @@ import ThrowTimer from "../components/throwtimer";
 import "../global.scss";
 import { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faDisplay, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
+import {
+  faDisplay,
+  faEyeSlash,
+  faGear,
+} from "@fortawesome/free-solid-svg-icons";
 
 import MatchSettings from "../components/match/matchSettings";
 import SaveToDatabase from "../components/database/saveToDatabase";
@@ -47,6 +51,8 @@ const App = (props) => {
   const [location, setLocation] = useState("Home");
   const [dataReady, setDataReady] = useState(false);
   const [showData, setShowData] = useState(false);
+  const [showSettings, setShowSettings] = useState(false);
+  const [halfTime, setHalfTime] = useState(1);
   const [data, setData] = useState([
     {
       teamOne: "Love",
@@ -64,6 +70,21 @@ const App = (props) => {
     },
     { teamTwo: "Team Two" },
   ]);
+
+  //sets the value of half time for the match
+  const getHalfTime = () => {
+    let time = window.prompt("Set half-time in minutes here");
+    time = parseInt(time);
+    if (time == null || Number.isNaN(time) || isNaN(time) || time === "") {
+      if (Number.isNaN(halfTime)) {
+        setHalfTime(1);
+      }
+    } else {
+      setHalfTime(time);
+      console.log("Half time set to", time);
+    }
+    return time;
+  };
 
   //gets an email via window prompt
   const getEmail = () => {
@@ -237,6 +258,7 @@ const App = (props) => {
         src="https://kit.fontawesome.com/5f53d7f4ac.js"
         crossorigin="anonymous"
       ></script>
+      <title>Football Timer</title>
 
       <main className={css.main}>
         <div id="mainDiv" className={css.mainDiv}>
@@ -253,17 +275,28 @@ const App = (props) => {
                   setIsAdmin={setIsAdmin}
                 />
               </li>
+              <li>
+                <MatchSettings
+                  location={location}
+                  setLocation={setLocation}
+                  teamNames={teamNames}
+                  setTeamNames={setTeamNames}
+                  showSettings={showSettings}
+                  getHalfTime={getHalfTime}
+                />
+              </li>
+              <li>
+                <Button
+                  name="Settings"
+                  onClick={() => setShowSettings(!showSettings)}
+                >
+                  <FontAwesomeIcon icon={faGear} />
+                </Button>
+              </li>
             </ul>
           </nav>
-          <GameClock />
-          <div id="settingsDiv" className={css.settingsDiv}>
-            <MatchSettings
-              location={location}
-              setLocation={setLocation}
-              teamNames={teamNames}
-              setTeamNames={setTeamNames}
-            />
-          </div>
+          <GameClock halfTime={halfTime} />
+          <div id="settingsDiv" className={css.settingsDiv}></div>
           <div id="TeamDiv" className={css.teamDiv}>
             <Team
               score={teamOneScore}

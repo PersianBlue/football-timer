@@ -3,9 +3,17 @@ import Location from "./location";
 import * as css from "./matchSettings.module.scss";
 import Button from "../button";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faKeyboard } from "@fortawesome/free-solid-svg-icons";
+import { faGear, faKeyboard } from "@fortawesome/free-solid-svg-icons";
+import { useState } from "react";
 
-const MatchSettings = ({ location, setLocation, teamNames, setTeamNames }) => {
+const MatchSettings = ({
+  location,
+  setLocation,
+  teamNames,
+  setTeamNames,
+  showSettings,
+  getHalfTime,
+}) => {
   //updates location variable in the parent component with a window prompt
   const updateLocation = (location) => {
     let loc = window.prompt("Enter location of match:");
@@ -31,17 +39,27 @@ const MatchSettings = ({ location, setLocation, teamNames, setTeamNames }) => {
   };
 
   return (
-    <div id="Settings" className={css.Settings}>
-      <Location
-        location={location}
-        updateLocation={updateLocation}
-        setLocation={setLocation}
-      />
-      <Button name="changeTeamNames" onClick={() => changeNames()}>
-        <span>
-          <FontAwesomeIcon icon={faKeyboard} /> Change Team Names{" "}
-        </span>
-      </Button>
+    <div id="matchSettings" className={css.matchSettings}>
+      <h2 className={css.h1}>{location}</h2>
+      {showSettings ? (
+        <div id="Settings" className={css.Settings}>
+          <Location
+            location={location}
+            updateLocation={updateLocation}
+            setLocation={setLocation}
+          />
+          <Button name="changeTeamNames" onClick={() => changeNames()}>
+            <span>
+              <FontAwesomeIcon icon={faKeyboard} /> Change Team Names{" "}
+            </span>
+          </Button>
+          <Button type="roundedEdges" onClick={() => getHalfTime()}>
+            Set Half-Time
+          </Button>
+        </div>
+      ) : (
+        ""
+      )}
     </div>
   );
 };

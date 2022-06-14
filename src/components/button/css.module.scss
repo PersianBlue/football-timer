@@ -48,6 +48,11 @@
     color: black;
     box-shadow: 0 0px 3px 1px rgb(123, 128, 109);
   }
+
+  .Settings:hover {
+    background-color: black;
+    color: white;
+  }
 }
 
 .circular {
@@ -293,4 +298,13 @@
 .changeNames {
   padding: 3px 0px 0 5px;
   border: thick solid green;
+}
+
+.Settings {
+  background-color: transparent;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  color: black;
+  margin-top: 10px;
 }

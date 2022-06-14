@@ -15,6 +15,14 @@
 .navBar > ul {
   padding: 2px;
   list-style: none;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+
+.navBar > ul > li {
+  display: list-item;
+  vertical-align: middle;
 }
 .teamDiv {
   display: inline-block;
