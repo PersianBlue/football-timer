@@ -3,6 +3,7 @@
   display: grid;
   grid-template-columns: 50% 30%;
   gap: 15px;
+  margin-top: 5px;
 }
 
 .timersDiv {
@@ -42,6 +43,7 @@
   box-shadow: 3px -2px 7px rgba(0, 0, 0, 0.25) inset, -3px 5px 8px white inset;
   margin-left: 20px;
   min-width: 150px;
+  margin-top: 3px;
 }
 
 .resetTimerDiv {
@@ -52,11 +54,27 @@
   grid-row: 2;
 }
 
+@media (min-width: 520px) {
+  .gameClockDiv {
+    grid-template-columns: 50% 10% 40%;
+  }
+
+  .halfTimeDiv {
+    grid-column-start: 3;
+  }
+}
 @media (min-width: 600px) {
   .gameClockDiv {
     max-height: 180px;
   }
   .resetTimerDiv {
     left: 55px;
+  }
+}
+
+@media (min-width: 1150px) {
+  .halfTimeDiv {
+    position: relative;
+    right: 30px;
   }
 }
