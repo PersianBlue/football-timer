@@ -1,5 +1,9 @@
 .gameClockDiv {
   max-width: 600px;
+  display: grid;
+  grid-template-columns: 50% 30%;
+  gap: 15px;
+  margin-top: 5px;
 }
 
 .timersDiv {
@@ -7,43 +11,39 @@
   border-style: solid;
   background-color: black;
   display: inline-block;
-  justify-content: center;
   padding-left: 33px;
   margin-right: auto;
   width: 113px;
   transform: translatex(100px) translatey(-65px);
 }
 
-.timersClockDiv {
-  text-align: center;
-  display: flex;
-  justify-content: center;
-}
 .h1 {
   font-size: 36px;
   transform: translatey(7px);
+  text-align: center;
 }
 .clockDiv {
   display: inline-block;
   height: 75px;
   width: 150px;
-  text-align: center;
   background-color: white;
   border-color: black;
   border-style: solid;
   border-width: 5px;
 
-  transform: translatex(-40px) translatey(10px);
+  transform: translatex(0px) translatey(10px);
 }
 
 .halfTimeDiv {
+  display: inline-block;
   text-align: center;
   border: solid;
-  display: inline-block;
   background-color: var(--secondary-color);
   font-size: 0.8em;
   box-shadow: 3px -2px 7px rgba(0, 0, 0, 0.25) inset, -3px 5px 8px white inset;
-  min-width: 209px;
+  margin-left: 20px;
+  min-width: 150px;
+  margin-top: 3px;
 }
 
 .resetTimerDiv {
@@ -51,24 +51,30 @@
   position: relative;
   top: 0px;
   left: 10px;
+  grid-row: 2;
 }
 
-@media (min-width: 420px) {
-  .timersDiv {
-    font-size: 18px;
+@media (min-width: 520px) {
+  .gameClockDiv {
+    grid-template-columns: 50% 10% 40%;
   }
-  .h1 {
-    font-size: 36px;
+
+  .halfTimeDiv {
+    grid-column-start: 3;
   }
 }
 @media (min-width: 600px) {
-  .halfTimeDiv {
-    transform: translatey(62px) translatex(330px);
-  }
   .gameClockDiv {
     max-height: 180px;
   }
   .resetTimerDiv {
     left: 55px;
+  }
+}
+
+@media (min-width: 1150px) {
+  .halfTimeDiv {
+    position: relative;
+    right: 30px;
   }
 }
