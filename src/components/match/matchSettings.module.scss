@@ -1,17 +1,9 @@
 .Settings {
+  display: grid;
+  grid-template-rows: auto;
   position: relative;
-  text-align: center;
-  justify-content: center;
+  text-align: right;
+  justify-content: right;
   border-top: 0px;
   background-color: transparent;
-}
-
-.matchSettings {
-  width: 100%;
-  border: solid red;
-}
-
-.h1 {
-  display: flex;
-  justify-content: center;
 }

@@ -23,18 +23,18 @@
 .navBar > ul > li {
   display: list-item;
   vertical-align: middle;
+  text-align: center;
 }
 .teamDiv {
   display: inline-block;
-  width: auto;
-  height: auto;
+  border: solid thick red;
 }
 
 .main {
   display: flex;
   justify-content: center;
   max-width: 850px;
-  min-width: 280px;
+  min-width: 400px;
 }
 
 @media (max-width: 600px) {

@@ -99,25 +99,33 @@ const GameClock = ({ halfTime }) => {
   );
   return (
     <div id="gameClockDiv" className={css.gameClockDiv}>
-      <div id="timersClockDiv" className={css.timersClockDiv}>
-        <div id="clockDiv" className={css.clockDiv}>
-          <h1 className={css.h1}>
-            {mins}:{secs}
-          </h1>
-          <div id="timersDiv" className={css.timersDiv}>
-            <Button name="startTimer" onClick={() => startTimer()}>
-              {" "}
-              Start{" "}
-            </Button>
-            <Button name="stopTimer" onClick={() => stopTimer()}>
-              {" "}
-              Stop{" "}
-            </Button>
-          </div>
-          {/*End timers Div*/}
-        </div>{" "}
-        {/*End clock Div*/}
+      <div id="clockDiv" className={css.clockDiv}>
+        <h1 className={css.h1}>
+          {mins}:{secs}
+        </h1>
+        <div id="timersDiv" className={css.timersDiv}>
+          <Button name="startTimer" onClick={() => startTimer()}>
+            {" "}
+            Start{" "}
+          </Button>
+          <Button name="stopTimer" onClick={() => stopTimer()}>
+            {" "}
+            Stop{" "}
+          </Button>
+        </div>
+        {/*End timers Div*/}
       </div>
+      {/*End clock Div*/}
+      <div className={css.halfTimeDiv}>
+        {mins < halfTime ? <h3>First Half </h3> : <h3>Second Half</h3>}
+
+        <h3>
+          Half time Set to: {halfTime} {halfTime === 1 ? "minute" : "minutes"}
+        </h3>
+
+        {matchEnded ? <h3>Match Ended!</h3> : ""}
+      </div>
+
       <div id="resetTimerDiv" className={css.resetTimerDiv}>
         <Button
           style={{ width: 100, height: 150 }}
@@ -127,20 +135,6 @@ const GameClock = ({ halfTime }) => {
         >
           Reset Timer{" "}
         </Button>
-      </div>
-      <div className={css.halfTimeDiv}>
-        {mins < halfTime ? <h3>First Half </h3> : <h3>Second Half</h3>}
-
-        <h3>
-          Half time Set to: {halfTime} {halfTime === 1 ? "minute" : "minutes"}
-        </h3>
-
-        {matchEnded ? <h3>Match Ended!</h3> : ""}
-        <div style={{ textAlign: "center" }}>
-          {/* <Button type="roundedEdges" onClick={() => getHalfTime()}>
-            Set Half-Time
-          </Button> */}
-        </div>
       </div>
     </div>
   );

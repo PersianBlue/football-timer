@@ -276,25 +276,26 @@ const App = (props) => {
                 />
               </li>
               <li>
-                <MatchSettings
-                  location={location}
-                  setLocation={setLocation}
-                  teamNames={teamNames}
-                  setTeamNames={setTeamNames}
-                  showSettings={showSettings}
-                  getHalfTime={getHalfTime}
-                />
+                <h2 className={css.h1}>{location}</h2>
               </li>
               <li>
                 <Button
                   name="Settings"
                   onClick={() => setShowSettings(!showSettings)}
                 >
-                  <FontAwesomeIcon icon={faGear} />
+                  <FontAwesomeIcon icon={faGear} /> Settings
                 </Button>
               </li>
             </ul>
           </nav>
+          <MatchSettings
+            location={location}
+            setLocation={setLocation}
+            teamNames={teamNames}
+            setTeamNames={setTeamNames}
+            showSettings={showSettings}
+            getHalfTime={getHalfTime}
+          />
           <GameClock halfTime={halfTime} />
           <div id="settingsDiv" className={css.settingsDiv}></div>
           <div id="TeamDiv" className={css.teamDiv}>

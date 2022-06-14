@@ -3,7 +3,7 @@ import Location from "./location";
 import * as css from "./matchSettings.module.scss";
 import Button from "../button";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faGear, faKeyboard } from "@fortawesome/free-solid-svg-icons";
+import { faClock, faGear, faKeyboard } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
 
 const MatchSettings = ({
@@ -40,7 +40,6 @@ const MatchSettings = ({
 
   return (
     <div id="matchSettings" className={css.matchSettings}>
-      <h2 className={css.h1}>{location}</h2>
       {showSettings ? (
         <div id="Settings" className={css.Settings}>
           <Location
@@ -54,7 +53,7 @@ const MatchSettings = ({
             </span>
           </Button>
           <Button type="roundedEdges" onClick={() => getHalfTime()}>
-            Set Half-Time
+            <FontAwesomeIcon icon={faClock} /> Set Half-Time
           </Button>
         </div>
       ) : (
