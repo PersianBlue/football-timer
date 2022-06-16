@@ -3,10 +3,11 @@ table {
   overflow: auto;
   border-collapse: collapse;
   margin-right: 10px;
+  font-size: 1em;
 }
 @media (min-width: 600px) {
   table {
-    font-size: 1.5em;
+    font-size: 1.05em;
   }
 }
 
