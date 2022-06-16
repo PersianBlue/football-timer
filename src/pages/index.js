@@ -5,7 +5,7 @@ import SignInPage from "../components/SignInButton/signInPage";
 import Team from "../components/team";
 import ThrowTimer from "../components/throwtimer";
 import "../global.scss";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faDisplay,
@@ -54,6 +54,14 @@ const App = (props) => {
   const [showData, setShowData] = useState(false);
   const [showSettings, setShowSettings] = useState(false);
   const [halfTime, setHalfTime] = useState(1);
+  const [sorter, setSorter] = useState("Date");
+
+  const sortTable = (value) => {
+    setSorter(value);
+  };
+  useEffect(() => {
+    updateData();
+  }, [sorter]);
   const [data, setData] = useState([
     {
       teamOne: "Love",
@@ -144,10 +152,11 @@ const App = (props) => {
   //if not, only matches containing the given userID are returned
   async function ReadFromDatabase(userID) {
     console.log("Reading from database");
+    console.log("Sorter is " + sorter);
     const matches = [];
     if (user) {
       if (isAdmin) {
-        const q = query(collection(db, "matches"), orderBy("Date"));
+        const q = query(collection(db, "matches"), orderBy(sorter));
         unsubscribe = onSnapshot(q, (querySnapshot) => {
           querySnapshot.forEach((doc) => {
             matches.push({ ...doc.data(), docID: doc.id });
@@ -157,7 +166,7 @@ const App = (props) => {
         const q2 = query(
           collection(db, "matches"),
           where("UID", "==", userID),
-          orderBy("Date")
+          orderBy(sorter)
         );
         unsubscribe = onSnapshot(q2, (querySnapshot) => {
           querySnapshot.forEach((doc) => {
@@ -358,11 +367,13 @@ const App = (props) => {
                 data={data}
                 updateData={updateData}
                 isAdmin={isAdmin}
+                sortTable={sortTable}
               />
             ) : (
               <p>
                 Click Load Data to fetch the data from the database, then
-                display data to show it.
+                display data to show it. Click the table headers to sort by that
+                entry.
               </p>
             )}
           </div>

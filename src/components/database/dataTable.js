@@ -5,7 +5,7 @@ import "./dataTable.module.scss";
 import { doc, deleteDoc } from "firebase/firestore";
 import { db } from "../../firebase-config";
 
-const DataTable = ({ data, updateData }) => {
+const DataTable = ({ data, updateData, sortTable }) => {
   console.log("Rendering Data Table");
   //deletes match with given document ID from "matches" collection in Firestore
   //bug fix: also runs updateData from parent component to fix sync issues
@@ -22,7 +22,7 @@ const DataTable = ({ data, updateData }) => {
 
   //renders each individual table row
   const DisplayArrayElement = (element) => {
-    console.log("Inside DisplayArrayElement");
+    // console.log("Inside DisplayArrayElement");
     let date = element["Date"].toDate().toLocaleString();
     let docID = element.docID;
     return (
@@ -44,12 +44,12 @@ const DataTable = ({ data, updateData }) => {
     <table className={css.Table}>
       <thead>
         <tr id="Header" className={css.tr}>
-          <th>Location</th>
-          <th>Team One </th>
-          <th>Team Two </th>
-          <th>Score</th>
-          <th>Match Date</th>
-          <th>Creator</th>
+          <th onClick={() => sortTable("Location")}>Location</th>
+          <th onClick={() => sortTable("TeamOne")}>Team One </th>
+          <th onClick={() => sortTable("TeamTwo")}>Team Two </th>
+          <th onClick={() => sortTable("TeamOneScore")}>Score</th>
+          <th onClick={() => sortTable("Date")}>Match Date</th>
+          <th onClick={() => sortTable("Creator")}>Creator</th>
           <th></th>
         </tr>
       </thead>
