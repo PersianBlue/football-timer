@@ -24,6 +24,7 @@ import {
   getDocs,
   setDoc,
   doc,
+  orderBy,
 } from "firebase/firestore";
 import DataTable from "../components/database/dataTable";
 import * as css from "./index.module.scss";
@@ -146,14 +147,18 @@ const App = (props) => {
     const matches = [];
     if (user) {
       if (isAdmin) {
-        const q = query(collection(db, "matches"));
+        const q = query(collection(db, "matches"), orderBy("Date"));
         unsubscribe = onSnapshot(q, (querySnapshot) => {
           querySnapshot.forEach((doc) => {
             matches.push({ ...doc.data(), docID: doc.id });
           });
         });
       } else {
-        const q2 = query(collection(db, "matches"), where("UID", "==", userID));
+        const q2 = query(
+          collection(db, "matches"),
+          where("UID", "==", userID),
+          orderBy("Date")
+        );
         unsubscribe = onSnapshot(q2, (querySnapshot) => {
           querySnapshot.forEach((doc) => {
             matches.push({ ...doc.data(), docID: doc.id });
