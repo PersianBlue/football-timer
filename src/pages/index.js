@@ -55,13 +55,6 @@ const App = (props) => {
   const [showSettings, setShowSettings] = useState(false);
   const [halfTime, setHalfTime] = useState(1);
   const [sorter, setSorter] = useState("Date");
-
-  const sortTable = (value) => {
-    setSorter(value);
-  };
-  useEffect(() => {
-    updateData();
-  }, [sorter]);
   const [data, setData] = useState([
     {
       teamOne: "Love",
@@ -79,6 +72,22 @@ const App = (props) => {
     },
     { teamTwo: "Team Two" },
   ]);
+
+  useEffect(() => {
+    updateData();
+  }, [sorter]);
+
+  const sortTable = (value) => {
+    setSorter(value);
+  };
+
+  const loadData = () => {
+    if (user) {
+      updateData();
+    } else {
+      alert("You must be signed in to load the data from the cloud");
+    }
+  };
 
   //sets the value of half time for the match
   const getHalfTime = () => {
@@ -188,7 +197,9 @@ const App = (props) => {
   //set display variables to false until after async operation finishes
   function updateData() {
     try {
-      if (user) {
+      if (!user) {
+        return;
+      } else {
         setDataReady(false);
         setShowData(false);
         const promise = ReadFromDatabase(user.uid).then((result) => {
@@ -199,8 +210,6 @@ const App = (props) => {
           setTimeout(() => setShowData(true), 2000);
           //setShowData(true);
         });
-      } else {
-        alert("You must be signed in to view match scores");
       }
     } catch (e) {
       console.log("Error in updateData()", e);
@@ -344,7 +353,7 @@ const App = (props) => {
             <Button onClick={() => uploadMatch()}>
               <i class="fa fa-upload"></i> Upload Match
             </Button>
-            <Button onClick={() => updateData()}>
+            <Button onClick={() => loadData()}>
               <i class="fa fa-download"></i> Load Data
             </Button>
             <Button onClick={() => displayData()}>
