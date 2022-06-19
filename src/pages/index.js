@@ -52,6 +52,7 @@ const App = (props) => {
   const [location, setLocation] = useState("Home");
   const [dataReady, setDataReady] = useState(false);
   const [showData, setShowData] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [showSettings, setShowSettings] = useState(false);
   const [halfTime, setHalfTime] = useState(1);
   const [sorter, setSorter] = useState("Date");
@@ -73,9 +74,57 @@ const App = (props) => {
     { teamTwo: "Team Two" },
   ]);
 
-  useEffect(() => {
-    updateData();
-  }, [sorter]);
+  useEffect(
+    function () {
+      async function ReadFromDatabase(userID) {
+        //returns an array with matches loaded from the Firestore database
+        //if the user is an Admin, it adds all matches
+        //if not, only matches containing the given userID are returned
+        console.log("Reading from database");
+        // console.log("Sorter is " + sorter);
+        const matches = [];
+        if (user) {
+          if (isAdmin) {
+            const q = query(collection(db, "matches"), orderBy(sorter));
+            unsubscribe = onSnapshot(q, (querySnapshot) => {
+              querySnapshot.forEach((doc) => {
+                matches.push({ ...doc.data(), docID: doc.id });
+                // console.log(matches);
+              });
+            });
+          } else {
+            const q2 = query(
+              collection(db, "matches"),
+              where("UID", "==", userID),
+              orderBy(sorter)
+            );
+            unsubscribe = onSnapshot(q2, (querySnapshot) => {
+              querySnapshot.forEach((doc) => {
+                matches.push({ ...doc.data(), docID: doc.id });
+              });
+            });
+          }
+          return matches;
+        }
+      }
+      if (user && loading) {
+        console.log("Now proceeding to read from database");
+        ReadFromDatabase(user.uid).then((result) => {
+          setData(result);
+          setLoading(false);
+          setDataReady(true);
+          setTimeout(() => setShowData(true), 1000);
+        });
+      }
+
+      //   await updateData().then((result) => {
+      //     if (loading) {
+      //       setLoading(false);
+      //     }
+      //   });
+    },
+    [sorter, loading]
+  );
 
   const sortTable = (value) => {
     setSorter(value);
@@ -83,7 +132,10 @@ const App = (props) => {
 
   const loadData = () => {
     if (user) {
-      updateData();
+      setLoading(true);
+      if (showData) {
+        setShowData(false);
+      }
     } else {
       alert("You must be signed in to load the data from the cloud");
     }
@@ -156,34 +208,22 @@ const App = (props) => {
     }
   };
 
-  //returns an array with matches loaded from the Firestore database
-  //if the user is an Admin, it adds all matches
-  //if not, only matches containing the given userID are returned
-  async function ReadFromDatabase(userID) {
-    console.log("Reading from database");
-    console.log("Sorter is " + sorter);
-    const matches = [];
-    if (user) {
-      if (isAdmin) {
-        const q = query(collection(db, "matches"), orderBy(sorter));
-        unsubscribe = onSnapshot(q, (querySnapshot) => {
-          querySnapshot.forEach((doc) => {
-            matches.push({ ...doc.data(), docID: doc.id });
-          });
-        });
-      } else {
-        const q2 = query(
-          collection(db, "matches"),
-          where("UID", "==", userID),
-          orderBy(sorter)
-        );
-        unsubscribe = onSnapshot(q2, (querySnapshot) => {
-          querySnapshot.forEach((doc) => {
-            matches.push({ ...doc.data(), docID: doc.id });
-          });
-        });
-      }
-      return matches;
+  function renderSpinner() {
+    if (loading) {
+      return (
+        <span>
+          Loading data <i className="fa fa-spinner fa-spin"></i>
+        </span>
+      );
+    } else if (!dataReady) {
+      return (
+        <p>
+          Click Load Data to fetch the data from the database, then display data
+          to show it. Click the table headers to sort by that entry.
+        </p>
+      );
+    } else if (dataReady && !loading) {
+      return <p>Data has been loaded. Click display data to view the data</p>;
     }
   }
 
@@ -195,21 +235,24 @@ const App = (props) => {
   //updates data with the array returned from ReadFromDatabase
   //bug fix: to prevent datatable being displayed before data is ready
   //set display variables to false until after async operation finishes
-  function updateData() {
+  async function updateData() {
     try {
       if (!user) {
         return;
       } else {
-        setDataReady(false);
-        setShowData(false);
-        const promise = ReadFromDatabase(user.uid).then((result) => {
-          console.log("Promise returned:", result);
-          setData(result);
-          console.log("Finished updating data");
-          setDataReady(true);
-          setTimeout(() => setShowData(true), 2000);
-          //setShowData(true);
-        });
+        loadData();
+        // setDataReady(false);
+        // // setShowData(false);
+        // const promise = await ReadFromDatabase(user.uid).then((result) => {
+        //   console.log("Promise returned:", result);
+        //   setData(result);
+        //   console.log("Finished updating data");
+        //   setDataReady(true);
+        //   //setShowData(true);
+        //   return result;
+        // });
+        // // setTimeout(() => setShowData(true), 2000);
+        // return promise;
       }
     } catch (e) {
       console.log("Error in updateData()", e);
@@ -292,7 +335,6 @@ const App = (props) => {
                   setParentUser={updateUser}
                   unsubscribe={unsubscribe}
                   setDataReady={setDataReady}
-                  loadDatabase={ReadFromDatabase}
                   dataReady={dataReady}
                   setShowData={setShowData}
                   setIsAdmin={setIsAdmin}
@@ -371,7 +413,7 @@ const App = (props) => {
             </Button>
           </div>
           <div id="DataTable">
-            {showData ? (
+            {!loading && showData ? (
               <DataTable
                 data={data}
                 updateData={updateData}
@@ -379,11 +421,7 @@ const App = (props) => {
                 sortTable={sortTable}
               />
             ) : (
-              <p>
-                Click Load Data to fetch the data from the database, then
-                display data to show it. Click the table headers to sort by that
-                entry.
-              </p>
+              <span>{renderSpinner()}</span>
             )}
           </div>
           <footer
