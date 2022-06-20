@@ -108,12 +108,18 @@ const App = (props) => {
         }
       }
       if (user && loading) {
+        if (showData) {
+          var showingTable = true;
+          setShowData(false);
+        }
         console.log("Now proceeding to read from database");
         ReadFromDatabase(user.uid).then((result) => {
           setData(result);
           setLoading(false);
           setDataReady(true);
-          setTimeout(() => setShowData(true), 1000);
+          if (showingTable) {
+            setTimeout(() => setShowData(true), 1000);
+          }
         });
       }
 
@@ -128,14 +134,12 @@ const App = (props) => {
 
   const sortTable = (value) => {
     setSorter(value);
+    loadData();
   };
 
   const loadData = () => {
     if (user) {
       setLoading(true);
-      if (showData) {
-        setShowData(false);
-      }
     } else {
       alert("You must be signed in to load the data from the cloud");
     }

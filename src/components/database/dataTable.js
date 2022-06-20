@@ -4,7 +4,7 @@ import "./dataTable.css";
 import "./dataTable.module.scss";
 import { doc, deleteDoc } from "firebase/firestore";
 import { db } from "../../firebase-config";
-
+import DisplayArrayElement from "./DisplayArrayElement";
 const DataTable = ({ data, updateData, sortTable }) => {
   console.log("Rendering Data Table");
   //deletes match with given document ID from "matches" collection in Firestore
@@ -21,24 +21,24 @@ const DataTable = ({ data, updateData, sortTable }) => {
   };
 
   //renders each individual table row
-  const DisplayArrayElement = (element) => {
-    // console.log("Inside DisplayArrayElement");
-    let date = element["Date"].toDate().toLocaleString();
-    let docID = element.docID;
-    return (
-      <tr className={css.tr} key={docID}>
-        <td>{element.Location}</td>
-        <td>{element.TeamOne}</td>
-        <td>{element.TeamTwo}</td>
-        <td>{element.TeamOneScore + "-" + element.TeamTwoScore}</td>
-        <td>{date}</td>
-        <td>{element.Creator}</td>
-        <td onClick={() => deleteScore(docID)} className={css.redTextCell}>
-          <p className={css.redText}> X </p>
-        </td>
-      </tr>
-    );
-  };
+  // const DisplayArrayElement = (element) => {
+  //   // console.log("Inside DisplayArrayElement");
+  //   let date = element["Date"].toDate().toLocaleString();
+  //   let docID = element.docID;
+  //   return (
+  //     <tr className={css.tr} key={docID}>
+  //       <td>{element.Location}</td>
+  //       <td>{element.TeamOne}</td>
+  //       <td>{element.TeamTwo}</td>
+  //       <td>{element.TeamOneScore + "-" + element.TeamTwoScore}</td>
+  //       <td>{date}</td>
+  //       <td>{element.Creator}</td>
+  //       <td onClick={() => deleteScore(docID)} className={css.redTextCell}>
+  //         <p className={css.redText}> X </p>
+  //       </td>
+  //     </tr>
+  //   );
+  // };
 
   return (
     <table className={css.Table}>
@@ -53,7 +53,15 @@ const DataTable = ({ data, updateData, sortTable }) => {
           <th></th>
         </tr>
       </thead>
-      <tbody>{data.map((element) => DisplayArrayElement(element))}</tbody>
+      <tbody>
+        {data.map((element) => (
+          <DisplayArrayElement
+            element={element}
+            deleteScore={deleteScore}
+            css={css}
+          />
+        ))}
+      </tbody>
       {console.log("We rendered the table")}
     </table>
   );
