@@ -14,7 +14,14 @@ const SignOutButton = ({
   //resets parent data values to null/false
   const signOut = () => {
     if (dataReady) {
-      unsubscribe();
+      if (unsubscribe) {
+        try {
+          unsubscribe();
+          console.log("Unsubscribed from data");
+        } catch (e) {
+          console.log(e);
+        }
+      }
     }
     auth.signOut();
     setParentUser(null);
