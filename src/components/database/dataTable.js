@@ -5,6 +5,9 @@ import "./dataTable.module.scss";
 import { doc, deleteDoc } from "firebase/firestore";
 import { db } from "../../firebase-config";
 import DisplayArrayElement from "./DisplayArrayElement";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSortDown } from "@fortawesome/free-solid-svg-icons";
+
 const DataTable = ({ data, updateData, sortTable }) => {
   console.log("Rendering Data Table");
   //deletes match with given document ID from "matches" collection in Firestore
@@ -44,12 +47,42 @@ const DataTable = ({ data, updateData, sortTable }) => {
     <table className={css.Table}>
       <thead>
         <tr id="Header" className={css.tr}>
-          <th onClick={() => sortTable("Location")}>Location</th>
-          <th onClick={() => sortTable("TeamOne")}>Team One </th>
-          <th onClick={() => sortTable("TeamTwo")}>Team Two </th>
-          <th onClick={() => sortTable("TeamOneScore")}>Score</th>
-          <th onClick={() => sortTable("Date")}>Match Date</th>
-          <th onClick={() => sortTable("Creator")}>Creator</th>
+          <th onClick={() => sortTable("Location")}>
+            Location{" "}
+            <span>
+              <FontAwesomeIcon icon={faSortDown} />
+            </span>
+          </th>
+          <th onClick={() => sortTable("TeamOne")}>
+            Team One{" "}
+            <span>
+              <FontAwesomeIcon icon={faSortDown} />
+            </span>
+          </th>
+          <th onClick={() => sortTable("TeamTwo")}>
+            Team Two{" "}
+            <span>
+              <FontAwesomeIcon icon={faSortDown} />
+            </span>
+          </th>
+          <th onClick={() => sortTable("TeamOneScore")}>
+            Score{" "}
+            <span>
+              <FontAwesomeIcon icon={faSortDown} />
+            </span>
+          </th>
+          <th onClick={() => sortTable("Date")}>
+            Match Date{" "}
+            <span>
+              <FontAwesomeIcon icon={faSortDown} />
+            </span>
+          </th>
+          <th onClick={() => sortTable("Creator")}>
+            Creator{" "}
+            <span>
+              <FontAwesomeIcon icon={faSortDown} />
+            </span>
+          </th>
           <th></th>
         </tr>
       </thead>

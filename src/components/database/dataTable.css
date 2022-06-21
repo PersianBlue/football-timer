@@ -14,3 +14,9 @@ th:active{
     border-style: outset;
 }
 
+span{
+    display: inline-block;
+    vertical-align: middle;
+    position: relative;
+    top: -2px;
+}
