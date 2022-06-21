@@ -14,3 +14,14 @@ th:active{
     border-style: outset;
 }
 
+#sort{
+    display: inline-block;
+    vertical-align: middle;
+    position: relative;
+    top: 0px;
+}
+
+
+span{
+    padding-right: 2px;
+}
