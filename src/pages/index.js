@@ -434,6 +434,7 @@ const App = (props) => {
                 updateData={updateData}
                 isAdmin={isAdmin}
                 sortTable={sortTable}
+                reversed={reversedOrder}
               />
             ) : (
               <span>{renderSpinner()}</span>

@@ -5,10 +5,9 @@ import "./dataTable.module.scss";
 import { doc, deleteDoc } from "firebase/firestore";
 import { db } from "../../firebase-config";
 import DisplayArrayElement from "./DisplayArrayElement";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSortDown } from "@fortawesome/free-solid-svg-icons";
+import Header from "./Header";
 
-const DataTable = ({ data, updateData, sortTable }) => {
+const DataTable = ({ data, updateData, sortTable, reversed }) => {
   console.log("Rendering Data Table");
   //deletes match with given document ID from "matches" collection in Firestore
   //bug fix: also runs updateData from parent component to fix sync issues
@@ -47,42 +46,36 @@ const DataTable = ({ data, updateData, sortTable }) => {
     <table className={css.Table}>
       <thead>
         <tr id="Header" className={css.tr}>
-          <th onClick={() => sortTable("Location")}>
-            Location{" "}
-            <span>
-              <FontAwesomeIcon icon={faSortDown} />
-            </span>
-          </th>
-          <th onClick={() => sortTable("TeamOne")}>
-            Team One{" "}
-            <span>
-              <FontAwesomeIcon icon={faSortDown} />
-            </span>
-          </th>
-          <th onClick={() => sortTable("TeamTwo")}>
-            Team Two{" "}
-            <span>
-              <FontAwesomeIcon icon={faSortDown} />
-            </span>
-          </th>
-          <th onClick={() => sortTable("TeamOneScore")}>
-            Score{" "}
-            <span>
-              <FontAwesomeIcon icon={faSortDown} />
-            </span>
-          </th>
-          <th onClick={() => sortTable("Date")}>
-            Match Date{" "}
-            <span>
-              <FontAwesomeIcon icon={faSortDown} />
-            </span>
-          </th>
-          <th onClick={() => sortTable("Creator")}>
-            Creator{" "}
-            <span>
-              <FontAwesomeIcon icon={faSortDown} />
-            </span>
-          </th>
+          <Header
+            displayText="Location"
+            sortText="Location"
+            sortTable={sortTable}
+          />
+          <Header
+            displayText="Team One"
+            sortText="TeamOne"
+            sortTable={sortTable}
+          />
+          <Header
+            displayText="Team Two"
+            sortText="TeamTwo"
+            sortTable={sortTable}
+          />
+          <Header
+            displayText="Score"
+            sortText="TeamOneScore"
+            sortTable={sortTable}
+          />
+          <Header
+            displayText="Match Date"
+            sortText="Date"
+            sortTable={sortTable}
+          />
+          <Header
+            displayText="Creator"
+            sortText="Creator"
+            sortTable={sortTable}
+          />
           <th></th>
         </tr>
       </thead>

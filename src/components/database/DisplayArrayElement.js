@@ -1,7 +1,7 @@
 import React from "react";
 
 const DisplayArrayElement = ({ element, deleteScore, css }) => {
-  console.log("Inside display array element");
+  // console.log("Inside display array element");
   //   console.table(element);
   let date = element["Date"].toDate().toLocaleString();
   //   let date = Date();
