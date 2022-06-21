@@ -1,29 +1,29 @@
 import React from "react";
 import { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSortDown, faSortUp } from "@fortawesome/free-solid-svg-icons";
+import {
+  faSort,
+  faSortDown,
+  faSortUp,
+} from "@fortawesome/free-solid-svg-icons";
 import "./dataTable.css";
 
 const Header = ({ displayText, sortText, sortTable }) => {
   const [clicked, setClicked] = useState(false);
-  const handleClicks = (SortText) => {
+
+  const handleClicks = (SortText, Event) => {
+    console.log(Event.target.id);
+    setClicked(!clicked);
     sortTable(SortText);
-    setClicked(true);
     console.log("Clicked!");
   };
 
   return (
-    <th onClick={() => handleClicks(sortText)}>
+    <th onClick={(Event) => handleClicks(sortText, Event)} id={displayText}>
       {displayText}{" "}
-      {clicked ? (
-        <span id="sortUp">
-          <FontAwesomeIcon icon={faSortUp} />
-        </span>
-      ) : (
-        <span id="sortDown">
-          <FontAwesomeIcon icon={faSortDown} />
-        </span>
-      )}
+      <span id="sort">
+        <FontAwesomeIcon icon={faSort} />
+      </span>
     </th>
   );
 };

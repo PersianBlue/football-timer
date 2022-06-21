@@ -14,11 +14,11 @@ th:active{
     border-style: outset;
 }
 
-#sortDown{
+#sort{
     display: inline-block;
     vertical-align: middle;
     position: relative;
-    top: -2px;
+    top: 0px;
 }
 
 
