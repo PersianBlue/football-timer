@@ -1,4 +1,3 @@
-import React from "react";
 import * as css from "./dataTable.module.scss";
 import "./dataTable.css";
 import "./dataTable.module.scss";
@@ -7,6 +6,7 @@ import { db } from "../../firebase-config";
 import DisplayArrayElement from "./DisplayArrayElement";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSortDown } from "@fortawesome/free-solid-svg-icons";
+import { useState } from "react";
 
 const DataTable = ({ data, updateData, sortTable }) => {
   console.log("Rendering Data Table");

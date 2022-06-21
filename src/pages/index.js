@@ -56,6 +56,7 @@ const App = (props) => {
   const [showSettings, setShowSettings] = useState(false);
   const [halfTime, setHalfTime] = useState(1);
   const [sorter, setSorter] = useState("Date");
+  const [reversedOrder, setReversedOrder] = useState(false);
   const [data, setData] = useState([
     {
       teamOne: "Love",
@@ -83,9 +84,16 @@ const App = (props) => {
         console.log("Reading from database");
         // console.log("Sorter is " + sorter);
         const matches = [];
+        let sortOrder = "asc";
+        if (reversedOrder) {
+          sortOrder = "desc";
+        }
         if (user) {
           if (isAdmin) {
-            const q = query(collection(db, "matches"), orderBy(sorter));
+            const q = query(
+              collection(db, "matches"),
+              orderBy(sorter, sortOrder)
+            );
             unsubscribe = onSnapshot(q, (querySnapshot) => {
               querySnapshot.forEach((doc) => {
                 matches.push({ ...doc.data(), docID: doc.id });
@@ -96,7 +104,7 @@ const App = (props) => {
             const q2 = query(
               collection(db, "matches"),
               where("UID", "==", userID),
-              orderBy(sorter)
+              orderBy(sorter, sortOrder)
             );
             unsubscribe = onSnapshot(q2, (querySnapshot) => {
               querySnapshot.forEach((doc) => {
@@ -133,6 +141,9 @@ const App = (props) => {
   );
 
   const sortTable = (value) => {
+    if (value == sorter) {
+      setReversedOrder(!reversedOrder);
+    }
     setSorter(value);
     loadData();
   };
