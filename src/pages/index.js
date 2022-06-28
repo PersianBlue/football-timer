@@ -457,7 +457,7 @@ const App = (props) => {
                 </span>
               )}
             </Button>
-            {showData && dataReady && isAdmin ? (
+            {showData && dataReady ? (
               <Button onClick={() => saveToXlsx(data)}>
                 <span>
                   {" "}
