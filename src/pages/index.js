@@ -11,6 +11,8 @@ import {
   faDisplay,
   faEyeSlash,
   faGear,
+  faCloudArrowUp,
+  faFileExport,
 } from "@fortawesome/free-solid-svg-icons";
 
 import MatchSettings from "../components/match/matchSettings";
@@ -28,10 +30,38 @@ import {
 } from "firebase/firestore";
 import DataTable from "../components/database/dataTable";
 import * as css from "./index.module.scss";
-
+import * as XLSX from "xlsx";
 //this variable is used to cancel the listener object that listens for
 //changes to the firestore database
 let unsubscribe;
+
+function saveToXlsx(data) {
+  console.log("LOgging module: ", XLSX);
+  createXlsx(data);
+}
+
+function createXlsx(data) {
+  console.log("Creating xlsx file");
+  //returns new array with the date for each match converted to a string
+  var data2 = data.map((element) => {
+    let date = element["Date"].toDate().toLocaleString();
+    let updatedMatch = { ...element };
+    updatedMatch["Date"] = date;
+    return updatedMatch;
+  });
+  console.log("Updated data: ", data2);
+  // create new workbook
+  console.log("Module: ", XLSX);
+  var wb = XLSX.utils.book_new();
+  // converts an array of arrays into a worksheet.
+  // var ws = XLSX.utils.aoa_to_sheet(data);
+  // converts data in json format to a worksheet
+  var ws = XLSX.utils.json_to_sheet(data2);
+  // add worksheet to workbook under name Sheet1
+  XLSX.utils.book_append_sheet(wb, ws, "Sheet1");
+  // save workbook to file export.xlsx
+  XLSX.writeFile(wb, "FootballTimer.xlsx");
+}
 
 const App = (props) => {
   /*
@@ -408,7 +438,8 @@ const App = (props) => {
               ""
             )}
             <Button onClick={() => uploadMatch()}>
-              <i class="fa fa-upload"></i> Upload Match
+              {/* <i class="fa-solid fa-cloud-arrow-up"></i> */}
+              <FontAwesomeIcon icon={faCloudArrowUp} /> Upload Match
             </Button>
             <Button onClick={() => loadData()}>
               <i class="fa fa-download"></i> Load Data
@@ -426,6 +457,16 @@ const App = (props) => {
                 </span>
               )}
             </Button>
+            {showData && dataReady && isAdmin ? (
+              <Button onClick={() => saveToXlsx(data)}>
+                <span>
+                  {" "}
+                  <FontAwesomeIcon icon={faFileExport} /> Export data
+                </span>
+              </Button>
+            ) : (
+              ""
+            )}
           </div>
           <div id="DataTable">
             {!loading && showData ? (
