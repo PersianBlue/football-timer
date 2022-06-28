@@ -17,17 +17,17 @@ const SignOutButton = ({
       if (unsubscribe) {
         try {
           unsubscribe();
+          auth.signOut();
+          setParentUser(null);
+          setDataReady(false);
+          setShowData(false);
+          setIsAdmin(false);
           console.log("Unsubscribed from data");
         } catch (e) {
           console.log(e);
         }
       }
     }
-    auth.signOut();
-    setParentUser(null);
-    setDataReady(false);
-    setShowData(false);
-    setIsAdmin(false);
   };
   return (
     <div>
